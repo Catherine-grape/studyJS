@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "img": "imgs/banner1.jpeg",
+    "desc": "1111111",
+    "link": "http://www.zhufengpeixun.cn/"
+  },
+  {
+    "id": 2,
+    "img": "imgs/banner2.jpeg",
+    "desc": "222222",
+    "link": "http://www.zhufengpeixun.cn/"
+  },
+  {
+    "id": 3,
+    "img": "imgs/banner3.jpeg",
+    "desc": "3333333",
+    "link": "http://www.zhufengpeixun.cn/"
+  },
+  {
+    "id": 4,
+    "img": "imgs/banner4.jpeg",
+    "desc": "444444444",
+    "link": "http://www.zhufengpeixun.cn/"
+  }
+]

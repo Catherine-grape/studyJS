@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        #box {
+            width: 800px;
+            /* border: 1px solid red; */
+            margin: 20px auto;
+        }
+
+        ul {
+            list-style: none;
+            display: flex;
+        }
+
+        ul li {
+            border: 1px solid black;
+            width: 150px;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            font-size: 20px;
+            margin-right: 10px;
+            position: relative;
+            top: 1px
+        }
+
+        #box div {
+            width: 800px;
+            height: 500px;
+            text-align: center;
+            line-height: 500px;
+            font-size: 40px;
+            border: 1px solid black;
+            display: none;
+        }
+
+        ul li.active {
+            border-bottom-color: white;
+        }
+
+        #box div.active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <ul id="navList">
+            <li class="active">一</li>
+            <li>二</li>
+            <li>三</li>
+        </ul>
+        <div class="active">一</div>
+        <div>二</div>
+        <div>三</div>
+    </div>
+    <script src="../0315_.JS/ss/jquery-1.11.3.js"></script>
+    <script>
+        $('#navList li').click(function(){
+            $(this).addClass('active').siblings().removeClass('active');
+            let index=$(this).index();
+            $('#box div').eq(index).addClass('active').siblings('div').removeClass('acetive');           
+        });
+    </script>
+</body>
+
+</html>
