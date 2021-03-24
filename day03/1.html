@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box1{
+            width: 100px;
+            height: 100px;
+            background-color:lightcoral;
+        }
+    </style>
+</head>
+<body>
+    <div id="box" class="box1" style="color:lightseagreen">box</div>
+</body>
+</html>
+<script >
+    // 控制台，拿到整个元素 然后获取它的id  className 它的行间样式 文字颜色 它行间样式的背景颜色 js不能使用- 用驼峰命名法
+    var obox=document.getElementById("box");
+    console.log(obox.id);
+    console.log(obox.className);
+    console.log(obox.style.color);
+    console.log(obox.style.backgroundColor);
+    // 鼠标滑上事件 滑上的时候触发一次 离开后再次滑上会再次触发
+    obox.onmouseover=function(){
+        console.log("鼠标滑上");
+    }
+    //鼠标离开事件
+    obox.onmouseout=function(){
+        console.log("鼠标离开");
+    }
+    //鼠标 move 鼠标在盒子中动的时候一直计数
+    obox.onmousemove=function(){
+        console.log("鼠标 move");
+    }
+    //鼠标点击 click
+    obox.onclick=function(){
+        console.log("鼠标点击")
+    }
+
+</script>

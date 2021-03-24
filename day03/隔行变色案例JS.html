@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        ul,ol{
+            list-style:none;
+        }
+        body{
+            background:lightpink;
+        }
+        #main{
+            width: 500px;
+            margin:50px auto;
+        }
+        #main>li{
+            height: 40px;
+            line-height: 40px;
+            text-indent:20px;
+            color:#333;
+        }
+        .bg1{
+            background:lightcoral;
+        }
+        .bg2{
+            background:lightseagreen;
+        }
+    </style>
+</head>
+<body>
+    <ul id="main">
+        <li>2019年底，连接北京冬奥会两个举办地的京张高铁开通运营。</li>
+        <li>2019年底，连接北京冬奥会两个举办地的京张高铁开通运营。</li>
+        <li>2019年底，连接北京冬奥会两个举办地的京张高铁开通运营。</li>
+        <li>2019年底，连接北京冬奥会两个举办地的京张高铁开通运营。</li>
+        <li>2019年底，连接北京冬奥会两个举办地的京张高铁开通运营。</li>
+        <li>2019年底，连接北京冬奥会两个举办地的京张高铁开通运营。</li>
+        <li>2019年底，连接北京冬奥会两个举办地的京张高铁开通运营。</li>
+        <li>2019年底，连接北京冬奥会两个举办地的京张高铁开通运营。</li>
+        <li>2019年底，连接北京冬奥会两个举办地的京张高铁开通运营。</li>
+        <li>2019年底，连接北京冬奥会两个举办地的京张高铁开通运营。</li>
+    </ul>
+</body>
+</html>
+<script>
+    var main=document.getElementById("main");
+    var lis=main.getElementsByTagName("li");
+//lis[0].style.backgroundColor="lightsalmon"
+//lis[1].style.backgroundColor="lightseagreen"
+    //i 是它的索引  lis[0]是它的第0个
+    for(var i=0;i<lis.length;i++){
+        if(i%2==0){
+            lis[i].style.backgroundColor="lightsalmon";
+            //第二种lis[i].className="bg1";
+        }else{
+            //lis[i].className="bg2";
+            lis[i].style.backgroundColor="lightseagreen";
+        }
+        lis[i].onmouseover=function(){
+            this.bgColor=this.style.backgroundColor;
+            this.style.backgroundColor="white";
+        }
+        lis[i].onmouseout=function(){
+            this.style.backgroundColor=this.bgColor;
+        }
+    }
+    
+    
+</script>
