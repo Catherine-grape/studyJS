@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="box">
+        <li><span>   
+        </span><span></span></li>
+    </ul>
+    <script>
+        let ary = [
+    {name:'葫芦娃',age:100},
+    {name:'樱桃小丸子',age:80},
+    {name:'舒克和贝塔',age:70},
+]
+        let str = ``;
+ary.forEach(item => {
+    str += `
+    <li>
+    <span>${item.name}</span>
+    <span>${item.age}</span>
+    </li>`
+})
+console.log(str);
+box.innerHTML=str
+    </script>
+</body>
+</html>
