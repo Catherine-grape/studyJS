@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            width:100px;
+            height: 30px;
+            line-height:30px;
+            text-align: center;
+            border:1px solid #333;
+        }
+    </style>
+</head>
+<body>
+    <div id="code">
+
+    </div>
+</body>
+</html>
+<script >
+   /* 
+     需求：
+     1、编码内容：0-9；
+     2、号码的位数：4
+     3、每隔1000ms的时候就变化一次，10秒钟时候停止，那个就是中奖的号码
+    */
+    var code=document.getElementById("code");
+
+   var codeStr="1234567890";
+   //获取号码的功能性代码
+   function getCode(str){
+    var res='';
+    for (var i=0;i<4;i++){
+        var index=Math.round(Math.random()*(codeStr.length-1));
+        res+=codeStr[index];
+    }
+    return res;
+   };
+   
+   var timer=setInterval(function(){
+    code.innerHTML=getCode(codeStr);
+   },1000);
+   setTimeout(function(){
+       clearInterval(timer);
+       timer=null;
+   },10000);
+   
+</script>
