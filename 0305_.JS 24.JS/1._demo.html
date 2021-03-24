@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">排序</button>
+    <ul>
+        <li num=4 hot="348">4</li>
+        <li num=2 hot=526>2</li>
+        <li num=5 hot=123>5</li>
+        <li num=1 hot=342>1</li>
+        <li num=3 hot=153>3</li>
+    </ul>
+    <script>
+        let btn1=document.getElementById('btn');
+        let list=document.getElementsByTagName('li');
+        let box=document.getElementsByTagName('ul')[0];//[ul]
+        list=Array.from(list);//类数组转数组
+
+        // let flag=-1;
+        // 给btn绑定点击事件 
+        // 操作的点击事件很多 所以把flag放到btn上
+        btn1.flag=-1;//把属性放到堆内存中 自己用自己的flag互不影响
+        btn2.flag=-1;//把属性放到堆内存中
+        // btn.setAttribute('flag',-1);// 放到行间 默认转成字符串  把当前的属性存储到元素的结构上
+        btn1.index=0;//知道是点击的哪一个
+        btn2.index=1;
+        btn1.onclick=sortList;
+        btn2.onclick=sortList;
+        
+        function sortList(){
+            this.flag*=-1
+            // 排序 这里面的this 是btn
+            let ary=['num','hot'];//
+            list.sort((a,b)=>{//普通函数里面this是window 如果用普通函数需在外面自定义属性 然后在回调函数里面使用  箭头函数里面没有this 去上级作用域找
+               // return (a.innerHTML-b.innerHTML)*this.flag
+
+               /*  a=a.getAttribute('num');//以后常用这种
+                b= b.getAttribute('num'); */
+                a=a.getAttribute(ary[this.index]);//ary[0] 或者[1]
+                b= b.getAttribute(ary[this.index]);
+                return (a-b)*this.flag
+            });
+            for (let i=0;i<list.length;i++){
+                box.appendChild(list[i]);
+            }
+        }
+    </script>
+</body>
+</html>
