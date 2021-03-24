@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #code{
+            width: 100px;
+            height:30px;
+            border:1px solid #333;
+        }
+        button{
+            width: 100%;
+            height: 30px;
+            margin-top:40px;
+        }
+    </style>
+</head>
+<body>
+    <div id="code">
+        <button id="btn">获取随机数</button>
+    </div>
+</body>
+</html>
+<script>
+    /* 
+        需求：
+        点击button按钮的时候出现四位随机数
+        验证码的长度：4位
+        验证码的组合：数字（0-9）、字母（大小写
+
+    */
+    var code=document.getElementById("code");
+    var btn=document.getElementById("btn");
+   var str="qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM0987654321"
+//讲解
+/*
+    索引范围：0-61
+    Math.random（）*61[0-61]
+    Math.round(Math.random（）*61) 0-61范围内
+ */
+
+console.log(res);
+function getCode(str){
+    var res="";//四位字符串
+for(var i=0;i<4;i++){
+    var index=Math.round(Math.random()*(str.length-1));
+    
+    res+=str[index];
+}
+return res;
+}
+//默认给一个
+code.innerHTML=getCode(str);
+btn.onclick=function(){
+    code.innerHTML=getCode(str);
+}
+</script>

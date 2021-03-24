@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="main"><input type="text" name="he1"></div>
+    <h1>h1</h1>
+    <input type="text" name="he1" index="2">
+    <input type="text" name="he2">
+</body>
+</html>
+<script>
+    //获取name=he1的  document.getElementsByName("he1")
+    
+    
+    console.log(ary);
+
+    function myGetName(context,attr,val){
+        var allTage=context.getElementsByTagName("*");
+        var ary=[];
+    for(var i=0;i<allTag.length;i++){
+        if(allTag[i][attr]=="val"){
+            ary.push(allTag[i]);
+        }
+    }
+    return ary;
+    }
+    var main=document.getElementById("main");
+     myGetName(main,"index","he1")
+
+function getMyName(context,val){
+
+
+     var res=context.getElementsByTagName("*");
+     var item=[];
+     for(var i=0;i<res.length;i++){
+         if(res[i].name=="val"){
+            item.push(res[i]);
+         }
+     }
+    }
+    getMyName(main,"he1");
+    var main=document.getElementById("main");
+
+</script>

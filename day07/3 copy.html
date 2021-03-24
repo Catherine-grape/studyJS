@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #code{
+            width: 100px;
+            height:30px;
+            line-height:30px;
+            border:1px solid #333;
+            text-align:center;
+        }
+        #btn{
+            width: 100px;
+            height: 30px;
+            margin-top:40px;
+            
+        }
+    </style>
+</head>
+<body>
+    <div id="code">
+        
+    </div>
+    <button id="btn">获取随机数</button>
+</body>
+</html>
+<script>
+    var code=document.getElementById("code");
+    var btn=document.getElementById("btn");
+    var str="qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM0987654321"
+    function getCode(){
+        var res="";
+           
+            for(var i=0;i<4;i++){
+                var item=Math.round(Math.random()*(str.length-1));
+               // res=res+str[item];
+                res+=str[item];
+            }
+        return res;
+    }
+  code.innerText=(getCode(str));
+  btn.onclick=function(){
+    code.innerText=(getCode(str));
+  }
+</script>
