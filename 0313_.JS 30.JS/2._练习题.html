@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    
+    <div class="box abs"></div>
+    <div class="box abs"></div>
+    <div class="box" ss="100 500"></div><!-- class有特殊性 可以写多个属性 其他不行  -->
+    <div class="box as"></div>
+    <script>
+        // 把字符串中的字母的大小写转换
+        let str = 'AbCdeFgsdfWIUr';
+        let reg = /[a-zA-Z]/g;
+        str.replace(reg, ($1) => {//小写字母 97-122  大写字母65-90
+            /* let s=$1.toUpperCase();//先把$1转大写，转换完成之后，与原来的对比一下，看看和原来的字符相等不相等，如果相等，说明就是大写
+            return s===$1?$1.toLowerCase():s; */
+            let code = $1.charCodeAt();
+            // 大写字母对应的ascii码的范围是65-90
+            // 小写字母对应的ascii码的范围是97-122 
+            if (code >= 65 && code <= 90) {
+                code = $1.toLowerCase();
+            } else {
+                code = $1.toUpperCase();
+            }
+            return code
+        });
+        console.log(str);
+
+        // 3.可以使用单词边界\b
+    let str = "好good好study天day天up！";
+  // 处理完成之后的str为 "好 good 好 study 天 day 天 up ！
+  let reg=/\b([a-z])+\b/g;
+  str=str.replace(reg,(aaa)=>{
+      return " "+aaa+" "
+  });
+  str=str.replace(reg,' $& ')
+  
+  2.
+function attr(key,value){
+    let eles=document.getElementsByTagName('*');//获取页面上所有的元素
+    let ary=[];
+    for(let i=0;i<eles.length;i++){//循环所有的元素
+        let itemValue=eles[i].getAttribute(key);//获取每一个元素行间名为key对应的属性值
+        // 如果属性名为class的话，那最下边的if就不走了
+        if(key=='class'){
+            let reg= new RegExp(`\\b${value}\\b)`)///\bbox\b/ 
+            if(reg.test(itemValue)){
+                ary.push(eles[i]);
+            }
+            continue;
+        }
+        if(itemValue===value){
+            //拿获取的属性值和用户传递进来的value做比对 如果相等 那就是咱们想要的元素，就push到ary中即可
+            ary.push(eles[i]);
+        }
+        
+        // if(eles.includes(value))
+    }
+    return ary;
+}
+attr('class','box')
+
+// 4.
+    let arr = [1, 2, 3, [5, [6]]];
+    arr=arr.flat(Infinity);//Number Infinity无限大
+    arr=arr.toString().split(',').map(item=>Number(item));
+
+    function myFlat(arr){
+        let ary=[];
+        function ss(arr){
+            for(let i=0;i<arr.length;i++){
+                let item=arr[i];
+                if(Array.isArray(item)){
+                    ss(item);
+                }else{
+                    ary.push(item);
+                }
+            }
+        }
+        ss(arr);
+        return ary;
+    }
+
+    let res=myFlat(arr);
+
+// 实现深克隆
+let obj={
+    a:1,
+    b:{c:2},
+    d:3
+}
+function deepClone(obj){
+    let cloneObj=null;
+    for(let key in obj){
+        if(obj[key]!==null&&typeof obj[key]==='object'){
+            cloneObj[key]=deepClone(obj[key]);
+        }else{
+            cloneObj[key]=obj[key];
+        }
+    }
+    return cloneObj;
+}
+
+// forEach
+let arr=[100,200,300]
+function myForEach(callback){
+    for(let i=0;i<this.length;i++){
+        callback(this[i],i,this)
+    }
+}
+Array.prototype.myForEach=myForEach;
+arr.myForEach((item,index,ss)=>{
+    // item数组的每一项 index是数组每一项的索引
+})
+
+    </script>
+</body>
+
+</html>
