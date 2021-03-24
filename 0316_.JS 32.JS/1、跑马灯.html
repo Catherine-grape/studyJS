@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        #box {
+            width: 600px;
+            height: 100px;
+            margin: 100px auto;
+            border: 1px solid red;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #box ul {
+            position: absolute;
+            left: 0;
+            width: 1500px;
+        }
+
+        #box ul li {
+            width: 150px;
+            height: 100px;
+            float: left;
+            list-style: none;
+        }
+
+        #box ul li img {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <ul id="list" style="left:0">
+            <li>
+                <img src="./img/1.jpg" alt="">
+            </li>
+            <li>
+                <img src="./img/2.jpg" alt="">
+            </li>
+            <li>
+                <img src="./img/3.jpg" alt="">
+            </li>
+            <li>
+                <img src="./img/4.jpg" alt="">
+            </li>
+            <li>
+                <img src="./img/5.jpg" alt="">
+            </li>
+            <li>
+                <img src="./img/6.jpg" alt="">
+            </li>
+            <li>
+                <img src="./img/1.jpg" alt="">
+            </li>
+            <li>
+                <img src="./img/2.jpg" alt="">
+            </li>
+            <li>
+                <img src="./img/3.jpg" alt="">
+            </li>
+            <li>
+                <img src="./img/4.jpg" alt="">
+            </li>
+        </ul>
+    </div>
+    <script src="../0315_.JS/ss/jquery-1.11.3.js"></script>
+    <script>
+        let list=document.getElementById('list');
+        let boxLeft=list.style.left;
+        let target=box.scrollWidth-box.clientWidth;
+        if(boxLeft==0){
+            $('li').animate({
+                left:0
+            },3000,'linear')
+        }
+
+    </script>
+</body>
+
+</html>
