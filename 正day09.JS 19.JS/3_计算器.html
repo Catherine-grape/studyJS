@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    ul,
+    ol {
+      list-style: none;
+    }
+
+    #main {
+      width: 479px;
+      /* height: 591px; */
+      margin: 0 auto;
+      /* background: url("bg1.png"); */
+      background: #333;
+      border-radius: 10px;
+      padding: 30px;
+      box-sizing: border-box;
+      color: #fff;
+      position: relative;
+    }
+
+    #main li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      justify-content: space-evenly;
+
+    }
+
+    #main li .info {
+      color: #fff;
+    }
+
+    button {
+      width: 52px;
+      height: 44px;
+      /* background: url("add.png"); */
+      background-color: #f1f1f1;
+      border-radius: 5px;
+      border: none;
+      font-size: 20px;
+    }
+
+    .sub {
+      /* background: url("sub.png"); */
+      content: "-",
+    }
+
+    .num {
+      width: 44px;
+      height: 36px;
+      line-height: 36px;
+      text-align: center;
+      background: #fff;
+      border-radius: 10px;
+      color: #333;
+    }
+
+    .shopInfo {
+      /* position: absolute; */
+      bottom: 20px;
+      left: 30px;
+    }
+
+    .shopInfo p {
+      line-height: 30px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="main">
+    <ul>
+      <li>
+        <button class="add">+</button>
+        <b class="num">0</b>
+        <button class="sub">-</button>
+        <span class="info">
+          单价:<span class="itemPrice">1</span>元 小计：
+          <b class="xjMoney">0</b>元
+        </span>
+      </li>
+      <li>
+        <button class="add">+</button>
+        <b class="num">0</b>
+        <button class="sub">-</button>
+        <span class="info">
+          单价:<span class="itemPrice">2</span>元 小计：
+          <b class="xjMoney">0</b>元
+        </span>
+      </li>
+      <li>
+        <button class="add">+</button>
+        <b class="num">0</b>
+        <button class="sub">-</button>
+        <span class="info">
+          单价:<span class="itemPrice">3</span>元 小计：
+          <b class="xjMoney">0</b>元
+        </span>
+      </li>
+      <li>
+        <button class="add">+</button>
+        <b class="num">0</b>
+        <button class="sub">-</button>
+        <span class="info">
+          单价:<span class="itemPrice">4</span>元 小计：
+          <b class="xjMoney">0</b>元
+        </span>
+      </li>
+
+    </ul>
+    <div class="shopInfo">
+      <p>商品共<span class="totalNum">0</span>件</p>
+      <p>共花了<span class="totalMoney">0</span>元</p>
+      <p id="changeBox">其中最贵的商品单价是<span class="specileMoney">0</span>元</p>
+    </div>
+  </div>
+</body>
+
+<script src="js/4_面向对象.js"></script>
+
+</html>
+<!-- <script>
+  let allGoods = document.querySelectorAll('#main ul li');
+  console.log(allGoods)
+  allGoods.forEach(item => {
+    // item 代表的是每一个li;
+    let addBtn = item.querySelector('.add'),
+      subBtn = item.querySelector('.sub'),
+      numBox = item.querySelector('.num'),
+      itemPrice = item.querySelector('.itemPrice'),
+      xjMoney = item.querySelector('.xjMoney');
+    addBtn.onclick = function () {
+      let num = numBox.innerHTML;
+      num = num / 1;
+      num += 1;
+      // num++
+      //累加完成之后  再把改变之后的数字赋值给 numBox
+      numBox.innerHTML = num;
+    }
+    subBtn.onclick = function () {
+      let num = numBox.innerHTML;
+      console.log(num)
+    }
+
+
+  })
+</script> -->

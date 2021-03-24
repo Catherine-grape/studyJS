@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box" class="box">
+        <ul class="tab_box">
+            <li class="tab">css</li>
+            <li class="tab">JS</li>
+            <li class="tab">HTML</li>
+        </ul>
+    </div>
+    <script >
+        //面向过程
+/*         function clear(){
+            for(let i=0;i<btns.length;i++){
+                body[i].classList.remove("current");
+                btns[i].classList.remove("current");
+            }
+        }
+        let tab=new Tab("#box")
+        let btn=document.querySelectorAll(".tab");
+        let body=document.querySelectorAll(".body");
+        for(let i=0;i<btns.length;i++){
+            btn[i].onclick=function(){
+                body[i].classList.add("current");
+                this.classList.add("current");
+            }
+        }
+ */   
+
+
+ function Tab(){
+     
+ }
+
+let tab=new Tab("#box",{
+    //配置项的参数都可以不传递
+    currentIndex:1,//用来控制初始加载时 渲染那个选项卡
+    currentClass:"current",//选中的元素的类名
+})
+</script>
+</body>
+</html>

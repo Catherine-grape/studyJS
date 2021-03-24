@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .box {
+      width: 600px;
+      margin: 30px auto;
+
+    }
+
+    .tab_box {
+      border: 1px solid salmon;
+      display: flex;
+    }
+
+    .tab {
+      flex: 1;
+      height: 50px;
+      line-height: 50px;
+      text-align: center;
+      font-size: 20px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .tab:nth-child(2) {
+      border: 1px solid salmon;
+      border-bottom: none;
+      border-top: none;
+    }
+
+    .tab.current {
+      /*同时又 tab 和 current者两个类名的元素才会有对应的样式 */
+      background: salmon;
+      color: #fff;
+    }
+
+    .body_box {
+      width: 600px;
+      height: 300px;
+      border: 1px dashed salmon;
+      border-top: none;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+
+    .body {
+      width: 600px;
+      height: 300px;
+      text-align: center;
+      line-height: 300px;
+      font-size: 50px;
+      display: none;
+    }
+
+    .body.current {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box" id='box'>
+    <ul class='tab_box'>
+      <li class="tab current">css</li>
+      <li class="tab">JS</li>
+      <li class="tab">HTML</li>
+    </ul>
+    <ul class="body_box">
+      <li class="body current">CSS基础</li>
+      <li class="body">JS基础</li>
+      <li class="body">HTML基础</li>
+    </ul>
+  </div>
+</body>
+
+</html>
+<script>
+  // classList.add(类名) 新增类名
+  // classList.remove(类名) 移除类名
+  // classList.toggle(类名) 以前有这个类名就删除 没有的话就新增
+  /* function clear() {
+    for (let i = 0; i < btns.length; i++) {
+      body[i].classList.remove('current');
+      btns[i].classList.remove('current');
+    }
+  }
+  // let tab = new Tab('#box')
+  let btns = document.querySelectorAll('.tab');
+  let body = document.querySelectorAll('.body');
+  for (let i = 0; i < btns.length; i++) {
+    btns[i].onclick = function () {
+      clear()
+      body[i].classList.add('current');
+      this.classList.add('current');
+    }
+  } */
+  function Tab(selection,options) {
+    //selection 用户给的外层选择器
+    //options 用户给的配置项
+    this.box=document.querySelector(selection);
+    this.btns=this.box.querySelectorAll(".btn");
+    this.bodys=this.box.querySelectorAll(".body");
+    //this.options=options;
+     let defaultOption={
+      currentIndex:0,
+      currentClass:"current"
+    }
+
+    this.options=Object.assign(defaultOption,options)//我们把用户给的设置对象合并到默认选中的对象
+    //合并的好处在于 用户设置了 就用用户设置的内容，没有设置 就是默认值
+  } 
+  Tab.prototype.init=function(){
+    let currentIndex=this.options.currentIndex;
+    this.clear();
+    this.btns[currentIndex].classList.add(this.options.currentClass);
+    this.bodys[currentIndex].classList.add(this.options.currentClass);
+    this.bindEvent();
+  }
+Tab.prototype.bindEvent=function(){
+  //this 是Tab实例
+  for (let i = 0; i < btns.length; i++) {
+    this.btns[i].onclick =  ()=> {
+      //保证这个函数中的this是当前实例
+      //若不是箭头函数 则这里的this是绑定的那个元素
+      this.clear()
+      this.body[i].classList.add(this.options.currentClass);
+      this.classList.add(this.options.currentClass);
+    }
+  } 
+}
+Tab.prototype.clear=function(){
+  for (let i = 0; i <btns.length; i++) {
+      this.body[i].classList.remove(this.options.currentClass);
+      this.btns[i].classList.remove(this.options.currentClass);
+    }
+}
+  let tab = new Tab('#box', {
+    //配置项的参数都可以不传递
+    currentIndex: 1, // 用来控制初始加载时 渲染哪个选项卡
+    currentClass: 'active', // 选中的元素的类名
+  })
+</script>
