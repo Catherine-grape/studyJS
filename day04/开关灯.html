@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        body{
+            background-color: lightcyan;
+        }
+        #main{
+            width: 300px;
+            border:1px solid lawngreen;
+            margin:0 auto;
+        }
+        button{
+            width:100%;
+            height:50px;
+            line-height:50px;
+            border-style:none;
+            margin-bottom:20px;
+            outline:none;
+        }
+        img{
+            
+            margin:0 auto;
+            width:100%;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="main">
+        <button id="btn">隐藏</button>
+        <img id="photo" src="../../2020-02/可爱.gif" alt="" style="display:block;">
+    </div>
+</body>
+</html>
+<script>
+    var btn=document.getElementById("btn");
+    var img=document.getElementById("photo");
+    btn.onclick=function(){
+        var message=btn.innerText;
+        if(message=="隐藏"){
+            btn.innerText="显示";
+            img.style.display="block";
+        }else{
+            btn.innerText="隐藏";
+            img.style.display="none";
+        }
+    }
+</script>

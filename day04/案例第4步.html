@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul,
+        ol {
+            list-style: none;
+        }
+
+        .main {
+            width: 500px;
+            margin: 0 auto;
+        }
+
+        .lists>li {
+            display: inline-block;
+            height: 40px;
+            text-align: center;
+            line-height: 40px;
+            border: 1px solid #333;
+            width: 100px;
+            margin-right: 30px;
+            position: relative;
+            top: 1px;
+        }
+
+        .main>div {
+            height: 300px;
+            line-height: 300px;
+            border: 1px solid #333;
+            text-align: center;
+            display: none;
+        }
+
+        .lists>li.current {
+            background: darkturquoise;
+            border-bottom-color: darkturquoise;
+        }
+
+        .main>div.current {
+            display: block;
+            background: darkturquoise;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main" class="main">
+        <ul class="lists">
+            <li class="current">电视1</li>
+            <li >电视2</li>
+            <li>电视3</li>
+        </ul>
+        <div>电视1</div>
+        <div class="current">电视2</div>
+        <div>电视3</div>
+    </div>
+
+</body>
+
+</html>
+<script>
+    // 获取操作的元素
+    var main = document.getElementById("main");
+    var lis = main.getElementsByTagName("li");
+    var divs = main.getElementsByTagName("div");
+
+    //依次给每个li绑定点击事件
+    for (var i = 0; i < lis.length; i++) {
+        // 给每一个li添加一个自定义属性index,来定义顺序
+        lis[i].index=i;
+        lis[i].onclick = function () {
+            var index=this.index;
+            // 点击的时候，为了保证唯一性，在给此元素添加这个current之前，我把所有的li 和div的类名都清空
+            for (var i = 0; i < lis.length; i++) {
+                lis[i].className = "";
+                divs[i].className = "";
+            }
+            lis[index].className = "current";
+            divs[index].className = "current";
+        }
+    }
+
+
+
+</script>

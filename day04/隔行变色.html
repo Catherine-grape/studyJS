@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        body{
+            background:lightcyan;
+        }
+        ul,li{
+            list-style:none;
+        }
+        ul{
+            width: 500px;
+            margin:20px auto;
+        }
+        li{
+            width:100%;
+            height:40px;
+            line-height:40px;
+        }
+    </style>
+</head>
+<body>
+    <ul id="main">
+        <li>2019年底，连接北京冬奥会两个举办地的京张高铁开通运营。</li>
+        <li>2019年底，连接北京冬奥会两个举办地的京张高铁开通运营。</li>
+        <li>2019年底，连接北京冬奥会两个举办地的京张高铁开通运营。</li>
+        <li>2019年底，连接北京冬奥会两个举办地的京张高铁开通运营。</li>
+        <li>2019年底，连接北京冬奥会两个举办地的京张高铁开通运营。</li>
+        <li>2019年底，连接北京冬奥会两个举办地的京张高铁开通运营。</li>
+        <li>2019年底，连接北京冬奥会两个举办地的京张高铁开通运营。</li>
+        <li>2019年底，连接北京冬奥会两个举办地的京张高铁开通运营。</li>
+        <li>2019年底，连接北京冬奥会两个举办地的京张高铁开通运营。</li>
+        <li>2019年底，连接北京冬奥会两个举办地的京张高铁开通运营。</li>
+
+    </ul>
+</body>
+</html>
+<script>
+    var omain=document.getElementById("main");
+    var lis=main.getElementsByTagName("li");
+    for(var i=0;i<lis.length;i++){
+        if(i%2==0){
+            lis[i].style.backgroundColor="lightpink";
+        }else{
+            lis[i].style.backgroundColor="ligthseagreen";
+        }
+        lis[i].onmouseover=function(){
+            this.oldColor=this.style.backgroundColor;
+            this.style.backgroundColor="white";
+        }
+        lis[i].onmouseout=function(){
+            this.style.backgroundColor=this.oldColor;
+        }
+    }
+</script>
