@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id='box' value="">
+    <script>
+       
+        let box=document.getElementById('box');
+        box.onkeyup=function(e){//down有缺陷
+            let reg = /[^\d]/g
+            let value = this.value;
+            this.value=value.replace(reg,'');
+            if(value.length>18){
+                this.value=this.value.slice(0,18);
+            }
+            if(e.keyCode==13){
+                alert(value)
+            }
+        }
+
+        /* 
+        let reg1=/^1[3-9]\d{9}$/;
+        if(reg1.test(value)){
+            alert(value);
+        }
+
+
+         if (reg1.test(value)) {//实时校验
+        span.style.display = 'none';
+      } else {
+        span.style.display = 'block';
+      }
+        */
+    </script>
+</body>
+</html>

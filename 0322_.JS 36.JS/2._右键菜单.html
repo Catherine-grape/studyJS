@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul,
+        li {
+            list-style: none;
+        }
+
+        ul {
+            width: 100px;
+            height: 100px;
+            background: mintcream;
+            border: 1px solid black;
+            box-shadow: 10px 10px 10px lightgrey;
+            padding: 10px;
+            margin: 20px auto;
+            position:absolute;
+            display:none;
+        }
+
+        li {
+            width: 100px;
+            height: 25%;
+            border-bottom: 1px solid lightgrey
+        }
+    </style>
+</head>
+
+<body>
+    <ul id='box'>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+    <script >
+        let box=document.getElementById('box');
+        window.oncontextmenu=function(e){
+           e.returnValue=false;
+           box.style.display='block';
+           let X=e.clientX;//获取当前鼠标点击的位置距离屏幕左边框的距离
+           let Y=e.clientY;
+           box.style.left=X+"px";
+           box.style.top=Y+"px";
+           
+        }
+        let lis=document.getElementsByTagName('li');
+        window.onclick=function(e){
+           
+           console.log(e.target); 
+           let tagName=e.target.tagName;//获取当前元素大写的名字
+            if(tagName!=='UL'&& tagName !=='LI'){
+                 box.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+
+</html>

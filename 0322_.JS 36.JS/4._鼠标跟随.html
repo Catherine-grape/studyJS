@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        #box{
+            width: 500px;
+            height: 500px;
+            background:lightskyblue;
+            position: absolute;
+            /* left:50%;
+            top:50%; */
+            /* transform: translate(-50%,-50%); 影响小盒子 导致出现在盒子右下角 */
+        }
+        #mark{
+            width: 250px;
+            height: 250px;
+            background:olivedrab;
+            opacity: 0.2;
+            position: absolute;
+            /* display:none; */
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <!-- <div id="mark"></div> -->
+    </div>
+    <script>
+        let box=document.getElementById('box');
+        let mark=null;//先在全局声明一个mark 可以让私有作用域中的拿到这个
+        box.onmouseenter=function(){
+            mark=document.createElement('div');//动态创建一个div
+            mark.id='mark';
+            box.appendChild(mark);//把它插回页面
+        }
+        box.onmousemove=function(e){
+            let minL=0;
+            let maxL=box.offsetWidth-mark.offsetWidth;
+            let minT=0;
+            let maxT=box.offsetHeight-mark.offsetHeight;
+            
+            let  left=e.clientX- box.offsetLeft-125;
+            let  top= e.clientY- box.offsetTop-125;
+ 
+            // left <= minL? left=minL: left;
+            // left >= maxL? left=maxL:left
+            if(left<=minL){
+                left = minL;
+            }
+            if(left>=maxL){
+                left = maxL;
+            }
+            // top <= minT?rej= minT + "px":rej= maxT + "px"
+            if(top<=minT){
+                top = minT ;
+            }
+            if (top >= maxT) {
+             top = maxT;
+            }
+            mark.style.left = left + "px";
+            mark.style.top = top + "px";
+        }
+        box.onmouseleave=function(){
+            box.removeChild(mark);//当鼠标离开移除mark
+        }
+    </script>
+</body>
+</html>
