@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+       /* html,body {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+ */
+        #box {
+            width: 200px;
+            height: 200px;
+            background-color: lightcoral;
+            position:absolute;
+
+            /* 知道宽高的前提下  
+           left:50%;
+            top:50%;
+            margin-top:-100px;
+            margin-left:-100px; */
+
+            /*          不需要知道盒子的宽高
+            left:50%;
+            top:50%;
+            transform:translate(-50%,-50%); */
+
+            /*  不需要知道盒子的宽高
+            left:0;
+            right:0;
+            top:0;
+            bottom:0;
+            margin:auto; */
+
+
+
+        }
+        #box::after{
+            content:'lskdfjlaksjflkasglkglakdjf';
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box" style="width:300px"></div>
+    <script>
+        // box的left值==屏幕的clientWindth/2-offsetWidth/2
+        // (屏幕的clientWindth- box.offsetWidth)/2
+        let box=document.getElementById('box');
+        box.style.left=(document.documentElement.clientWidth-box.offsetWidth)/2+"px";
+        box.style.top=(document.documentElement.clientHeight-box.offsetHeight)/2+"px";
+
+        // getComputedStyle(ele)获取元素的计算样式 是一个方法 window上的可省略 方法
+        let res=getComputedStyle(box)
+        // 获取的样式计算到元素身上之后的值
+        // 返回值是一个实例对象，里面存储的是当前元素身上所有的被计算之后的样式
+        console.log(res.width);//300px
+        console.log(res);//所有的css的样式
+        //如果样式名是复合名字，那就用驼峰命名的方式去获取，js中没有-连接符
+        console.log(res.backgroundColor);
+        // 如果项获取当前元素的伪类元素的样式，那就该方法传递第二个参数‘after’或者‘before’
+        let item=getComputedStyle(box,'after');
+        console.log(item.left)
+
+        // 元素.currentStyle.width//专门在ie浏览器下使用的 属性
+        
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html,body{
+            width:100%;
+            height:100%;
+        }
+        img{
+            display: block;
+            width:100%;
+        }
+        button{
+            width: 100px;
+            height: 100px;
+            line-height: 100px;
+            border-radius:50%;
+            background:lightblue;
+            text-align:center;
+            color:lightcyan;
+            font-size: 16px;
+            position:fixed;
+            bottom:20px;
+            right:20px;
+            border:0px;
+            outline:none;
+            display:none;
+        }
+    </style>
+</head>
+<body>
+    <img src="./顶部.png" alt="">
+    <img src="./顶部.png" alt="">
+    <img src="./顶部.png" alt="">
+    <img src="./顶部.png" alt="">
+    <img src="./顶部.png" alt="">
+    <img src="./顶部.png" alt="">
+    <button id="btn">回到顶部</button>
+    <script src="./js/utils.js"></script>
+    <script>
+        let btn=document.getElementById('btn');
+        btn.onclick=function(){
+            // 假设现在的scrollTop的值为100
+            // 要求1秒内回到顶部
+            let distance=utils.screen('scrollTop');//获取当前浏览器滚动条纵向卷曲的高度
+            // 每隔20毫秒运动一次 一共需要50次 
+            let mean=distance/50;//把运动的总距离分为50份，每隔20ms运动一次，每次运动50分之一
+            let timer=setInterval(()=>{
+                distance-= mean;
+                if(distance<=0){
+                    clearInteral(timer);
+                }
+                utils.screen('scrollTop',distance);
+            },20)
+            utils.screen('scrollTop',0);
+        }
+        //当滑动浏览器的滚动条的时候就会触发onscroll绑定的方法
+        let screenH = utils.screen('clinentHeight');//屏幕可视区域的高度
+        window.onscroll=function(){
+            // 当函数执行的时候就判断btn按钮是否应该展示
+            
+            let scrollTop=utils.screen('scrollTop');//屏幕滚动条卷曲的高度
+            console.log(scrollTop, screenH);
+            if(scrollTop>screenH){
+                console.log('展示')
+                btn.style.display="block";
+            }else{
+                btn.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
