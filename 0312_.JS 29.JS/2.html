@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        html.body{
+            width: 100%;
+            height: 100%;
+        }
+        #box{
+            width: 30px;
+            margin:200px auto 0 auto;
+        }
+        img{
+            display:block;
+            width: 300px;
+            height: 200px;
+            border:1px solid black;
+            margin-top:30px;
+            margin-bottom:500px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div id="box">
+        <img class="bg" src="./img/timg.gif" alt="" true-img="./img/1.jpg">
+        <img class="bg" src="./img/timg.gif" alt="" true-img="./img/2.jpg">
+        <img class="bg" src="./img/timg.gif" alt="" true-img="./img/3.jpg">
+        <img class="bg" src="./img/timg.gif" alt="" true-img="./img/4.jpg">
+        <img class="bg" src="./img/timg.gif" alt="" true-img="./img/5.jpg">
+       
+    </div>
+    <script src="js/utils.js"></script>
+    <script>
+        let imgs=document.getElementsByClassName('bg');//有映射功能
+        function delay(img){
+            //用来判断当前的图片是否需要加载
+            let imgH=img.offsetHeight;
+            let imgT=utils.offset(img).top;
+            let winH=utils.screen('clientHeight');
+            let winT = utils.screen('scrollTop');
+
+            if(winT+ winH>= imgT+ imgH){
+                let address=img.getAttribute('true-img');
+                img.src=address;
+                img.classList.remove('bg');
+                fadeIn(img);
+                img.onerror=function(){
+                    img.src='./img/default.jpg';
+                }
+            }
+        }
+        function fadeIn(img){
+            img.style.opacity=0;
+            let cur=parseFloat(img.style.opacity=0);
+            let timer=setInterval(()=>{
+                cur+=0.01;
+                if(cur>=1){
+                    clearInterval(timer);
+                    img.style.opacity = 1;
+                    return
+                }
+                img.style.opacity=cur;
+            },17)
+        }
+        function check(){
+            for (let i = 0; i < imgs.length; i++) {
+                let item = imgs[i];
+                delay(item);
+            }
+        }
+       check();
+        window.onscroll=function(){
+            check();
+        }
+    </script>
+</body>
+</html>
