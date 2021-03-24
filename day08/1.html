@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+            #box{
+            width: 100px;
+            height:30px;
+            line-height:30px;
+            border:1px solid #333;
+            text-align:center;
+
+        }
+        button{
+            width: 100px;
+            height:40px;
+            margin-top:40px;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <button id="btn">获取随机验证码</button>
+</body>
+</html>
+<script>
+    var box=document.getElementById("box");
+    var btn=document.getElementById("btn");
+    var str="qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890"
+function getCode(str){
+    var res="";
+    for(var i=0;i<4;i++){
+        var item=Math.round(Math.random()*(str.length-1))
+        if(res.indexOf(item)==-1){
+            res=res+str[item];
+        }
+    }
+    return res;
+}
+box.innerHTML=getCode(str);
+btn.onclick=function(){
+    box.innerHTML=getCode(str);
+}
+</script>

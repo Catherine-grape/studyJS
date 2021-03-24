@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="main">
+        <h1>h1</h1>
+    </div>
+</body>
+</html>
+<script>
+    //dom的增删改查
+    var oh1=document.createElement("h1");//创建一个元素
+var otext=document.createTextNode("哈哈");//创建一个文本节点
+//这个dom不是死的
+document.appendChild();//
+oh1.appendChild(otext);//容器.appendChild（节点）;节点放到容器的里面
+//把oh1 追加到页面中 document.body.appendChild(oh1);   把p标签放到main里面  var op=document.createElement("p"); var otext=document.createTextNode("段落")   var p1=op.appendChild(otext);  main.appendChild(op);
+main.removeChild(op);//删除容器里面的节点  容器.removeChild(节点)
+/* 
+var h2=document.createElement("h2");
+var otext=document.createTextNode("h2");
+h2.appendChild（otext)
+var h1=document.querySelector("h1");
+main.insertBefore(h2,h1);
+ */
+
+main.insertBefore(h2,h1);//把h2插入到h1的前面
+
+var s=main.cloneNode();//克隆某个节点，不写参数只是浅克隆，单纯的只克隆了一层
+var s=main.cloneNode(true);//深克隆：把里面所有的结构都给克隆一份
+
+
+//===>第一种方式：把属性名和属性值添加到了dom结构上了，三个方法是一组不能和第二种方式混用
+//给元素添加属性，第一个参数就是属性名第二个参数：属性值  
+main.setAttribute("index",0);//给main设置自定义属性 属性名index 属性值0
+main.getAttribute("index");//"0"获取元素特定属性对应的属性值
+main.removeAttribute("index");//删除属性
+//===>第二中方式 一对象的形式进行添加，添加到堆内存中了，你可以通过console.dir（元素），可以看到其属性和属性值
+//添加属性名和属性值
+main["index"]=100; dir(main);//通过对象的方式添加 添加到堆栈内容里面了 结构中没有  
+//获取
+/* 
+main["index"] 
+ main.index;
+ 这样就获取到了  */
+//删除
+delete main["index"];
+delete main.index;
+</script>

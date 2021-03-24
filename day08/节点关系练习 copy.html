@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="main">
+
+        <!-- 注释 -->
+        
+        <h1>h1</h1>
+        <span id="box">box</span>
+    </div>
+    <ul id="oul">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <p id="p1">p1</p>
+    </ul>
+</body>
+
+</html>
+<script>
+    var box=document.getElementById("box")  ;  
+    //如果说某个节点存在上一个哥哥节点，并且不是元素类型，那我就的一只通过previousSibling
+    //封装 元素哥哥节点
+function mychildren(ele){
+    var pre=box.previousSibling;//得到上一个哥哥节点，（如果不存在null）
+    while(pre&&pre.nodeType!=1){
+        pre=pre.previousSibling;
+    }
+    return pre;
+}
+mychildren(box);
+mychildren(p1);
+    
+ 
+        
+
+
+        
+
+     </script> 

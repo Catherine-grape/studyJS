@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="main">
+        <!-- 注释  换行也是文本节点-->
+        <h1 id="h1">h1</h1>
+        <span id="box">box</span>
+    </div>
+</body>
+</html>
+<script>
+    var main=document.getElementById("main");
+    var h1=document.getElementById("h1");
+    var box=document.getElementById("box");
+    box.parentNode;//获取某个节点的父节点  
+     /* 
+     <div id="main">
+        <!-- 注释  换行也是文本节点-->
+        <h1 id="h1">h1</h1>
+        <span id="box">box</span>
+    </div>
+     */
+    main.childNodes;//获取当前节点下面所有的子节点
+    /*
+    [text, comment, text, h1#h1, text, span#box, text] 
+     */
+    main.children;//获取当前节点下面所有的子元素（ie6-ie8 不兼容）
+    /* 
+    [h1#h1, span#box, h1: h1#h1, box: span#box]
+     */
+    box.previousSibling;//获取当前节点的哥哥节点（向上的兄弟）
+    /* #text */
+    box.previousSibling.previousSibling;//获取当前节点的哥哥的哥哥节点
+    /* 
+    <h1 id="h1">h1</h1>
+     */
+    box.previousElementSibling;//获取当前节点的哥哥元素节点（ie6-ie8不兼容）
+    /* 
+    <h1 id="h1">h1</h1>
+    */
+    h1.nextSibling.nextSibling;//获取当前节点的弟弟节点（向下的兄弟）
+    /* 
+    <span id="box">box</span>
+    */
+    h1.nextElementSibling;//获取向下的兄弟元素（ie6-ie8不兼容）
+    /* 
+    <span id="box">box</span>
+    */
+   main.firstChild;//获取当前节点下面的第一个子节点
+   main.firstElementChild;//获取当前节点下面的第一个子元素（ie6-ie8不兼容）
+   main.lastChild;//获取当前节点下面的最后一个子节点
+   main.lastElementChild;//获取当前节点下面的最后一个子元素（ie6-ie8不兼容）
+
+</script>

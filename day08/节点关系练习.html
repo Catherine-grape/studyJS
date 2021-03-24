@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="main">
+
+        <!-- 注释 -->
+        
+        <h1>h1</h1>
+        <span id="box">box</span>
+    </div>
+    <ul id="oul">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+    </ul>
+</body>
+
+</html>
+<script>
+    var oul = document.getElementById("oul");
+    /*   var lis=oul.childNodes;
+       function getCode(lis){
+           var res=[];
+           for(var i=0;i<lis.length;i++){
+               var item=lis[i];
+               if(item.nodeType==1){
+                   res.push(item[i]);
+               }
+           }
+           return res;
+       }
+       console.log(getCode(lis));
+    */
+
+    //讲解
+     function myChildren(oul) {        
+        var nodes = oul.childNodes;//拿到所有的子节点
+        var ary = [];//盛放最后筛选所有的元素盒子
+        for (var i = 0; i < nodes.length; i++) {
+            //说明是元素标签
+            if (nodes[i].nodeType == 1) {
+                ary.push(nodes[i]);
+            }
+        }
+return ary;
+    }
+    myChildren(main);
+    var oul = document.getElementById("oul");
+    var main = document.getElementById("main");
+
+ 
+    var box=document.getElementById("bro");
+ var box=document.getElementById("box")  ;     
+ var pre=box.previousSibling;
+        
+
+
+        //封装 元素哥哥节点
+
+     </script> 
