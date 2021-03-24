@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+    <script>
+        let list=document.getElementsByTagName('li');
+        Array.prototype.slice.call(list);//让slice里面的this变成list并且执行
+        list.sort((a,b)=>{
+            return b.innerHTML-a.innerHTML
+        })
+        list.forEach(item=>{
+            ul.appenChild(item);//浏览器知道你这个li是之前的 所以不会再新增加
+        })
+
+        /* let li=document.createElement('li');
+        li.innerHTML=6;
+        ul.appenChild(li); */
+
+        let frg=document.createDocumentFragment();//创建一个容器
+        ul.appenChild(frg);
+
+        
+    </script>
+</body>
+</html>
