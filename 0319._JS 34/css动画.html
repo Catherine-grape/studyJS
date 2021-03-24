@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./animate.min.css">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        #box {
+            width: 200px;
+            height: 200px;
+            background: pink;
+            border-radius: 50%;
+        }
+
+        @keyframes aaa {
+            0% {
+                transform: translate(0px, 0px);
+            }
+
+            25% {
+                transform: translate(150px, 100px);
+            }
+
+            50% {
+                transform: translate(300px, 0px);
+            }
+
+            75% {
+                transform: translate(150px, 100px);
+            }
+
+            100% {
+                transform: translate(0px, 0px);
+            }
+        }
+
+        #box {
+            animation: aaa 4s linear 2s both infinite;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <!-- <div class="animated bounce infinite"></div> -->
+    </div>
+    <script>
+        /*
+        css3中的变形属性：transform，改变元素的样式
+          性能比js操作dom要好
+          + scale(n):缩放
+          + translate(x,y):位移  translate3d(X,Y,Z)/translateX/translateY/translateZ
+          + retate(n):旋转    rotateX/rotateY/rotateZ
+          + skew(n):倾斜
+          + matrix：矩阵变形
+         */
+
+        /*
+        * CSS3中的过渡动画:transition
+        *   给元素设置过渡效果，当元素的样式在某种情况下发生改变了，不是立即改变，而是按照指定的效果慢慢的去改变，从而实现动画效果
+        *   + transition-property：设置过渡的样式属性（哪些样式改变会执行过渡效果），默认是all，元素所有的样式改变都会执行过渡效果
+        *   + transition-druation：动画运行的时间 ms/s
+        *   + transition-timing-function：运行的方式，linear默认值“匀速运动”、ease、ease-in、ease-out、ease-in-out、cubic-bezier...
+        *   + transition-delay：设置延迟时间，默认值0s“立即执行”
+    
+        他只能做从A到B的动画，哪想做一些比较复杂的动画怎么办呢，就要利用咱们的帧动画
+    */
+
+        /*
+         * CSS3中的帧动画：animation(有两部分)
+         *   1.制作运动的轨迹（每一帧元素的样式） @keyframes
+         *     @keyframes 动画名{
+         *	       0%或者from{ 第一帧的样式 }
+         *         ...
+         *         50%{ 中间某帧的样式 }
+         *         ...
+         *         100%或者to{ 最后一帧的样式 }
+         *     }
+         *   2.播放动画（按照轨迹运动） animation
+         *     + animation-name：动画名
+         *     + animation-duration：播放的时间
+         *     + animation-timing-function：运动方式，默认ease
+         *     + animation-delay：延迟时间，默认0s
+         *     + animation-iteration-count：播放次数，默认1，infinite无限次播放
+         *     + animation-fill-mode：控制运动状态
+         *         + forwards：animation动画，元素运动完，默认会返回第一帧所在的位置，如果设置了这个属性，则运动完停留在最后一帧的位置
+         *         + backwards：在动画设置延迟时间的情况下，我们让元素在第一帧位置等待运行
+         *         + both：同时具备以上两个特点
+         */
+    </script>
+</body>
+
+</html>
