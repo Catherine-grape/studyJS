@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul id='ul'>
+        <li>姓名是：张三；年纪是18</li>
+        
+    </ul>
+    <!-- 
+        <li>7</li>
+        <li>267</li>
+        <li>223</li>
+        <li>1123</li>
+        <li>2323</li>
+        <li>323</li> -->
+   
+    <button id="btn">删除</button>
+    <button>升序</button>
+    <button>降序</button>
+    <script>
+        let ul = document.getElementById('ul'), lis = document.getElementsByTagName("li"), lis2 = document.querySelectorAll('li'), btn = document.getElementById('btn');
+        // 通过 getElement……这类方法获取的元素 它的变量会自动跟着元素发生改变
+        // 通过  querySelectorAll 获取的元素不会自动改变
+        btn.onclick = function () {
+            ul.removeChild(lis[2]);
+            console.log('lis', lis);
+            console.log('lis2', lis2);
+        }
+
+        var ary = [
+            { name: "张三1", age: 204 },
+            { name: "张三2", age: 222 },
+            { name: "张三3", age: 234 },
+            { name: "张三4", age: 214 },
+            { name: "张三5", age: 142 },
+        ]
+        // 怎么去把这个数组中的数据展示到页面上  字符串用法：`反引号是可以换行 用${123}承接变量 新增的
+        function rederHtml(ary){
+            // 操作数据 在反引号出来之后基本 这种最好用 后面经常用 性能比较好 
+            ul.innerHTML=`<li>姓名是：张三；年纪是18</li> `
+           let str=``;
+            ary.forEach(item=>{
+                str+=`<li>姓名是：${item.name};年纪是:${item.age}</li>`
+            })
+            ul.innerHTML=str;
+        }
+        rederHtml(ary);
+        // document.createElement 创造li标签 然后再一个一个的添加（appendChild）到ul中
+        function renderHtml2(){
+            // 有多少数据就创造多少标签
+            // 每次改动的时候都会引起dom的回流 操作dom
+            ary.forEach(item=>{
+                // item 是数组中的每一项（name：xxx，age：xxx）
+                let li=document.createElement("li");
+                li.innerHTML=`姓名是：${item.name};年纪是${item.age}`
+                ul.appendChild(li)
+            })
+        }
+        /* 
+        回流：当html结构发生改变的时候 浏览器要重新过一遍结构  display：none block 都会引起回流 非常耗性能  回流必定引起重绘
+        重绘：就是浏览器会对元素进行重新描绘  重绘不一定引起回流
+
+        */
+
+
+        function renderHtml(){
+            // 有多少数据就创造多少标签
+            // 文档碎片 API 不是存在在HTML结构中 不是dom可以使用dom的操作方法 但是它只是一个小空间 
+            // 单独的文档碎片#document.fragment 
+            // fragment===fragment //=>true
+
+            let fragment=document.createDocumentFragment();
+            ary.forEach(item=>{
+                // item 是数组中的每一项（name：xxx，age：xxx）
+                // 
+                let li=document.createElement("li");
+                li.innerHTML=`姓名是：${item.name};年纪是${item.age}`
+                fragment.appendChild(li)
+            })
+            
+            ul.appendChild(fragment)
+        }
+         /* 映射 
+         appendChild新增的时候 会查看新增这一项是否是结构中存在的元素，若是则只调位置 不新增 有就调序 没有就新增
+ */
+    </script>
+</body>
+
+</html>

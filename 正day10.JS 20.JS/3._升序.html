@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul id='ul'>
+        <li>姓名是：张三；年纪是18</li>
+        
+    </ul>
+    <button id="btn">删除</button>
+    <button id="up">升序</button>
+    <button id="down">降序</button>
+    <script src="js/utils.js"></script>
+      <script> 
+       let ul = document.getElementById('ul'), lis = document.getElementsByTagName("li"), lis2 = document.querySelectorAll('li'), btn = document.getElementById('btn'),
+       upBtn=document.getElementById("up"),downBtn=document.getElementById("down");
+       btn.onclick = function () {
+            ul.removeChild(lis[2]);
+            console.log('lis', lis);
+            console.log('lis2', lis2);
+        }
+
+        var ary = [
+            { name: "张三1", age: 204 },
+            { name: "张三2", age: 222 },
+            { name: "张三3", age: 234 },
+            { name: "张三4", age: 214 },
+            { name: "张三5", age: 142 },
+        ]
+        function rederHtml(ary){
+            // 操作数据 在反引号出来之后基本 这种最好用 后面经常用 性能比较好 
+            ul.innerHTML=`<li>姓名是：张三；年纪是18</li> `
+           let str=``;
+            ary.forEach(item=>{
+                // 再每一个 li上太假一个myage的行内属性为什么添加？为了我们在下面的计算的时候方便获取年龄
+                // 在下面 计算的时候我嗯就可以通过 getAttribute这个方法 直接获取到年龄值
+                str+=`<li myage=${item.age}>姓名是：${item.name};年纪是:${item.age}</li>`
+            })
+            ul.innerHTML=str;
+        }
+        rederHtml(ary);
+
+        function mysort(n){
+            // lis
+            // 对 lis排序 然后循环调用 appendChild即可
+            // lis排序怎么能拿到年龄呢
+            // 元素.getAttribute（行内属性名）专门用来获取行内属性的一个方法
+            let ary=util.toArray(lis);
+            ary.sort((a,b)=>{
+                return (a.getAttribute('myage')-b.getAttribute('myage'))*n
+                // -a+b=>b-a
+            })
+            ary.forEach(item=>{
+                // ary中放的就是排好序的li标签
+                // item 就是每一个li
+                ul.appendChild(item);
+                // 给ul的尾部添加一个元素 若这个元素本身就已经存在 则直接把他从原来的位置挪到这个ul的尾部
+            })
+        }
+        mysort();
+        upBtn.onclick=function(){
+            mysort(1);
+        }
+        downBtn.onclick=function(){
+            mysort(-1);
+        }
+    </script>
+</body>
+</html>

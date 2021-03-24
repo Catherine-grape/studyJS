@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul id='ul'>
+        <li>姓名是：张三；年纪是18</li>
+        
+    </ul>
+    <button id="btn">删除</button>
+    <button id="up">升序</button>
+    <button id="down">降序</button>
+    <script src="js/utils.js"></script>
+      <script> 
+       let ul = document.getElementById('ul'), 
+       upBtn=document.getElementById("up"),downBtn=document.getElementById("down");
+       btn.onclick = function () {
+            ul.removeChild(lis[2]);
+            console.log('lis', lis);
+            console.log('lis2', lis2);
+        }
+
+        var ary = [
+            { name: "张三1", age: 204 },
+            { name: "张三2", age: 222 },
+            { name: "张三3", age: 234 },
+            { name: "张三4", age: 214 },
+            { name: "张三5", age: 142 },
+        ]
+       
+        function rederHtml(){
+            ul.innerHTML=`<li>姓名是：张三；年纪是18</li> `
+           let str=``;
+            ary.forEach(item=>{
+                str+=`<li myage=${item.age}>姓名是：${item.name};年纪是:${item.age}</li>`
+            })
+            ul.innerHTML=str;
+        }
+        rederHtml();
+        // 排序 去排ary 排好之后再重新 rederHTML
+/*         function mysort(ary){
+            let max=ary[0];
+        for(let i=0;i<ary.length;i++){
+            
+            max=ary[i]>max?ary[i]:max
+        }
+        console.log(max) ;
+        }
+        let bess=mysort(ary);
+ */     
+// 数据驱动  实图以后的一个趋势 能操作数据不操作dom
+function mysort(){
+    ary.sor((a,b)=>{
+        return(a-b)*n
+    })
+} 
+   upBtn.onclick=function(){
+       ary.sort((a,b)=>{
+           return a.age-b.age
+       })
+       renderHtml()
+   }
+   downBtn.onclick=function(){
+       ary.sort((a,b)=>{
+           return b.age-a.age
+       })
+       renderHtml()
+   }
+   </script>
+</body>
+</html>
