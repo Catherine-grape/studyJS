@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>珠峰培训</title>
+  <style>
+    body,
+    ul,
+    li {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+  </style>
+  <link rel="stylesheet" type="text/css" href="price.css" />
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="box">
+      <ul class="list">
+        <li>
+          <i></i>
+          <em>0</em>
+          <i></i>
+          <span>
+            单价：<strong>12.5元 </strong> 小计：<strong>0元</strong>
+          </span>
+        </li>
+        <li>
+          <i></i>
+          <em>0</em>
+          <i></i>
+          <span>
+            单价：<strong>10.5元 </strong> 小计：<strong>0元</strong>
+          </span>
+        </li>
+        <li>
+          <i></i>
+          <em>0</em>
+          <i></i>
+          <span>
+            单价：<strong>8.5元 </strong> 小计：<strong>0元</strong>
+          </span>
+        </li>
+        <li>
+          <i></i>
+          <em>0</em>
+          <i></i>
+          <span>
+            单价：<strong>8元 </strong> 小计：<strong>0元</strong>
+          </span>
+        </li>
+        <li>
+          <i></i>
+          <em>0</em>
+          <i></i>
+          <span>
+            单价：<strong>14.5元 </strong> 小计：<strong>0元</strong>
+          </span>
+        </li>
+      </ul>
+      <div class="info">
+        <span>商品共合计：<em>0</em>件</span>
+        <span>共花费了：<em>0</em>元</span>
+        <br />
+        <br />
+        <span>其中最贵的商品单价是：<em>0</em>元</span>
+      </div>
+    </div>
+  </div>
+  <script src="../ss/jquery-1.11.3.js"></script>
+  <script>
+//第一步获取相应的元素
+// 给相应的元素绑定相应的事件
+$('i').click(function(){//给每一个i绑定点击事件
+  let index=$(this).index();//获取当前元素在兄弟姐妹中的索引
+  let num=parseFloat($(this).siblings('em').html());//获取em的内容(数量)
+  let $strongs=$(this).siblings('span').find('strong');
+  let price=parseFloat($strongs.eq(0).html());//获取当前的单价
+  if(index==0){
+    num<=0?num=0: num--;//如果num的值小于等于0让数量=0 否则就-- 
+    
+   // $(this).siblings('em').html(num);//再把数量设置回去 提取到外面
+  }
+  if(index==2){
+    num++;//让数量加加
+    //$(this).siblings('em').html(num);//再把数量设置回去  提取到外面
+  }
+  $(this).siblings('em').html(num);//再把数量设置回去
+  $strongs.eq(1).html(num*price+'元');
+  // em 用each   共花费和最高单价each
+  computed();
+});
+function computed(){
+  let allCount = 0;
+  let allPrice=0;
+  let ary=[0];
+  $('.list em').each((index,item)=>{
+    console.log(index,item);
+   allCount+= parseFloat($(item).html());
+  });
+  console.log(allCount);
+  $('.list strong').each((i,item)=>{
+    console.log(item);
+    let index=$(item).index();
+    if(index===1){
+      allPrice += parseFloat($(item).html());
+    }else{
+      console.log(item);
+      let value=parseFloat($(item).html());
+      let num=parseFloat($(item).next().html());
+      if(num!=0){
+        ary.push(value);
+      }
+    }
+  });
+  console.log(allPrice);
+  ary.sort((a,b)=>b-a);
+  $('.info em').eq(1).html(allPrice);
+  $('.info em').eq(0).html(allCount);
+  $('.info em').eq(2).html(ary[0]);
+};
+
+    /* let lis = document.getElementsByTagName('li');
+    let ems = document.querySelectorAll('.info em');// [em,em,em]
+    for (let i = 0; i < lis.length; i++) {
+      // lis[i] // 代表每一个li
+      // 给每一个li中的i元素增加点击事件
+      addEvent(lis[i])
+    }
+
+    function addEvent(li) {
+      let tags = li.getElementsByTagName('i');// [i,i]
+      let em = li.getElementsByTagName('em')[0];
+      let strongs = li.getElementsByTagName('strong'); // [strong,strong]
+      tags[0].onclick = function () {
+        console.log('-');
+        if (em.innerHTML <= 0) return;
+        em.innerHTML = Number(em.innerHTML) - 1;
+        strongs[1].innerHTML = Number(em.innerHTML) * parseFloat(strongs[0].innerHTML) +'元';
+        computed()
+      }
+      tags[1].onclick = function () {
+        console.log('+');
+        if (em.innerHTML >9) return;
+        em.innerHTML = Number(em.innerHTML) + 1;
+     
+        strongs[1].innerHTML = Number(em.innerHTML) * parseFloat(strongs[0].innerHTML) +'元';
+        computed();
+      }
+
+    }
+
+    function computed(){
+      // 专门用来计算下边三个em的值的
+      console.log(111111);
+      // 1.先创建一个变量用来累加所有商品的数量
+      // 2.循环li，拿到每一个li里的em元素的内容(拿到每一个商品的数量)，把商品数量累加到一起，然后设置到页面
+
+      let allCount = 0; // 初始化一个变量，用来存储商品的数量
+      let allPrice = 0; // 初始化一个变量，用来存储商品的小计
+      let ary = [0]; // 创建一个变量，用来存储购买商品的单价
+      for(let i = 0;i<lis.length;i++){
+        let em = lis[i].getElementsByTagName('em')[0]; // 获取到每一个li中的em元素
+        let strongs = lis[i].getElementsByTagName('strong'); // [strong,strong] 获取到每一个li中的strong元素
+        allCount+=Number(em.innerHTML); // 把em元素中的数量累加到allCount中
+        allPrice+=parseFloat(strongs[1].innerHTML); // 把strong元素中的小计累加到allPrice中
+
+        // 把购买的商品的单价push到ary中
+        if(Number(em.innerHTML)!=0){
+          // 如果当前购买的商品的数量不是0，那就把单价push到ary中
+          ary.push(parseFloat(strongs[0].innerHTML))
+        }
+        
+      }
+
+      console.log(ary);
+      ary.sort((a,b)=>b-a);
+      ems[0].innerHTML = allCount; // 把数量渲染到页面
+      ems[1].innerHTML = allPrice; // 总计展示到页面
+      ems[2].innerHTML = ary[0]; // 把最大的单价渲染到页面
+    } */
+  </script>
+</body>
+
+</html>

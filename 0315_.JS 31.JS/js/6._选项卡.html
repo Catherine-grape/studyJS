@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        #box {
+            width: 800px;
+            /* border: 1px solid red; */
+            margin: 20px auto;
+        }
+
+        ul {
+            list-style: none;
+            display: flex;
+        }
+
+        ul li {
+            border: 1px solid black;
+            width: 150px;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            font-size: 20px;
+            margin-right: 10px;
+            position: relative;
+            top: 1px
+        }
+
+        #box div {
+            width: 800px;
+            height: 500px;
+            text-align: center;
+            line-height: 500px;
+            font-size: 40px;
+            border: 1px solid black;
+            display: none;
+        }
+
+        ul li.active {
+            border-bottom-color: white;
+        }
+
+        #box div.active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <ul id="navList">
+            <li class="active">一</li>
+            <li>二</li>
+            <li>三</li>
+        </ul>
+        <div class="active">我们是一</div>
+        <div>我们是二</div>
+        <div>我们是三</div>
+    </div>
+    <script src="../ss/jquery-1.11.3.js"></script>
+    <script>
+
+/* 
+        let navList = document.querySelectorAll('#navList li');
+        let tabList = document.querySelectorAll('#box div');
+
+        for (let i = 0; i < navList.length; i++) {
+            navList[i].onclick = function () {
+                selected(i)
+            }
+        }
+
+        // 定点清除
+        let flag=0;
+        function selected(index) {//保存一下上一次的用户点击的li的索引值
+            // for (var i = 0; i < navList.length; i++) {
+                navList[flag].className = '';
+                tabList[flag].className = '';
+           // }
+
+
+            navList[index].className = 'active';
+            tabList[index].className = 'active';
+            flag=index//把当前最新的索引值赋值给flag
+        }
+ */
+        $('#navList li').click(function(){
+            // 可以把原生的元素转换为jq版的实例元素,目的就是为了去调取jq原型上的方法
+           // index();//获取当前元素在兄弟姐妹中的索引
+           //1 $(this).addClass('active').siblings('li').removeClass('active');
+            // 给当前点击的li增加active类名，然后再获取其余的两个li并且给他们移除active类名
+            // $(this).index() 当前点击的li的索引
+            //eq();按照指定索引获取jq版的元素
+            //get() 按照指定的索引获取原生的dom元素
+            // siblings(); 获取除了自己以外的所有兄弟姐妹元素（还能详细的按照参数进行过滤）
+            // jq方法的链式调用
+
+            // 如果当前方法是按照条件获取元素的，那方法的返回值是获取的最新的元素
+            // 如果当前的方法是操作元素的某些属性的，那方法的返回值还是当前被操作的元素
+            // 先获取三个div元素，然后再通过用户点击的li的索引找到对应的div元素，给他加上active类名，然后再获取其余两个div元素并且移除active类名
+           //2 $('#box div').eq($(this).index()).addClass('active').siblings('div').removeClass('active');
+//操作dom的返回就是当前操作的dom   获取最新返回的就是最新的dom
+// each里面的item是原生的
+            $(this).addClass('active').siblings('li').removeClass('active').parent().nextAll().eq($(this).index()).addClass('active').siblings('div').removeClass('active');
+
+
+        });
+
+
+    </script>
+</body>
+
+</html>
