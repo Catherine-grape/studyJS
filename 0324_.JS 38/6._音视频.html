@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./爱心.png" >
+    <style>
+        span{
+            font-size: 20px;
+            color:lightseagreen;
+
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <input type="text">
+    <input type="number">
+    <input type="password"> -->
+    <audio src="./myDream.m4a" id="music" controls></audio>
+    <button id="start">开始</button>
+    <button id="pause">暂停</button>
+    <button id="one">统一</button>
+    <span class="iconfont icon-yincang_icon" id='span'></span>
+    <script >
+        let start = document.getElementById('start');
+        let pause = document.getElementById('pause');
+        console.dir(music.play);
+        // play() 让音乐播放
+        // pause() 让音乐暂停
+        one.onclick=function(){
+            let flag = music.paused;//属性 如果当前音乐是暂停的，他就是true，否则就是false
+            if (flag) {
+                music.play();
+                span.classList.add('spa')
+            } else {
+                music.pause();
+            }
+        }
+        start.onclick=function(){          
+                music.play();
+            console.log(music.paused);//false
+        }
+        pause.onclick=function(){
+            music.pause();
+             console.log(music.paused);//true
+        }
+
+        /* 
+        played paused pausend三个只读属性
+        currentTime 可以设置或者获取当前正在播放的时长
+        duration 当前音乐的总时长/秒
+        netWork  Media
+
+        hybrid  简易版app与正式版app混合
+        html5页面 webapp 简易版app不能打开手机硬件
+        */
+    </script>
+</body>
+
+</html>

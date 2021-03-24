@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        /* html,body{
+            width: 100%;
+            height: 100%;
+        } */
+        /* div{
+            width: 50vw;
+            height: 25%;
+            /！* margin:0.5%; *！/
+            background:lightpink;
+        } */
+        div{
+            width: 200px;
+            height: 200px;
+            background:lightseagreen;
+        }
+        @media screen and (min-width:400px) {
+            div{/*如果屏幕尺寸大于400就会执行此处的样式*/
+                background:lightskyblue;
+            }
+        }
+        @media screen and (min-width: 600px) and (max-width: 900px){
+            div{/*如果屏幕尺寸大于600 小于900就会执行此处的样式*/
+                background:lightsalmon;
+            }
+        }
+        /* html{
+            font-size:100px;
+        } */
+       div{
+           width: .2rem;/*20px==0.2rem*/
+           height: 2rem;/*200px */
+           background:lightseagreen;
+       }
+    </style>
+    <script>
+        function resize(){
+            let winW = document.documentElement.clientWidth;
+            let res = 100 * winW / 750;
+            document.documentElement.style.fontSize = res + "px";
+        }
+        window.onresize = resize; //监听window的尺寸变化  当屏幕尺寸发生变化就执行下面的
+        resize();
+    </script>
+</head>
+<body>
+    <div id="box">
+
+    </div>
+    <script src="./js/3._响应式布局.js"></script>
+</body>
+</html>
