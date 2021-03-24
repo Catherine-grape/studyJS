@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul,
+        ol {
+            list-style: none;
+        }
+
+        .main {
+            width: 500px;
+            margin: 0 auto;
+        }
+
+        .main li {
+            display: inline-block;
+            width: 100px;
+            border: 1px solid #333;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            margin-right: 20px;
+            position: relative;
+            top: 1px;
+        }
+
+        .main>div {
+            height: 300px;
+            border: 1px solid #333;
+            line-height: 300px;
+            text-align: center;
+            display: none;
+        }
+
+        .main li.current {
+            background-color: lightcoral;
+            border-bottom-color: lightcoral;
+        }
+
+        .main>div.current {
+            background-color: lightcoral;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main" class="main">
+        <ul>
+            <li class="current">电视1</li>
+            <li>电视2</li>
+            <li>电视3</li>
+        </ul>
+        <div class="current">电视1</div>
+        <div>电视2</div>
+        <div>电视3</div>
+    </div>
+</body>
+
+</html>
+<script>
+    var olis = document.querySelectorAll(".main li");
+    var odivs = document.querySelectorAll(".main>div");
+    for (let i = 0; i < olis.length; i++) {
+//通过作用域的方式
+     olis[i].onclick = function () {
+                //alert(i);  
+             //添加之前 清空
+  for(var j=0;j<olis.length;j++){
+                    olis[j].className="";
+                    odivs[j].className="";
+                }
+                //点的是谁，我就给第几个添加
+        olis[i].className="current";
+        odivs[i].className="current";               
+            };
+    }
+</script>
