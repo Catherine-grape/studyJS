@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+/*         Array.prototype.myPush = function myPush(...arg){
+        //    this[this.length]=content;
+        //    return this.length;
+        for(let i=0;i<arg.length;i++){
+            let item=arg[i];
+            this[this.length]=item
+        }
+        return this.length;
+        }
+        let ary=[100,200,300];
+        let res=ary.myPush(400);
+        console.log(ary);//[100,200,300,400]
+        console.log(res);
+ */  
+function myUnshift(){
+    let newAry=this.slice();
+    this.length=0;
+    for(let i=0;i<arg.length;i++){
+        this[this.length]=ary[i];
+    }
+    for(let i=0;i<newAry.length;i++){
+        this[this.length]=newAry[i]
+    }
+    return this.length;
+}
+Array.prototype.myUnshift=myUnshift;
+let ary=[100,200,300,400];
+let res=ary.myUnshift(500,600);
+</script>
+</body>
+</html>

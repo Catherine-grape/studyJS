@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>珠峰培训</title>
+  <style>
+    body,
+    ul,
+    li {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+  </style>
+  <link rel="stylesheet" type="text/css" href="price.css" />
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="box">
+      <ul class="list">
+        <li>
+          <i></i>
+          <em>0</em>
+          <i></i>
+          <span>
+            单价：<strong>12.5元 </strong> 小计：<strong>0元</strong>
+          </span>
+        </li>
+        <li>
+          <i></i>
+          <em>0</em>
+          <i></i>
+          <span>
+            单价：<strong>10.5元 </strong> 小计：<strong>0元</strong>
+          </span>
+        </li>
+        <li>
+          <i></i>
+          <em>0</em>
+          <i></i>
+          <span>
+            单价：<strong>8.5元 </strong> 小计：<strong>0元</strong>
+          </span>
+        </li>
+        <li>
+          <i></i>
+          <em>0</em>
+          <i></i>
+          <span>
+            单价：<strong>8元 </strong> 小计：<strong>0元</strong>
+          </span>
+        </li>
+        <li>
+          <i></i>
+          <em>0</em>
+          <i></i>
+          <span>
+            单价：<strong>14.5元 </strong> 小计：<strong>0元</strong>
+          </span>
+        </li>
+      </ul>
+      <div class="info">
+        <span>商品共合计：<em>0</em>件</span>
+        <span>共花费了：<em>0</em>元</span>
+        <br />
+        <br />
+        <span>其中最贵的商品单价是：<em>0</em>元</span>
+      </div>
+    </div>
+  </div>
+  <script>
+    let lis = document.getElementsByTagName('li');
+    for (let i = 0; i < lis.length; i++) {
+      // lis[i] // 代表每一个li
+      // 给每一个li中的i元素增加点击事件
+      addEvent(lis[i])
+    }
+
+    function addEvent(li) {
+      let tags = li.getElementsByTagName('i');// [i,i]
+      let em = li.getElementsByTagName('em')[0];
+      let strongs = li.getElementsByTagName('strong'); // [strong,strong]
+      tags[0].onclick = function () {
+        console.log('-');
+        if (em.innerHTML <= 0) return;
+        em.innerHTML = Number(em.innerHTML) - 1;
+        strongs[1].innerHTML = Number(em.innerHTML) * parseFloat(strongs[0].innerHTML) +'元'
+      }
+      tags[1].onclick = function () {
+        console.log('+');
+        if (em.innerHTML >9) return;
+        em.innerHTML = Number(em.innerHTML) + 1;
+     
+        strongs[1].innerHTML = Number(em.innerHTML) * parseFloat(strongs[0].innerHTML) +'元'
+      }
+
+    }
+  </script>
+</body>
+
+</html>

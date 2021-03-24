@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        function Fn(n, m) {
+            n = n || 0;
+            m = m || 0;
+            this.x = n;
+            this.y = m;
+            this.getX = function () {
+                console.log(this.x);//10
+            }
+            return n + m;//return后面跟的必须是一个值
+        }
+        Fn.prototype.sum = function () {
+            console.log(this.x + this.y);
+        }
+        //let ss=new Fn;//ss__proto__指向老原型，占用 老原型就不销毁
+        Fn.prototype = {//重定向的原型没有constructor
+            //x：NaN
+            //y：NaN
+            getX: function () {
+                //this-->原型
+                this.x += 1;//原型.x=原型.x+1 undefined+1=NaN
+                console.log(this.x);
+            },
+            getY: function () {
+                this.y -= 1;
+                console.log(this.y);
+            }
+        };
+        let f1 = new Fn(10, 20);//{x:10,y:20,getX:fun}
+        let f2 = new Fn;//{x:0,y:0,getX:fun}
+        console.log(f1.getX === f2.getX);//false
+        console.log(f1.getY === f2.getY);//true
+        console.log(f1.__proto__.getY === Fn.prototype.getY);//true
+        console.log(Fn.prototype.getX === f2.getX);//false
+        console.log(f1.constructor);//Object
+        f1.getX();//10 console.log(f1.getX())//undefined
+        Fn.prototype.getX();//NaN
+        f2.getY();//-1
+        Fn.prototype.getY();//NaN
+        f1.sum();//报错
+        /* 
+        构造函数
+        形成私有作用域---》形参赋值---》变量提升---》把当前作用域的this指向实例（空对象）---》代码从上往下执行---》默认把this return出去---》作用域是否销毁
+        普通函数
+        形成私有作用域---》形参赋值---》变量提升---》代码从上往下执行---》作用域是否销毁
+        */
+        var name = "WINDOW";
+        function fn() {
+            console.log(this.name);
+        }
+        var obj = {//对象不是作用域
+            name: "OBJ",//只是obj的键值对
+            fn: () => {
+                console.log(this.name);
+            }
+        };
+        fn();//'WINDOW'
+        obj.fn();//'WINDOW'
+        fn.call(obj);//'OBJ'
+        window.onload = function () { //页面加载完成，事件就会触发
+            fn();//'WINDOW'
+            obj.fn();//'WINDOW'
+        };
+        fn.bind(obj);//不输出
+
+        /* 
+        print = af1 af2 af3 af4
+        Fn=af0
+        */
+        var print = function () { //af2
+            alert(1);
+        };
+        function Fn() {//af0
+            print = function () {//af3 af4 给变量重新赋值
+                alert(2);
+            };
+            return this;
+        };
+        function print() {//af1
+            alert(3);
+        };
+        Fn.prototype.print = function () {
+            alert(4);
+        };
+        Fn.print = function () {//af7 点的方式才是给对象增加键值对
+            alert(5);
+        };
+        print();//'1'
+        Fn.print();//'5'
+        Fn().print();//window.print '2'
+        new Fn.print();//new af7()-->'5'
+        new Fn().print();// 实例.print() '4'
+
+        // 请列举出你所知道的ES6新语法规范（不少于5个）
+
+        // 形参赋默认值 ...运算符  解构赋值 箭头函数 let const class set 模版字符串
+        //数组克隆
+        let ary = [100, 200, 300, 400];
+        // let ary1=[...ary];
+        // let ary2=ary.slice();
+        //let ary1=ary.concat();
+        //for循环
+        let ary1 = JSON.parse(JSON.stringify(ary));//字符串转对象 不能是字符串
+
+        // 封装数组去重的方法，并且挂载到原型上
+        function unique() {
+            // this-->ary
+            let newAry = [];
+            for (let i = 0; i < this.length; i++) {
+                let item = this[i];
+                if (!newAry.includes(item)) {
+                    newAry.push(item);
+                }
+            }
+            return newAry;
+        }
+        Array.prototype.unique = qunique;
+        let ary = [12, 33, 43, 22, 12];
+        let ary1 = ary.unique();
+
+
+
+        function Modal(element) {
+                element = element || document;
+                this.element = element;
+            }
+            Modal.prototype.show = function () {
+                    this.element.style.display = 'block';
+                }
+                Modal.prototype.hide = function () {
+                    this.element.style.display = 'none';
+                };
+                Modal.position = {
+                    x: 100,
+                    y: 200
+                };
+                Modal.setPosition = function (x, y) {
+                        this.position = {
+                            x: x,
+                            y: y
+                        };
+                    };
+                    let m = new Model(document.body);
+
+                    class Model{
+                        constructor(element){
+                            element = element || document;
+                            this.element = element;
+                        }
+                        show(){
+                            this.element.style.display = 'block';
+                        }
+                        hide(){
+                            this.element.style.display = 'none';
+                        }
+                        static position ={
+                            x: 100,
+                            y: 200
+                        }
+                          static setPosition= function (x, y){
+                              this.position = {
+                                  x: x,
+                                  y: y
+                              }
+                          }  
+                    }
+
+                    /*分析下面的changeThis方法该如何实现？*/
+                        Function.prototype.changeThis = function changeThis(content, ...arg) {
+                            //=>实现你的代码 
+                            //this-->fn context--》obj
+                            let res=null;
+                            content = content || window;
+                            content.$fn = this;
+                            res = content.$fn(...arg);
+                            delete content.$fn;
+                            return res;
+                        };
+                        let obj = {
+                            name: 'Alibaba'
+                        };
+
+
+                        function fn(x, y) {
+                            this.total = x + y;
+                            return this;
+                        }
+                        let res = fn.changeThis(obj, 100, 200); //res => {name:'Alibaba',total:300} 
+    var name = 'WINDOW';//"B" "B"
+    //每一个函数当作对象的时候，都会拥有一个name属性，其属性值就是字符串的函数名
+    function A() {
+
+        console.log(1, this.name);
+        name = this.name;
+    };
+    function B() {
+        name = this.name;
+        console.log(2, this.name);
+    };
+    A.call(B, 10);//1,"B"
+    A.call.call.call(B);//2"B"
+    Function.prototype.call(B);//Function的匿名函数 什么也不输出
+    Function.prototype.call.call.call(B);//
+function mycall(context,...arg){
+
+    content = content || window;
+    content.$fn = this;
+    content.$fn(...arg);
+    // A.call.call.call(B);
+    // this-->A.call.call this--->call context-->B arg-->[]
+    // B.$fn=call  B.$fn(...arg)-->call()
+
+    // call第二次执行
+    // this-->B context-->window
+    // window.$fn=B
+    // window.$fn()-->B()
+
+
+
+
+    Function.prototype.call(B);
+    // this-->原型 context --》B
+    // B.$fn=原型  
+
+    Function.prototype.call.call.call(B);
+    // this-->call  context-->B arg-->[]
+    // B.$fn=call
+    // B.$fn()-->call()
+    // call第二次执行
+    // this-->B context-->window 
+    // context.$fn=B
+    // window.$fn()-->B()
+    // 出现两个及以上的call，那就会执行传递进去的第一个参数
+}
+let num=1;
+function fn(){
+
+}
+fn.call(num);//Number(1)
+
+// 获取数组中最大值的方法
+let ary=[700,200,300,400]
+// Math.max(...ary)
+ary.sort((a,b)=>b-a)[0];
+
+let max=ary[0];//200 300 400
+ary.forEach(item=>{
+    if(item>max){
+        max=item;
+    }
+})
+let res=Math.max.apply(null,ary);
+
+
+function myApply(context,arg){
+    //this-->Math.max
+    context.$fn=this;
+    context.$fn(...arg)
+}
+
+
+                        // - 8、实现工具类方法：toArray函数，给toArray传任意参数，输出以参数为值的数组
+                           
+let utils = (function () {
+
+    function toArray(...arg) {
+        //实现你的代码   
+        return arg
+
+    };
+
+    return {
+        toArray
+    };
+})();
+let ary = utils.toArray(10, 20, 30);
+// ary=[10,20,30] 
+ary = utils.toArray('A', 10, 20, 30);
+    // ary=['A',10,20,30]
+
+try{
+console.log(a);
+}catch(error){ //捕获报错的代码 但是并不爆红
+console.log("上面代码出错",error)
+}finally{//不管上面的是否出错 最终都会执行
+
+}
+
+    </script>
+</body>
+
+</html>
