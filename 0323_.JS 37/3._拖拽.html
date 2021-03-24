@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 500px;
+            height: 500px;
+            background: lightsalmon;
+            position: relative;
+        }
+
+        #small {
+            width: 100%;
+            height: 15%;
+            background: lightseagreen;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <div id="small">
+
+        </div>
+    </div>
+    <script>
+        let box = document.getElementById('box');
+        let small = document.getElementById('small');
+        let winW = document.documentElement.clientWidth;
+        let winT = document.documentElement.clientHeight;
+        box.style.top = winT / 2 - (box.offsetHeight / 2) + "px"
+        box.style.left = winW / 2 - (box.offsetWidth / 2) + "px"
+        // 在页面渲染的时候，不能直接给title绑定鼠标移动事件，只有当用户鼠标在title元素上 按下的时候，在title绑定鼠标移动事件，当鼠标抬起的时候移除移动事件
+        function move(e) {
+            // 先获取当前光标的最新的clientX和clientY的值
+            let clientX = e.clientX;
+            let clientY = e.clientY;
+            // 给box设置最新的left和top即可
+            // box盒子最新的left值等于==光标移动的距离（光标最新的clientX-光标初始的clientX）+盒子初始的位置的left值
+            box.style.left = clientX - this.initClientX + this.initLeft + "px";
+            box.style.top = clientY - this.initClientY + this.initTop + "px";
+            // console.log('move');
+
+        }
+        function up() {
+            // console.log('up');
+            window.onmousemove = null;
+        }
+        function down(e) {
+            // 在用户鼠标按下的时候，我会把当前box的left起始值和光标的clientX值保存下来
+            // this-->title
+            this.initLeft = parseFloat(box.style.left);//起始值保存在small上
+            this.initTop = parseFloat(box.style.top);
+            this.initClientX = e.clientX;
+            this.initClientY = e.clientY;
+            // console.dir(this);
+            window.onmousemove = move.bind(this);
+        }
+        small.onmousedown = down;
+        window.onmouseup = up;
+    </script>
+</body>
+
+</html>

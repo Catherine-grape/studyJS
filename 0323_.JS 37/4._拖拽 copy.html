@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 500px;
+            height: 500px;
+            background: lightsalmon;
+            position: relative;
+        }
+
+        #small {
+            width: 100%;
+            height: 15%;
+            background: lightseagreen;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <div id="small">
+
+        </div>
+    </div>
+    <script>
+        let box = document.getElementById('box');
+        let small = document.getElementById('small');
+        let winW = document.documentElement.clientWidth;
+        let winT = document.documentElement.clientHeight;
+        box.style.top = winT / 2 - (box.offsetHeight / 2) + "px"
+        box.style.left = winW / 2 - (box.offsetWidth / 2) + "px"
+        function move(e){
+            let lefT=e.clientX-this.initClientX+this.initLeft;
+            let toP=e.clientY-this.initClientY+this.initTop;
+            box.style.left=lefT+"px";
+            box.style.top=toP+"px";
+        }
+        small.onmousedown = function(e){
+            this.initLeft=parseFloat(box.style.left);
+            this.initTop=parseFloat(box.style.top);
+            this.initClientX=e.clientX;
+            this.initClientY=e.clientY;
+            window.onmousemove=(e)=>{
+                move.call(this,e);
+            };
+        };
+        window.onmouseup = function(){
+            small.onmousemove=null;
+        };
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        /**{
+            margin: 0;
+            padding: 0;
+        }*/
+        .box {
+            width: 500px;
+            /*1.角度  颜色*/
+            background: linear-gradient(-45deg, lightseagreen, lightpink, lightblue, lightyellow, lightcoral);
+            background: -webkit-linear-gradient(-45deg, lightseagreen, lightpink, lightblue, lightyellow, lightcoral);
+        }
+
+        .box span {
+            display: block;
+            height: 35px;
+            line-height: 35px;
+            cursor: pointer;
+        }
+
+        .box span.close:before {
+            content: "+";
+            font-size: 20px;
+            font-weight: bold;
+            color: red;
+        }
+
+        .box span.open:before {
+            content: "-";
+            font-size: 30px;
+            font-weight: bold;
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <ul class="box" id="box">
+        <li><span>第一级菜单</span>
+            <ul>
+                <li><span>第二级菜单</span>
+                    <ul>
+                        <li><span>第三级菜单</span>
+                            <ul>
+                                <li><span>第四级菜单</span></li>
+                                <li><span>第四级菜单</span></li>
+                            </ul>
+                        </li>
+                        <li><span>第三级菜单</span></li>
+                        <li><span>第三级菜单</span></li>
+                        <li><span>第三级菜单</span></li>
+                    </ul>
+                </li>
+                <li><span>第二级菜单</span>
+                    <ul>
+                        <li><span>第三级菜单</span></li>
+                        <li><span>第三级菜单</span></li>
+                        <li><span>第三级菜单</span></li>
+                        <li><span>第三级菜单</span></li>
+                    </ul>
+
+                </li>
+                <li><span>第二级菜单</span>
+                </li>
+                <li><span>第二级菜单</span></li>
+            </ul>
+        </li>
+        <li><span>第一级菜单</span></li>
+        <li><span>第一级菜单</span></li>
+        <li><span>第一级菜单</span></li>
+    </ul>
+    <script>
+
+
+        let spans = document.getElementsByTagName('span');
+        for(let i = 0;i<spans.length;i++){
+            let span = spans[i];
+            if(span.nextElementSibling){
+                span.classList.add('close');
+                span.nextElementSibling.style.display = 'none'
+            }
+            else {
+                span.classList.add('open');
+            }
+        }
+        let box=document.getElementById('box');
+        box.onclick=function(e){
+            // console.log(1);
+            let target=e.target;//当前用户点击的事件源头（就是用户点击的元素）
+            let tagName=target.tagName;
+            if(target.nextElementSibling&&tagName==="SPAN"){//获取某一个元素获取不到是null  单个  多个是[]
+                // 如果当前元素有兄弟元素，说明菜单里有东西
+                if(target.className.includes('close')){
+                    // 如果当前span的类名是close 那就代表他是关闭状态的，就把类名值改为open
+                    // 再把当前span的兄弟元素ul展示出来
+                    target.className='open';
+                    target.nextElementSibling.style.display="block"
+                } else {//如果代码走else，说明当前的类名是open，那就跟上边执行相反的逻辑即可
+                    target.className = 'close';
+                    target.nextElementSibling.style.display = "none";
+                    // 当用户点击span关闭当前菜单的时候，咱们得把里面所有的菜单都关闭
+                    let spanChildren=target.nextElementSibling.getElementsByTagName('span');
+                    for(let i=0;i<spanChildren.length;i++){
+                        let span=spanChildren[i];                      
+                        if(span.nextElementSibling){
+                            span.className = 'close';
+                            span.nextElementSibling.style.display = "none"
+                        }
+                    }
+                }
+            }
+            }
+
+        
+
+        // Maximum call stack size exceeded 堆栈溢出
+
+        // 当点击span的时候，判断当前点击的span有么有兄弟元素，如果没有就啥都不做，
+        // 如果有，在判断一下当前span的类名是啥，如果是close，那证明就是关着的，就让他的兄弟显示并且把span的类名改为open，(如果是open那就反过来)
+    </script>
+</body>
+
+</html>

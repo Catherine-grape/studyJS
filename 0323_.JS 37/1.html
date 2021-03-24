@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        span{
+            color:red;
+        }
+    </style>
+</head>
+<body>
+    <input id="inp" type="text">
+    <span id="span"></span>
+    <script>
+        let inp=document.getElementById('inp');
+        inp.onkeyup=function(e){
+            let reg=/[^0-9]/g;
+           let value=this.value;
+           this.value=value.replace(reg,'');
+           if(this.value.length>10){
+               this.value=this.value.slice(0,10);
+               
+           }
+            if(e.keyCode==13){
+                if (this.value.length > 10) {
+                    span.innerHTML = "输入内容长度不符合规则"
+                }else{
+                    span.innerHTML = ""
+                    console.log(this.value);
+                }
+                alert(this.value);
+            }
+            
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box {
+            display: flex;
+            list-style: none;
+            /* width: 200px; */
+            height: 500px;
+            margin: 20px;
+            background: coral;
+            /* flex-direction: row; 默认主轴方向横向排列 */
+            /* flex-direction: column; 从上往下 1、2、3、4排列 */
+            /* flex-direction: row-reverse; 从右往左 */
+            /* flex-direction: column-reverse;  */
+            flex-wrap: wrap;
+            /* flex-flow:row-reverse wrap; */
+            /* justify-content:flex-start;
+           justify-content: space-around;
+           justify-content: space-between;
+           justify-content: flex-end; */
+            justify-content: space-evenly;
+            /* align-items: flex-start;
+           align-items: baseline;
+           align-items: stretch; */
+            align-items: center;
+            align-content: center;
+            align-content: flex-end;
+            align-content: stretch;
+            align-content: space-around;
+            align-content: space-between;
+
+        }
+
+        /* li:nth-child(even){
+            height:100px;
+            order:1;
+        } */
+        li {
+            /* width: 50px; */
+            height: 50px;
+            line-height: 50px;
+            border: 1px solid lawngreen;
+            text-align: center;
+            flex: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <ul id="box">
+        <li style="order:8">1</li>
+        <li style="flex-grow: 2;">2</li>
+        <li style="flex-shrink: 0;">3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li style="align-self:flex-end">7</li>
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>
+
+
+    </ul>
+
+    <script>
+        let a = 0;
+        function fn() {
+
+            a = {};
+        }
+        fn();
+
+    </script>
+</body>
+
+</html>
