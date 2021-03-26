@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/iconfont.css">
+    <style>
+        #span {
+            font-size: 50px;
+            color: orangered;
+            /* transition: all 1s linear; */
+        }
+
+        @keyframes ss {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            25% {
+                transform: rotate(90deg);
+            }
+
+            50% {
+                transform: rotate(180deg);
+            }
+
+            75% {
+                transform: rotate(270deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .span {
+            animation: ss 1s all infinite;
+        }
+    </style>
+</head>
+
+<body>
+    <audio src="./img/myDream.m4a" id="music" controls></audio>
+    <button id="start">开始</button>
+    <button id="pause">暂停</button>
+    <span class="iconfont icon-menu span" id="span"></span>
+    <script>
+        let start = document.getElementById('start');
+        let pause = document.getElementById('pause');
+        console.dir(music.play);
+        // play() 让音乐播放
+        // pause() 让音乐暂停
+        // ended如果当前音乐是播放完成的就是true，否则就是false
+        // paused 如果当前音乐是暂停的，他就是true，否则就是false
+        // duration 当前音乐的总时间
+        // currentTime 设置或者获取当前正在播放的时长
+        let span = document.getElementById('span');
+        start.onclick = function () {
+            let flag = music.paused; // 如果当前音乐是暂停的，他就是true，否则就是false
+            if (flag) {
+                music.play();
+                pause.classList.add('span')
+            }
+            else {
+                music.pause()
+            }
+
+            console.log(music.paused);
+        }
+        pause.onclick = function () {
+            music.pause()
+            console.log(music.paused);
+        }
+    </script>
+</body>
+
+</html>

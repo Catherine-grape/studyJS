@@ -1,0 +1,57 @@
+#box {
+  width: 800px;
+  height: 800px;
+  border: 1px solid block;
+  color: lightcoral;
+  background-color: lightcyan;
+  background: url('img//1.png');
+}
+#box span {
+  width: 800px;
+  height: 800px;
+  color: lightsalmon;
+  background-color: lightseagreen;
+  background: url('img//2.png');
+}
+#box span i {
+  color: mediumpurple;
+}
+#box {
+  width: 200px;
+  height: 200px;
+}
+#box:hover {
+  background: midnightblue;
+}
+#box-ss {
+  color: 200px;
+}
+#box {
+  width: 300px;
+  height: 500px;
+  background: mediumseagreen;
+}
+#box2 {
+  width: 400rem;
+  height: 800px;
+  background: mediumseagreen;
+  width: 200px;
+  height: 300px;
+  background: orange;
+}
+#box {
+  width: 1.5cm;
+  height: 1.5cm;
+  background: mistyrose;
+}
+.pub,
+#box {
+  width: 200px;
+  height: 300px;
+  background: orange;
+}
+#box {
+  width: 200px;
+  height: 800px;
+  background: mediumseagreen;
+}

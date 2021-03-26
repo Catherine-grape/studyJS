@@ -1,0 +1,90 @@
+// 在less中可以实现css不可能实现的语法 less可以嵌套 可以使用变量（变量也存在作用域）,也有类似变量提升的功能
+@w:200px;//@w是变量名  @是固定的 后面名字随意 创建一个全局变量w，值为200px；
+@b:1px solid block;
+@c:lightblue;
+@img:'./img/';//变量的值也可以是路径，但是得加字符串,使用的时候@{变量名}
+
+// &连接符  #box:hover===&:hover 等价  在当前作用域中&代表上级作用域的选择器
+#box{
+    width: @w;
+    height: @w;
+    border:@b;
+    @w:800px;//类似变量提升的功能
+    color:lightcoral;
+    background-color:lightcyan;
+    background:url('@{img}/1.png');
+    span{
+        width: @w;
+        height: @w;
+        color:lightsalmon;
+        background-color:lightseagreen;
+        background:url('@{img}/2.png');
+        i{
+            color:mediumpurple;
+        }
+    }
+}
+#box{
+    span{
+
+    }
+}
+#box2{
+    span{
+
+    }
+}
+
+#box{
+    width: 200px;
+    height: 200px;
+    &:hover{
+background:midnightblue;
+    }
+    &-ss{
+        color:200px;
+    }
+}
+// ----------------------
+// 函数 
+// less中的函数，当函数执行的时候可以把函数体里的样式代码作用到当前作用域中，而且还可以实参传值、形参接收 并且形参可以赋默认值
+// 函数的形参，如果没有赋默认值的话，那在函数执行的时候必须传递实参
+.pub(@w:400rem,@h:800px){
+    width: @w;
+    height: @h;
+    background:mediumseagreen;
+}
+#box{
+    .pub(300px,500px);
+}
+#box2{
+    .pub();
+}
+
+
+@w:1cm+5mm;
+#box{
+    width: @w;
+    height: @w;
+    background:mistyrose;
+}
+// 继承  :extend 让#box去继承.pub的样式
+.pub{
+    width: 200px;
+    height: 300px;
+    background:orange;
+}
+#box{
+    &:extend(.pub);
+}
+
+// --------
+// if条件判断语句
+.pub(@w)when(@w>200px){
+    // 当@w大于200px的时候，此作用域中的样式生效
+    background:palegoldenrod;
+}
+#box{
+    .pub(200px);
+}
+// 嵌套 变量 &
