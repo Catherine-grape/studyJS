@@ -1,30 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="//at.alicdn.com/t/font_1687960_owhggrpwod.css">
+    <link rel="stylesheet" href="./node_modules/swiper/css/swiper.css">
     <link rel="stylesheet" href="./css/index.css">
     <script>
         // 自适应 fontsize
-        function resize(){
-            let winW=document.documentElement.clientWidth;
-            document.documentElement.style.fontSize=winW*100/750+"px"
+        function resize() {
+            let winW = document.documentElement.clientWidth;
+            document.documentElement.style.fontSize = winW * 100 / 750 + "px"
         }
-        window.onresize=resize;
+        window.onresize = resize;
         resize();
     </script>
 </head>
+
 <body>
     <!-- 顶部 -->
     <nav class="nav">
         <span>
-        百度信用卡中心
-    </span>
-    <span>
-        快速申卡 尽享优惠
-    </span>
+            百度信用卡中心
+        </span>
+        <span>
+            快速申卡 尽享优惠
+        </span>
     </nav>
     <!-- 广告图 -->
     <div class="title_banner">
@@ -35,40 +38,120 @@
             <span>热门银行</span>
             <span>全部信用卡</span>
         </div>
-        <div class="content">
-            <ul>
-                <li>
-                    <img src="https://banker.cdn.bcebos.com/bank_3051_2c1ng_1568086388.png" alt="">
-                    <p>招商银行</p>
+
+        <ul class="content" id="bankContent">
+            <!--                 <li>
+                    <a href="javascript:;">
+                        <img src="https://banker.cdn.bcebos.com/bank_3051_2c1ng_1568086388.png" alt="">
+                    <span>招商银行</span>
+                    </a>   
                 </li>
                 <li>
-                    <img src="https://banker.cdn.bcebos.com/bank_3051_2c1ng_1568086388.png" alt="">
-                    <p>招商银行</p>
+                    <a href="javascript:;">
+                        <img src="https://banker.cdn.bcebos.com/bank_3051_2c1ng_1568086388.png" alt="">
+                    <span>招商银行</span>
+                    </a>   
                 </li>
                 <li>
-                    <img src="https://banker.cdn.bcebos.com/bank_3051_2c1ng_1568086388.png" alt="">
-                    <p>招商银行</p>
+                    <a href="javascript:;">
+                        <img src="https://banker.cdn.bcebos.com/bank_3051_2c1ng_1568086388.png" alt="">
+                    <span>招商银行</span>
+                    </a>   
                 </li>
                 <li>
-                    <img src="https://banker.cdn.bcebos.com/bank_3051_2c1ng_1568086388.png" alt="">
-                    <p>招商银行</p>
+                    <a href="javascript:;">
+                        <img src="https://banker.cdn.bcebos.com/bank_3051_2c1ng_1568086388.png" alt="">
+                    <span>招商银行</span>
+                    </a>   
                 </li>
-                <li>
-                    <img src="https://banker.cdn.bcebos.com/bank_3051_2c1ng_1568086388.png" alt="">
-                    <p>招商银行</p>
-                </li>
-                <li>
-                    <img src="https://banker.cdn.bcebos.com/bank_3051_2c1ng_1568086388.png" alt="">
-                    <p>招商银行</p>
-                </li>
-                <li>
-                    <img src="https://banker.cdn.bcebos.com/bank_3051_2c1ng_1568086388.png" alt="">
-                    <p>招商银行</p>
-                </li>
-                
-            </ul>
+ -->
+        </ul>
+
+    </div>
+
+    <div class="hotRecommend">
+
+        <div class="swiper-container" id='swiper1'>
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">Slide 1</div>
+                <div class="swiper-slide">Slide 2</div>
+                <div class="swiper-slide">Slide 3</div>
+            </div>
+            <!-- 如果需要分页器 -->
+            <!-- <div class="swiper-pagination"></div> -->
+
+            <!-- 如果需要导航按钮 -->
+            <!-- <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div> -->
+
+            <!-- 如果需要滚动条 -->
+            <!-- <div class="swiper-scrollbar"></div> -->
+        </div>
+
+
+
+    </div>
+
+
+
+
+    <div class="hotRecommend">
+        <div class="swiper-container" id='swiper2'>
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">Slide 1</div>
+                <div class="swiper-slide">Slide 2</div>
+                <div class="swiper-slide">Slide 3</div>
+            </div>
+            <!-- 如果需要分页器 -->
+            <!-- <div class="swiper-pagination"></div> -->
+
+            <!-- 如果需要导航按钮 -->
+            <!-- <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div> -->
+
+            <!-- 如果需要滚动条 -->
+            <!-- <div class="swiper-scrollbar"></div> -->
         </div>
     </div>
+
+    <div class="recommend">
+        <h6>热门推荐</h6>
+        <ul class="ul1">
+            <li>1</li>
+            <li>2</li>
+        </ul>
+        <ul class="ul2">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ul>
+    </div>
+
+<div>
+    <div class="card">
+        <div class="title">
+            <span>热门卡片</span>
+            <span>更多</span>
+        </div>
+        <ul>
+            <li>
+                <div class='left'>
+                    <img src="https://banker.cdn.bcebos.com/cardlogo/bbs_5103_logoUrl.jpg@w_300" alt=""> 
+                </div>
+                <div class='right'>
+                    <p>招行Young卡</p>
+                    <p>新用户达标送899元拉杆箱</p>
+                    <p>
+                        <span>易下卡</span>
+                        <span>白金卡</span>
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
     <!-- 底部 tabbar -->
     <footer class="footer">
 
@@ -88,6 +171,9 @@
         </ul>
     </footer>
     <script src="./node_modules/jquery/dist/jquery.js"></script>
+    <script src="./js/data.js"></script>
+    <script src="./node_modules/swiper/js/swiper.js"></script>
     <script src="./js/index.js"></script>
 </body>
+
 </html>

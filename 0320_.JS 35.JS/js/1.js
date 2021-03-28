@@ -1,6 +1,6 @@
 /* 
 $.ajax()
-promise 就是让异步代码以同步的方式展现出来，避免了回调地域问题    最常用的then catch  可用到finally、all
+promise 就是让异步代码以同步的方式展现出来，避免了回调地狱问题    最常用的then catch  可用到finally、all
 
 
 promise是ES6的一个内置类

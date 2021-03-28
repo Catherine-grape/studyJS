@@ -49,6 +49,151 @@ body {
   width: 100%;
   height: 3rem;
 }
+.bank {
+  width: 100%;
+  background: white;
+  font-size: 0.36rem;
+  box-sizing: border-box;
+  padding: 0.2rem 0.3rem;
+}
+.bank .title {
+  width: 100%;
+  height: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.bank .title span:nth-child(2) {
+  font-size: 0.24rem;
+}
+.bank .content {
+  display: flex;
+  flex-wrap: wrap;
+}
+.bank .content li {
+  width: 24%;
+  margin: 2% 0.5%;
+}
+.bank .content li a {
+  width: 100%;
+}
+.bank .content li a img {
+  width: 1rem;
+  height: 1rem;
+  margin-left: 0.3rem;
+}
+.bank .content li a span {
+  display: block;
+  margin: auto;
+  text-align: center;
+  color: black;
+}
+.hotRecommend {
+  width: 100%;
+  box-sizing: border-box;
+  border-top: 0.2rem solid #cfcfcf;
+  border-bottom: 0.2rem solid #cfcfcf;
+  padding: 0.2rem 0.3rem;
+}
+.hotRecommend .swiper-container {
+  width: 100%;
+}
+.hotRecommend .swiper-container .swiper-wrapper {
+  width: 100%;
+  height: 3rem;
+  line-height: 3rem;
+  text-align: center;
+  background: #cfcfcf;
+}
+.hotRecommend .swiper-container .swiper-wrapper .swiper-slide {
+  background: lightcoral;
+}
+.recommend {
+  width: 100%;
+  background: lightcoral;
+  box-sizing: border-box;
+  padding: 0 0.3rem;
+}
+.recommend h6 {
+  font-weight: normal;
+}
+.recommend .ul1 {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 0.1rem;
+}
+.recommend .ul1 li {
+  width: 48%;
+  height: 2rem;
+  border: 1px solid #cfcfcf;
+  margin-bottom: 0.3rem;
+}
+.recommend .ul2 {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.1rem;
+}
+.recommend .ul2 li {
+  width: 24%;
+  height: 2rem;
+  margin: 0 0.1rem;
+  border: 1px solid #cfcfcf;
+  margin-bottom: 0.3rem;
+}
+.card {
+  width: 100%;
+  background: white;
+  font-size: 0.36rem;
+  box-sizing: border-box;
+  padding: 0.2rem 0.3rem;
+}
+.card .title {
+  width: 100%;
+  height: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.card .title span:nth-child(2) {
+  font-size: 0.24rem;
+}
+.card li {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #cfcfcf;
+  box-sizing: border-box;
+}
+.card li .left {
+  width: 30%;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+}
+.card li .left img {
+  width: 100%;
+  display: block;
+}
+.card li .right {
+  width: 68%;
+  padding: 0.2rem 0.3rem;
+  box-sizing: border-box;
+}
+.card li .right p {
+  width: 100%;
+}
+.card li .right p:nth-child(2) {
+  font-weight: 800;
+  font-size: 0.36rem;
+  color: rgba(0, 119, 255, 0.37);
+}
+.card li .right p span {
+  border: 1px solid lightsalmon;
+  margin-right: 0.1rem;
+  background: lightblue;
+  font-size: 0.24rem;
+  padding: 0 0.1rem;
+}
 .footer {
   width: 100%;
   height: 1rem;
@@ -71,36 +216,4 @@ body {
 }
 .footer ul li span.select {
   color: lightseagreen;
-}
-.bank {
-  width: 100%;
-  background: white;
-  font-size: 0.36rem;
-  box-sizing: border-box;
-  padding: 0.2rem 0.3rem;
-}
-.bank .title {
-  width: 100%;
-  height: 1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.bank .title span:nth-child(2) {
-  font-size: 0.24rem;
-}
-.bank .content ul {
-  width: 100%;
-  height: 3.7rem;
-  display: flex;
-  flex-wrap: wrap;
-  box-sizing: border-box;
-}
-.bank .content ul li {
-  width: 1rem;
-  height: 1rem;
-}
-.bank .content ul li img {
-  width: 0.9rem;
-  height: 0.9rem;
 }
