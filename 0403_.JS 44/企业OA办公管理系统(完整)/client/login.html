@@ -38,11 +38,14 @@
 	<!-- IMPORT JS -->
 	<script src="js/jquery.min.js"></script>
 	<script src="js/jquery.cookie.js"></script>
+<!-- 同一个作用域 可能产生全局变量污染，可能冲突 要用闭包 -->
 	<script src="js/axios.min.js"></script>
 	<script src="js/axios.defaults.js"></script>
+
 	<script src="js/md5.min.js"></script>
+
 	<script src="js/utils.js"></script>
-	<script src="js/login.js"></script>
+	<script src="js/login_first.js"></script>
 	<script>
 		console.log(md5('123456789'));
 	</script>

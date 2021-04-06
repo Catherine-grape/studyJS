@@ -135,7 +135,7 @@ function _debounce(func, wait) {
 }
 
 /*
- * DIALOG：模态框组件 
+ * DIALOG：模态框组件  alert框更改
  */
 window.alert = (function () {
 	class Dialog {
