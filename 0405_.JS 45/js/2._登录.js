@@ -13,6 +13,10 @@ location.href 跳转
 admin 后台的文件夹
 client 前端的文件夹
 sources 资源
+
+在登录成功之后 会在服务器生成一个session 自动保存一个connect-sid 和属性值 以及 姓名 密码  以后登录是用cookies 去和服务器中的session 的姓名密码做对比
+
+power必须要有
 */
 
 let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4]
