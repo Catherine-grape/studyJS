@@ -8,7 +8,7 @@ let obj = {
     b: 2
 }
 for (var key in obj) {
-    // 判断一下档期啊你的属性是否是我的私有属性，如果是的话正常执行，如果不是的话，就直接break，结束当前的枚举
+    // 判断一下当前你的属性是否是我的私有属性，如果是的话正常执行，如果不是的话，就直接break，结束当前的枚举
     if (!obj.hasOwnProperty(key))    break;
     
     console.log(key);

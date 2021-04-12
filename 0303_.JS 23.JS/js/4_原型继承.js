@@ -5,7 +5,7 @@ function A() {
     this.getX = function () { console.log('恭喜发财') }
 };
 A.prototype.getY = function () {
-    console.log('妮儿，你长的课俊哩')
+    console.log('妮儿，你长的可俊哩')
 };
 function B() { }
 
