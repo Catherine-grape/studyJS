@@ -1,1 +1,106 @@
-[{"id":1,"name":"珠峰培训","password":"8376ac810bb9f231d28fcf1f","sex":"1","email":"1144709265@qq.com","phone":"18310612838","departmentId":"1","jobId":"1","desc":"珠峰培训最高管理员账户","time":1568640222269,"state":0},{"id":2,"name":"周啸天","password":"8376ac810bb9f231d28fcf1f","sex":0,"email":"zhouxiaotian@qq.com","phone":"13041086186","departmentId":1,"jobId":5,"desc":"","time":1568640222269,"state":0},{"id":3,"name":"程亚光","password":"8376ac810bb9f231d28fcf1f","sex":"0","email":"chengyanguang@126.com","phone":"12356985478","departmentId":"2","jobId":"3","desc":"我是程亚光，来自于星星的你","time":1568955194924,"state":0},{"id":4,"name":"王金光","password":"8376ac810bb9f231d28fcf1f","sex":"1","email":"wangjinguang@qq.com","phone":"18569565656","departmentId":"4","jobId":"6","desc":"我是一名出色的CV工程师","time":1568956399054,"state":0},{"id":5,"name":"asd","password":"8376ac810bb9f231d28fcf1f","sex":"1","email":"","phone":"","departmentId":1,"jobId":1,"desc":"","time":1617786944511,"state":0},{"id":6,"name":"asd","password":"8376ac810bb9f231d28fcf1f","sex":"0","email":"","phone":"","departmentId":1,"jobId":1,"desc":"","time":1617786951128,"state":1},{"id":7,"name":"dsafds","password":"8376ac810bb9f231d28fcf1f","sex":"1","email":"askd@qq.com","phone":"13456789011","departmentId":"3","jobId":"5","desc":"asdf","time":1617787655913,"state":0},{"id":9,"name":"阿斯顿发","password":"8376ac810bb9f231d28fcf1f","sex":"1","email":"asdf阿斯顿发","phone":"13456789011","departmentId":"3","jobId":"4","desc":"阿斯顿发士大夫撒的","time":1617787893029,"state":0}]
+[
+    {
+        "id": 1,
+        "name": "珠峰培训",
+        "password": "8376ac810bb9f231d28fcf1f",
+        "sex": "1",
+        "email": "1144709265@qq.com",
+        "phone": "18310612838",
+        "departmentId": "1",
+        "jobId": "1",
+        "desc": "珠峰培训最高管理员账户",
+        "time": 1568640222269,
+        "state": 0
+    },
+    {
+        "id": 2,
+        "name": "周啸天",
+        "password": "8376ac810bb9f231d28fcf1f",
+        "sex": 0,
+        "email": "zhouxiaotian@qq.com",
+        "phone": "13041086186",
+        "departmentId": 1,
+        "jobId": 5,
+        "desc": "",
+        "time": 1568640222269,
+        "state": 0
+    },
+    {
+        "id": 3,
+        "name": "程亚光",
+        "password": "8376ac810bb9f231d28fcf1f",
+        "sex": "0",
+        "email": "chengyanguang@126.com",
+        "phone": "12356985478",
+        "departmentId": "2",
+        "jobId": "3",
+        "desc": "我是程亚光，来自于星星的你",
+        "time": 1568955194924,
+        "state": 0
+    },
+    {
+        "id": 4,
+        "name": "王金光",
+        "password": "8376ac810bb9f231d28fcf1f",
+        "sex": "1",
+        "email": "wangjinguang@qq.com",
+        "phone": "18569565656",
+        "departmentId": "4",
+        "jobId": "6",
+        "desc": "我是一名出色的CV工程师",
+        "time": 1568956399054,
+        "state": 0
+    },
+    {
+        "id": 5,
+        "name": "asd",
+        "password": "8376ac810bb9f231d28fcf1f",
+        "sex": "1",
+        "email": "",
+        "phone": "",
+        "departmentId": 1,
+        "jobId": 1,
+        "desc": "",
+        "time": 1617786944511,
+        "state": 0
+    },
+    {
+        "id": 6,
+        "name": "asd",
+        "password": "8376ac810bb9f231d28fcf1f",
+        "sex": "0",
+        "email": "",
+        "phone": "",
+        "departmentId": 1,
+        "jobId": 1,
+        "desc": "",
+        "time": 1617786951128,
+        "state": 1
+    },
+    {
+        "id": 7,
+        "name": "dsafds",
+        "password": "8376ac810bb9f231d28fcf1f",
+        "sex": "1",
+        "email": "askd@qq.com",
+        "phone": "13456789011",
+        "departmentId": "3",
+        "jobId": "5",
+        "desc": "asdf",
+        "time": 1617787655913,
+        "state": 0
+    },
+    {
+        "id": 9,
+        "name": "阿斯顿发",
+        "password": "8376ac810bb9f231d28fcf1f",
+        "sex": "1",
+        "email": "asdf阿斯顿发",
+        "phone": "13456789011",
+        "departmentId": "3",
+        "jobId": "4",
+        "desc": "阿斯顿发士大夫撒的",
+        "time": 1617787893029,
+        "state": 0
+    }
+]

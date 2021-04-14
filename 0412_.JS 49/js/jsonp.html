@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+    // 同源策略 ajax
+    // 非同源策略 img audio vedio link a script
+    // jsonp利用的就是script的非同源策略，
+    // script标签请求回来的数据会在浏览器中执行
+
+    // 特点：只能发送get请求，post是不支持的
+
+    // cors跨域(后台)
+    // jsonp跨域(前后台都的配置)
+    // proxy跨域(前端配置)
+
+    function get(data){
+      console.log(data);
+    }
+  </script>
+  <script src="http://127.0.0.1:8888/list?callback=get"></script>
+</body>
+</html>

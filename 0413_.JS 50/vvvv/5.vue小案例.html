@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="(item,index) in arr">
+            {{index+1}} {{item}} 
+                <ul>
+                    <li v-for="(ite,ind) in [1,2]">{{ite}}.{{ary[fn()]}} </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        let vm=new Vue({
+            el:"#app",
+            data:{
+              arr:[ "苹果","香蕉","西瓜"],
+              ary:["green","red","white","yellow"],
+              flag:null
+            },
+            methods:{
+                fn(){
+                    let i = Math.round(Math.random() * 3);
+                    while(i ==this.flag){
+                        i = Math.round(Math.random() * 3);
+                    }
+                    this.flag = i;
+                    return i  
+                }
+            }
+        })
+    </script>
+</body>
+</html>

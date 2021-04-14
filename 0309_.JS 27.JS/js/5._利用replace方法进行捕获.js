@@ -17,7 +17,7 @@ str = str.replace(/good/g, function() {
     console.log(1);//3 
     console.log(arguments);//["good", 0, "goodssgoodaagood", callee: ƒ, Symbol(Symbol.iterator): ƒ]
     console.log(arg);
-    return ',';//如果replace执行的时候，第二个参数传递的是一个函数的话，那正则匹配几次，函数就执行几次，，而且每一次匹配的时候，会把匹配到的值以实参的形式传递给回调函数
+    return ',';//如果replace执行的时候，第二个参数传递的是一个函数的话，那正则匹配几次，函数就执行几次，而且每一次匹配的时候，会把匹配到的值以实参的形式传递给回调函数
     // replace的返回值，每一次回调函数的执行结果会把当前匹配的内容进行替换
     
 });

@@ -36,7 +36,7 @@ console.dir(reg2.lastIndex);//5
 reg2.exec(str2);//['5']
 console.dir(reg2.lastIndex);//12
 reg2.exec(str2);//null
-console.dir(reg2.lastIndex);//0
+console.dir(reg2.lastIndex);//14
 
 // 自己封装一个方法，用来捕获字符串中所有符合规则的内容，以一个数组的形式进行返回，如果捕获不到就是null
 function myExecAll(str) {

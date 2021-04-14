@@ -1,0 +1,19 @@
+### 请求列表信息
+url:http://127.0.0.1:8080/list
+method:get
+params:lx=my(lx代表请求的类型，all代表...,此参数不是必传项，如果不传默认lx的值为my)
+
+result:{
+    code:0,
+    codeText:'ok',
+    data:[xcxcxc]  //[]
+}
+
+### 注册账户
+url:http://127.0.0.1:8080/sign
+method:post,
+data:account=xxx&password=xxx&email=xxx //是x-www-form-urlencoded格式
+result:{
+    code:0,
+    codeText:'ok'
+}

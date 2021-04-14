@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="app">
+        {{num}}
+        <span>{{num}} </span>   
+        <!-- 只要在控制层范围的都可以 -->
+        <button v-on:click="add">点击</button>
+    </div> <!-- 视图层 -->
+    <div>222</div>
+    <!-- 看见的就是视图层 -->
+    <!-- vue是类 -->
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        // 中间控制层
+        // vue中的数据是数据层
+        // 控制的是id为app的div元素
+        let vm=new Vue({
+            el:"#app",//el就是一个选择器，它就是选择Vue控制的范围
+            data:{//data是存放数据的地方，想把num放到页面中 使用{{小胡子/花胡子语法}}.data里面的键值对最终它会挂载到当前vue的实例上，在视图层的花胡子里去拿实例上的属性可以直接写，视图变了数据会更新 数据变了视图也会更新，数据的双向绑定。
+                num:100
+            },
+            methods:{//方法
+                // 存放的是各种事件对应的方法
+                // methods里的键值对，最终会挂载到当前的vue实例上
+                add:function(){
+                    console.log(111);
+                    vm.num++;
+                },
+                /* add(){
+                    vm.num++
+                } 
+                与上面的一样是快捷方式
+                */
+            }
+        });
+// 以控制区 的为模板生成一个虚拟dom 找到{{}}再变成真实dom插入到页面
+// 在vue中想改变页面的内容，只需要把对应的数据更改即可，视图中只要使用里当前的数据，那就会自动更新的
+// 视图<==>数据   vue的双向数据绑定
+    </script>
+</body>
+</html>

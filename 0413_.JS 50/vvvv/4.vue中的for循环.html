@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <!-- vue中的for循环，可以写在视图中，当循环的时候，item是数组的每一项，index是每一项的索引，v-for写在谁身上就会循环谁 -->
+            <li v-for="(item,index) in arr">
+                {{item}} {{index}} 
+                <!-- <span v-for="(ite,ind) in [1,2,3]">{{ite}}</span> -->
+            </li>
+            
+        </ul>
+        
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        // ./node_modules/vue/dist/vue.js  控制台会输出错误   min就不会有报错了
+        // v-for 不仅可以循环数组、循环对象 还可以循环字符串，数字
+        // 对象 item 属性值  index 属性名 
+        // 字符串 item 每一项 index 索引
+        // 数字  item 从数字1循环到目标数字  index索引
+        let vm=new Vue({
+            el:'#app',
+            data:{
+                ary:123,
+                arr:[1,2,3]
+            },
+            
+        })
+    </script>
+</body>
+</html>

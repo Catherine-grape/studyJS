@@ -6,7 +6,7 @@ let userListModel = (function () {
         if (!power.includes("userhandle")) {
             // 如果当前if成立说明当前用户没有操作权限
             // $(".tableBox thead tr th").eq(0).empty();
-            $(".tableBox thead tr th").eq(0).remove();
+            $(".tableBox thead tr th").eq(0).remove();//选择框
             console.log($(".tableBox thead tr th").eq(0));
             $(".deleteAll").remove();
             // $(".w12").remove();
@@ -89,7 +89,7 @@ let userListModel = (function () {
         })
     }
 
-    // 基于时间委托实现删除的功能
+    // 基于事件委托实现删除的功能
     let handle = () => {
         $('tbody').click(function (e) {
             console.log(e.target);

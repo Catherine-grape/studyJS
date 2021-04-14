@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- v-model 只能用于input -->
+        <input type="text" v-model="num">
+
+        <span>{{num/7.6}} </span>
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        // 当用户改变input视图的时候，num数据会自动更新，数据一更新，视图中使用到当前数据的地方都会得到高效的更新
+        let vm = new Vue({
+                el: "#app",
+                data:{
+                    num:100,
+                },
+            })
+    </script>
+</body>
+</html>

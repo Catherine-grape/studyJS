@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模板</title>
+</head>
+<body>
+    <div></div>
+    <!-- 
+        npm i xxx -g
+        npm i xxx --save 把当前的模块下载到生产依赖里面 「在线上还需要使用的模块 jq axios。。。」
+        npm i xxx --save-dev 把当前模块下载到开发依赖里 「less。。。」
+
+        npm i xxx    默认就是下载生产依赖   npm i xxx --save与这个相等\
+
+
+        0配置：src文件夹中都是你写的代码   index.js是webpack打包入口
+        package.json中 build打包
+         "scripts": {
+             "ss":"lessc index.less index.css",
+    "build": "webpack",
+            
+    npm run build
+    webpack自动打包出现一个dist文件夹  有一个打包好的文件main.js
+
+
+        自己配置的 必须在根目录写一个 webpack.config.js 
+
+     -->
+     <script src="./dist/main.js"></script>
+     <script src="./list/index.js"></script>
+     <script src="./list/index.js"></script>
+</body>
+</html>

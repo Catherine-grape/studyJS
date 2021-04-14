@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 同源策略 ajax/fetch
+        // 非同源策略 img audio video link a script 
+        /* 
+        jsonp利用的就是script的非同源策略，「可以给任意服务器发请求」  前端和后台都要写
+        script标签请求回来的数据，会在浏览器中执行。
+        特点：只能发送get请求，post是不支持的
+        */
+    //    cors 跨域「后端配置」 jsonp跨域「前后端配置」 proxy跨域「前端配置 在webpack写一行代码，用的最多」
+       //proxy 跨域
+       function get(data){
+           console.log(data);
+       }
+    </script>
+    <script src="http://127.0.0.1:8888/list?callback=get"></script>
+</body>
+</html>
