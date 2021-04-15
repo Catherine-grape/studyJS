@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    width:;
+</style>
+
+<body>
+    <div id="app">
+        <div v-bind:class="name,fn(name)" v-for="(item,index) in arr">
+            {{item}} {{index}}
+        </div>
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                num: 100,
+                age: 20,
+                name: {
+                    "lili": true
+                },
+                arr: [1, 2, 3, 4, 5, 6, 7, 8]
+            },
+            methods: {
+                fn() {
+                    if (this.name == true) {
+                        return this.name = false
+                    }
+                    return this.name = true
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

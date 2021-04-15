@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #outer{
+            width: 200px;
+            height: 200px;
+            background:lightblue;
+        }
+        #inter{
+            width: 100px;
+            height: 100px;
+            background:lightgreen;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- <input type="text" @change.13="fn"> -->
+        <!-- <input type="text" @keyup.13="fn"> -->
+        <input type="text" @keyup.ctrl.c="fn">
+        <div id="outer" @click.capture="fn2">
+            <div id="inter" @click.stop="fn1">
+                1
+            </div>
+        </div>
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        // vue中的事件修饰符
+        // .stop 阻止事件的冒泡传播机制
+        // .prevent 阻止事件的默认行为
+        // .capture 控制方法在捕获阶段执行
+        // .once 只让当前方法触发一次（不会阻止事件的冒泡）
+        // .self 只有点击自己才能触发方法执行「通过冒泡或者捕获都不能触发方法」
+        
+        // 键盘的事件修饰符
+        // .c .b .f   .13.1   
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                num: 100,
+            },
+            methods: {
+                fn(){
+                    
+                    console.log("点击的是回车");
+                },
+                fn1(){
+                    console.log("点击的是inter");
+                },
+                fn2() {
+                    console.log("点击的是outer");
+                }
+                },
+                
+            
+        })
+    </script>
+</body>
+
+</html>

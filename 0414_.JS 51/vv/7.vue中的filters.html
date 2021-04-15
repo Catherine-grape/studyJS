@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!--  <p>{{ss(num,2)}}</p>
+      <p>{{ss(num,3)}}</p> -->
+        <p>{{num | toFixed(2) | addZero() }}</p>
+        <!--  | 叫做管道符，符号左边的值会自动传递给右边的函数的第一个实参.取前面函数执行的返回结果 给到第二个函数，作为第一个实参 -->
+        <!-- 管道符只能配合filters里面的方法去使用 -->
+            <p>{{  addZero(toFixed(num,2) ) }}</p>
+        <!-- 当前对数据进行二次处理的逻辑使用filters里的方法和methods里面的方法都可以实现，但是使用filter实现起来更加方便、更加专业 -->
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                num: 3.1415926,
+            },
+            methods: {//给事件绑定方法的函数
+                ss(num, n) {
+                    // 对数据进行二次处理，然后显示到页面
+                    return num.toFixed(n)
+                },
+                toFixed(num, n) {
+                    console.log(num);
+                    return num.toFixed(n)
+                },
+                addZero(num) {
+                    num = Number(num);
+                    return num < 10 ? "0" + num : num;
+                }
+            },
+            // data、 methods 、filters 里面的方法「属性」不要重名
+            filters: {// 过滤的方法如果放到filters里面的话，上面就可以使用 | 管道符语法。 固定语法 。 对数据进行二次处理
+                toFixed(num, n) {
+                    console.log(num);
+                    return num.toFixed(n)
+                },
+                addZero(num) {
+                    num = Number(num);
+                    return num <10 ? "0" + num : num;
+                }
+            },
+            computed:{//当前对象中存储的不是方法，而是属性
+                // 当增减键值对的时候书写的语法跟函数很像，但是他不是函数，就是属性
+                ss(){
+                    // return 什么属性值就是什么
+                    return 100;
+                }
+            },
+            watch:{
+
+            }
+        })
+    </script>
+</body>
+
+</html>

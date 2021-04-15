@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="box">
+        <ul>
+            <li v-for="(item,index) in ary">
+               {{index+1}}、 {{item.name}}
+               <ul>
+                   <li v-for="(ite,ind) in item.color">
+                   {{index+1}}.{{ind}} 、{{ite}}
+                   </li>
+               </ul>
+            </li>
+        </ul>
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el: "#box",
+            data: {//new vue的时候 会监听ary放到实例上
+                ary: [
+                    {
+                        name: "苹果",
+                        color: ['pink', 'red']
+                    },
+                    {
+                        name: "桃子",
+                        color: ['yellow', 'green']
+                    },
+                    {
+                        name: "香蕉",
+                        color: ['white', 'block']
+                    }
+                ]
+            }
+        })
+    </script>
+</body>
+
+</html>

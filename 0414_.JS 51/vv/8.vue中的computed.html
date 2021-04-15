@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="num">
+        <p>{{ss()}}</p>
+        <p>{{ss}}</p>
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                num: 0,
+                flag:789
+            },
+            methods:{
+               /*  ss() {
+                //    修改flag也会走到这里的函数执行 性能不好 此函数每次更新视图都会执行
+                    console.log(111);
+                    return this.num / 7;
+                } */
+            },
+            computed: {//当前对象中存储的不是方法，而是属性
+                // 当增减键值对的时候书写的语法跟函数很像，但是他不是函数，就是属性
+                // 它是一个计算属性，它一般都是依赖data中的某个数据的变化而变化
+                // 计算属性是有缓存的，当属性计算的时候，他会把当前的return的结果缓存下来，以后视图更新的时候它会自动检测当前依赖的属性有没有发生变化，如果没有发生变化，那就说明不需要重新计算，就会读取之前的缓存，如果当前依赖的属性发生了变化，那它就会重新计算结果渲染到页面。
+                ss() {
+                    // 当前 return 什么属性值就是什么
+                    return this.num/7;
+                },
+                aa(){
+                    // 当前属性aa没有依赖data中的某个属性的变化而变化，所以应该放到data中
+                    return 800
+                },
+                ss:{//ss的真实写法
+                    get(){
+                        return this.num / 7;
+                    },
+                    set(val){//设置不上，但是可以监听，可以知道设置的值。一般不用
+                        console.log(val);
+                    }
+                }
+            },
+            watch: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>

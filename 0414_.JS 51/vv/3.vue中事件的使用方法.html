@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div @click="fn($event,1,2)"> 111</div>
+        <!-- 加上小括号与不加都不会自己执行，只不过加上小括号可以进行传参
+        绑定方法的如果不想给方法传递实参，可以不写执行小括号，如果想给方法传递实参那就要写上执行小括号，但是如果写了执行小括号，那事件对象就没有了.
+    解决方法：如果即想传递实参还想保留事件对象，那就使用$event占位 -->
+        <div>{{num}}</div>
+        <ul>
+            <li v-for="(item,index) in ary" @click="fn1(item.id)">
+                {{item.name}}
+            </li>
+        </ul>
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                num: 100,
+                ary: [{
+                    name: "华为",
+                    id: "1"
+                }, {
+                    name: "苹果",
+                    id: "2"
+                }, {
+                    name: "小米",
+                    id: "3"
+                }, ]
+            },
+            methods: {
+                fn(e, num1, num2) {
+                    //事件对应的方法里的this是当前vue的实例
+                    // 在vue中给事件绑定的方法也有事件对象，大多数与原生都一样
+                    console.log(e, num1, num2); //就是传递的实参
+                    this.num = 300
+                },
+                fn1(id) {
+                    console.log(id);
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- vue的特殊指令对应的值，会从当前vue 的实例上去获取，如果实例上没有对应的值就会报错 你自定义的指令不会去vue实例上取值，你写什么就是什么 -->
+        <!-- 如果当前vue的指令里的值是一个js 的数据类型,那就直接使用，如果不是那就回去往vue实例上找对应的属性「去取值」，那当前指令对应的值就是这个数据类型的值 如果找不到就报错-->
+
+        <div v-text="num"></div>
+        <div v-html="ss"></div>
+        <div v-text="true"  v-bind:a="ss"></div>
+        
+        <img v-bind:src="img" alt="">
+        <p v-once v-bind:[key]="num">{{num}}</p>
+        <ul>
+            <li v-for="(item,index) in [100,200,300,400]"  :index="index" v-on:click="fn">
+                {{item}}
+            </li>
+        </ul>
+        <button @click="start" >{{content}}</button>
+        <div v-if="flag">
+            霸气侧漏
+        </div>
+        <ul>
+            <li v-if="flag"> 1 </li>
+            <li v-else-if="num==100"></li>
+            <li v-else>2</li>
+
+            <li v-show="flag" @click="start">1234456</li>
+        </ul>
+        <input type="text" v-model="num">
+        <span>{{num}}</span>
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        // 在vue进行渲染的时候，它会把行间带v-属性的标签「元素」进行特殊的处理
+        // [v-html/v-text] 他俩都是给元素设置内容，但是v-html可以识别字符串标签，v-text不可以识别字符串标签「与小胡子区别，就是在页面渲染的时候，小胡子会一闪而过，但是v-text不会出现这样的情况」
+        // [v-bind]给标签的普通的行间属性动态取值的。「可以简写成 :  ===v-bind:」 行间属性的属性名也可以动态获取
+        // [v-on] 给当前元素绑定对应的事件。「可以简写成 @click="fn"===v-on:click="fn"」
+        // [v-once] 只让元素动态的获取一次数据，以后就算数据更新了，视图也不会更新
+        // [v-if] 控制当前元素的显示隐藏「通过控制dom元素的加载和写在来控制元素的有无」
+        // [v-else-if]
+        // [else]
+        // [v-show] 控制当前元素的显示隐藏「通过控制元素的样式display来控制元素的有无」
+        // 如果页面的一个dom要频繁的进行显示隐藏，使用v-show要比v-if性能高一些
+        // [v-model] 实现数据和视图的双向数据绑定的  视图<==>数据 仅限用于表单元素
+            // 1. 先把数据中的num给到视图中的input框
+            // 2. 当用户更改视图的时候会引起，对应的数据的更新
+            // 3. 数据一更新，那视图中使用到此数据的地方都得更新。
+        let vm=new Vue({
+            el:"#app",//当前获取的范围不能是body或者html
+            data:{
+                num:100,
+                // ss:'<span>你好 </span>'
+                ss:800,
+                img:'./moto.jpg', //vm.img='./1.jpg' 动态切换图片，只需要操作数据
+               key : 'age',
+               flag:true,
+               content:"隐藏"
+            },
+            methods:{//data中的属性和methods的属性不能重名，否则会报错
+                fn(){
+                    console.log(1);
+                },
+                start(){
+                    if(vm.content== "隐藏"){
+                        vm.flag=false;
+                        vm.content="显示"
+                    }else{
+                        vm.flag=true;
+                        vm.content = "隐藏"
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .aa {
+            width: 200px;
+            height: 200px;
+            background: lightskyblue;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- class类名前面加上v-bind:之后，class的值可以是一个对象，对象里的键值对的属性名是类名，属性值去控制当前这个类名的有无 -->
+        <!-- 如果当前class的值为一个对象，那每一个键值对的属性值就可以动态的控制当前的类名生不生效 -->
+        <!-- <div v-bind:class="box"></div> -->
+        <!-- {'box':flag} 'box'属性名 flag 是转成布尔值  -->
+        <div v-bind:class="{'box':flag,ss:flag1}">123</div>
+        <div v-bind:class="r">123</div>
+        <!-- 如果想从vue的实例上 动态获取类名，如果仅仅是想获取一个，就可以直接写，如果想获取多个就得使用数组的格式了 -->
+        <div v-bind:class="[a,'b','c']">123</div>
+        <div v-bind:class="as">123</div>
+        <!-- 数组里可以写三元运算符，可以通过某一个响应式的数据去判断到底取那个类名 -->
+        <div :class="[flag?'a':'b',flag1?'c':'d']">111</div>
+
+        <div :style="{color:activeColor,fontSize:fontSize+'px'}"> </div>
+        
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                box: "aa",
+                flag: false,
+                flag1: true,
+                a: 'ss',
+                as:'a b c',
+                // r: { 'box': flag, 'ss': flag1 },
+                activeColor:'red',
+                fontSize:'30'
+            }
+        })
+    </script>
+</body>
+
+</html>
