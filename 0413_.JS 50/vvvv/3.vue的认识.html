@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <div id="app">
         <!-- {{num>99?"大了":"小了"}} -->
         <!-- {{fn}}  function () { [native code] } -->
-        {{fn()}}
-        {{num+num}}
-        {{obj.ss}}
+        {{fn()}} {{num+num}} {{obj.ss}}
     </div>
     <script src="./node_modules/vue/dist/vue.js"></script>
     <script>
@@ -19,35 +19,35 @@
         // 1. 如果数据是对象「引用数据类型」，那它会把对象基于JSON.stringify转一下,如果是null、undefined 是渲染的空，不会显示对应的值
         // 2. 小胡子里不光可以动态获取数据，还可以写js逻辑语句，还可以写函数执行,也可以进行加减乘除运算
         // 3. 不是所有的数据都是响应式的
-            //1. 如果一开始对象中没有的数据在视图中展示是没有响应式的，以后就算加上了，视图也不会更新
-            // 解决办法： 
-            //          1. 更改数据的时候，直接把对象替换，因为对象是原始数据，它是响应式的
-            //          2. 一开始如果不知道当前的值为多少，可以给他赋一个null或者undefined都可以，但是不要不写
-            //          3. vm.$set(obj,key,value)给当前的obj增加键值对，并且拥有响应式。 
-            // let obj={a:1,b:2,c:3}   vm.obj={...vm.obj,"ss",500}
-            // 2. 数组中的值本身是没有响应式的，通过length获取数组的索引对数组进行操作是不能引起视图的更新的。
-            // 解决办法：
-            //          1. vue对可以操作愿数组的7个方法进行了二次的封装，并且放到了数组的重定向之后的原型上，当数组调用和这个7个新的方法的时候是可以实现更改视图的(这个新原型的__proto__是指向数组的老原型的，所以之前的方法还可以使用)
-        let vm=new Vue({
-            el:"#app",
-            data:{//null与undefined 代表没有    data初始化存在的数据是有响应式的   get set 增加监听器
-                
+        //1. 如果一开始对象中没有的数据在视图中展示是没有响应式的，以后就算加上了，视图也不会更新
+        // 解决办法： 
+        //          1. 更改数据的时候，直接把对象替换，因为对象是原始数据，它是响应式的
+        //          2. 一开始如果不知道当前的值为多少，可以给他赋一个null或者undefined都可以，但是不要不写
+        //          3. vm.$set(obj,key,value)给当前的obj增加键值对，并且拥有响应式。 
+        // let obj={a:1,b:2,c:3}   vm.obj={...vm.obj,"ss",500}
+        // 2. 数组中的值本身是没有响应式的，通过length获取数组的索引对数组进行操作是不能引起视图的更新的。
+        // 解决办法：
+        //          1. vue对可以操作原数组的7个方法进行了二次的封装，并且放到了数组的重定向之后的原型上，当数组调用和这个7个新的方法的时候是可以实现更改视图的(这个新原型的__proto__是指向数组的老原型的，所以之前的方法还可以使用)
+        let vm = new Vue({
+            el: "#app",
+            data: { //null与undefined 代表没有    data初始化存在的数据是有响应式的   get set 增加监听器
+
                 // num:[null,1,2,3,4,5],
                 // num:{a:1,b:2},
                 // num:function(){},
-                num:100,
-                obj:{
+                num: 100,
+                obj: {
                     // vm.obj.ss=100  视图没有更新，data初始化存在的数据是有响应式的，新增的是没有的
                     // vm.$set(vm.obj, "ss", "400")
                 }
             },
-            methods:{
-                fn(){
+            methods: {
+                fn() {
                     return 999;
                 }
             }
         })
-        
     </script>
 </body>
+
 </html>

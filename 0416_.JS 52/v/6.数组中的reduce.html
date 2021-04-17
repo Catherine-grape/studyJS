@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    let ary = [
+        {
+            id: 1,
+            img: 'xxxxx',
+            title: '高级程序设计3',
+            price: 39.9,
+            num: 2
+        },
+        {
+            id: 2,
+            img: 'xxxxx',
+            title: '高级程序设计4',
+            price: 49.9,
+            num: 2
+        }
+    ];
+    // let total = 0;
+    // ary.forEach(item=>{
+    //   total+=item.price*item.num
+    // });
+    // console.log(total);
+
+        let arr=[100,200,300,400]
+        // 如果reduce执行的时候只传递一个参数，那回调函数第一次执行的时候，prev是数组的第一项，next是数组的第二项
+        // 以后回调函数执行的时候 prev 是上一次回调函数的返回结果， next正常取数组的下一项
+        // 如果reduce 传递了第二个参数，prev第一次就会取第二个参数的值，next就是数组的每一项
+        arr.reduce((prev,next)=>{
+            // 第一次prev 100（数组第一项）   next 200 （数组第二项）
+
+            // 第二次prev un                next 300（数组第三项）
+            // 第二次prev un                next 400（数组第四项）
+            console.log(prev,next);
+            // 求和
+            // 1    0     100       return 100
+            // 2   100    200       return 300
+            // 3   300    300       return 600
+            // 4   600    400       return 1000
+            return prev+next;
+        },0)
+        let as=null;
+        let ary=[{ num: 2, price: 39.9 }, { num: 2, price: 49.9 }];
+        as=ary.reduce((prev,next)=>{
+            // 1 prev 0  next 第一个对象  return  79.8
+            // 1 prev 79.8  next 第二个对象 return 179.6
+            let {num,price}=next
+            console.log(prev,next);
+            // return prev+next.num*next.price
+           return prev+=num*price
+        },0)
+        console.log(as);
+    </script>
+</body>
+</html>

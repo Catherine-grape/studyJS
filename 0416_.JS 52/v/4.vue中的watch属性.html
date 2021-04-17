@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- <input type="text" v-model="num" @input="change"> -->
+        <input type="text" v-model="num">
+        <div>{{trans}}</div>
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                num: 0,
+                trans: 0
+            },
+            methods: {
+                /* change() {
+                    this.trans = this.num / 7;
+                } */
+            },
+            /* computed:{//需要return 的返回值。
+                trans(){
+                    // 计算属性的值是get函数return的结果，如果return或者相关的逻辑代码放到异步里面就会导致 return的值不准确，并不是不支持异步的语法。
+                    // 函数执行后没有return 就是undefined
+                    setTimeout(()=>{
+                      return  this.num/7
+                    },1000) 
+                }
+            }, */
+            watch:{//支持异步，computed不支持
+                // watch和computed很像，但是watch是监听vue实例上的属性的变化而执行的函数。computed是一个计算属性，必须依赖某个值的变化而变化。
+                // computed里的属性是不支持异步的，但是watch里是可以写异步的
+                // watch里存储的是函数，它的意思是监听vue实例上的数据的变化，只要监听的值发生了改变，那当前对应的函数就会执行
+                num(){//当前的函数名字必须和vue实例上的属性一样，监听属性的变化
+                    // 当前函数已经把vue实例上的num属性进行了监听，只要num的值发生变化，此监听函数就会执行
+                    console.log(1);
+                    setTimeout(()=>{
+                        this.trans = this.num/7
+                    },1000) 
+                    // 因为watch里的方法不是必须使用return的，所以异步的逻辑不会影响return的值
+               }
+            }
+        })
+    </script>
+</body>
+
+</html>

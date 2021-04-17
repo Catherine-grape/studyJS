@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <span id="span">{{num}}</span>
+    
+  </div>
+  <script src="./node_modules/vue/dist/vue.js"></script>
+  <script>
+    let vm = new Vue({
+      el: '#app',
+      // template:`<div>
+      //               <span>{{num}}</span>
+      //           </div>`,
+      data: {
+        num: 100
+      },
+      methods: {
+        fn() { }
+      },
+      beforeCreate() {
+        console.log('beforeCreate');
+        // 此函数执行，就是要说明要开始初始化实例了
+        // 这时data中的响应式数据和methods中的方法都没有挂载到实例上
+        // 在这里你几乎啥也做不了
+        console.log(this.num); // un
+        console.log(this.fn); // un
+      },
+      created() {
+        console.log('created');
+        // 此函数执行，说明实例已经初始化完成了
+        // 此时data中的数据和methods中的方法已经挂载到实例上了
+        // 此时你可以在这里更改data中的响应式的数据，而不会引发视图的再次更新,因为此时dom模板还没有替换到页面上呢
+
+        // 咱们在工作的时候都在这里发送数据请求
+       
+
+        // this.num = 800;
+        console.log(this.num); // 100
+        console.log(this.fn); // fn(){}
+        // console.log(document.getElementById('span')); // <span>{{num}}</span>
+        // 在这里拿不到渲染完成之后的元素
+      },
+      beforeMount() {
+        // 生成的dom模板挂载到真实的dom上之前
+        // 在这里也可以对data中的数据进行更改而不会引发视图的从新渲染(因为你在模板挂载到页面之前可以随便改)
+        this.num = 789;
+        console.log('beforeMount');
+        // console.log(document.getElementById('span'));
+
+      },
+      mounted() {
+        console.log('mounted');
+        // dom模板已经挂载到真实的dom元素上了，页面已经正常显示
+        // this.num = 900;
+        // 如果在这里更改数据会引发视图的再次更新，以为此时页面已经正常挂载完毕
+        console.log(document.getElementById('span'));
+        // 在这里可以获取到到渲染完成之后的dom
+      },
+      // 上边的beforeCreate、created、beforeMount、mounted只会在第一次初始化的时候执行，以后不再执行
+
+      // -----------------------------------------------------------
+
+      // beforeUpdate和updated在初次渲染页面的时候不会执行
+      beforeUpdate() {
+        // 在后期更改响应式数据之前会执行
+          console.log('beforeUpdate');
+      },
+      updated() {
+        // 在数据更改完成之后，视图渲染完成之后执行
+        console.log('updated');
+      },
+
+
+      //-------------------------------------------------------------------
+      // 下边这俩死亡的函数会在用户手动调用vm.$destroy()方法的时候执行
+      // 一旦调用之后，vue实例就不能用了，数据已经不是响应式的了，页面就是死页面了
+      beforeDestroy(){
+        console.log('boforeDestory');
+      },
+      destroyed(){
+        console.log('destoryed');
+      }
+    });
+    // vm.$mount('#app');
+    // vm.$destroy(); // 把当前vue实例摧毁
+    // 一旦把vue实例摧毁之后，实例上的响应式的数据就不能够使用了，页面就成了死页面了
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <div @click="fn">{{num}}</div>
+        <div>{{ss}}</div>
+        <!-- 对象的属性名默认是字符串类型 -->
+        <div :class="[a,'b',{active:flag}]"></div>
+        <div :class="{active:flag,ss:'flag1'}"></div>
+        <div :style="{width:num+'px',fontSize:num/2+'px'}"></div>
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        /* 
+        `<div id="app">
+        <div>100</div>
+        </div>`
+
+        */
+       let vm = new Vue({
+           el:"#app",
+           data:{//一般存放的都是响应式的数据
+               num:100,
+               a:"age"
+           },
+           methods:{//一般存放的是方法，逻辑的方法
+            // vue 里的方法不要写箭头函数，这样会丢失this的
+               fn() {
+                   console.log(10);
+               }
+           },
+           filters:{
+            //    存放的也是方法（可以配合管道符在视图中使用）「管道符是filters独有的」，二次处理响应式的数据
+           },
+           computed:{
+            //    存放的是计算的属性（不是函数），特点：当前存放的属性就是依赖其他data中的属性的变化而发生变化.当计算属性执行的时候，它会缓存下来当前的数据，如果下次视图更新的时候，当前计算属性所依赖的值没有发生变化，那它就会拿上次的缓存放到视图中，并不会重新计算
+            ss(){//这是计算属性的语法糖「是get的省略写法」
+                return this.num/1;
+            },
+            // 上下两种写法完全一致
+            ss:{
+                get(){
+                   return this.num / 1; 
+                }
+            }
+            // 下面是计算属性的完整写法
+            /* ss:{
+                get(){
+                    // 如果视图中要获取ss对应的值，那get函数就会执行，而且此函数return，ss的值就是什么
+                },
+                set(value){
+                    // 如果设置当前的ss的值的时候，set函数就会执行，而且会默认给set函数传递一个实参，实参的值就是当前正在设置的值
+                }
+            } */
+           }
+        //    上面四个对象中的方法、属性最终都会挂载到当前的vue实例上，而且书写的时候每一个对象里的属性或者方法不能够重名，否则就会报错
+       })
+       let obj={
+           methods:{
+               fn:()=>{
+                   console.log(this);
+               }
+           }
+       }
+       let app = new Vue(obj)
+    </script>
+</body>
+</html>

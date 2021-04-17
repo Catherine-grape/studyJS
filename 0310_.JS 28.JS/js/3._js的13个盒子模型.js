@@ -5,7 +5,7 @@ content+左右的padding+左右的border
 /* 
 js盒子模型
 client
-clientWidth clientHeight clientTop clentLeft
+clientWidth clientHeight clientTop clientLeft
 offset
 offsetWidth offsetHeight offsetLeft offsetTop offsetParant
 scroll

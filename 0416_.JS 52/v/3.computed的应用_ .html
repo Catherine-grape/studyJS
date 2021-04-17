@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        
+
+
+
+        <input type="checkbox" v-model="all" >全选
+        <div >
+            <span  v-for="(item,index) in ary">
+                <input  type="checkbox" :value="item.value" v-model="checkList">
+                {{item.name}}
+            </span>
+        </div>
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                checkList: [],
+                ary: [
+                    {
+                        value: "Kawasaki",
+                        name: "川崎"
+                    },
+                    {
+                        value: "Suzuki",
+                        name: "铃木"
+                    },
+                    {
+                        value: "Yamaha",
+                        name: "雅马哈"
+                    },
+                    {
+                        value: "Honda",
+                        name: "本田"
+                    }
+                ]
+            },
+            methods: {
+                               
+            },
+            computed:{
+                all:{
+                    // 当前all属性的值，依赖data中的checkList的length的变化而变化
+                    get(){
+                        let flag=true;
+                        if(this.checkList.length!==this.ary.length){
+                            flag = false
+                        }
+                        return flag
+                    },
+                    set(value){//set都会执行，set给表单元素就可以设置上 非表单不行
+                        // 当前用户设置全选框的值的时候，set函数就执行，这时候我们可以从形参里拿到最新的值，看看值如果是true，那就是选中全选，我们就把checkList里的值写满就好，否则就把checkList的值改为空数组
+                        console.log(value);
+                        if(value){this.checkList=this.ary.map(item=>item.value)}                       
+                        /* if(value)this.checkList=this.ary.map(item=>{
+                            return item.value
+                        });  */                       
+                            else{
+                                this.checkList=[]};                      
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
