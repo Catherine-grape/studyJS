@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 把ss函数传递给组件的内部 -->
+        <son :num='num1' :fn="ss"></son>
+    </div>
+
+    <script>
+        let son = {
+            data() {
+                return {
+                    msg: '我是son组件'
+                }
+            },
+            methods: {
+    
+            },
+            props: ['num','fn'],
+            // 在儿子内部去执行从父亲传递过来的方法，让父亲自己去改自己的数据
+            template: `<div>{{msg}} {{num}}
+                <button @click="fn(800)">点击</button>
+                </div>`
+        }
+        let vm = new Vue({
+            el: '#app',
+            created() { },
+            data: {
+                num1: 1,
+                num2: 2
+            },
+            methods: {
+                // ss执行就可以把自己的num1数据执行
+                ss(value){
+                    console.log(value);
+                    this.num1=value
+                }
+            },
+            components: {
+                son
+            }
+        });
+        // 子改父就是在父亲身上写一个更改数据的方法，然后传递给儿子组件内部，让儿子去调用父亲身上的方法，从而间接的实现子改父的目的
+    </script>
+</body>
+
+</html>

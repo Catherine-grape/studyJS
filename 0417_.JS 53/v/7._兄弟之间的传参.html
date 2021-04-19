@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        我是root
+        <com1></com1>
+        <com2></com2>
+    </div>
+
+    <script>
+        let obj={ };
+        let eventBus=new Vue();//创建了一个vue实例（事件总线）
+        // $on订阅方法       $emit发布方法
+        // 原理就是利用发布订阅模式，在被改数据的组件里去订阅一个方法，然后在另外一个组件里去发布刚才订阅的方法，说白了也是通知组件自己身上的方法去执行
+        // vuex 
+        let com1={
+            data(){
+                return{
+                     num:100
+                }              
+            },
+            methods:{
+                ss(){
+                   // obj.changeCom2(300);
+                    // obj.changeCom2(this.num);
+                    eventBus.$emit('changeCom2',567);
+                }
+            },
+            template:`<div>我是com1组件{{num}}
+                <button @click="ss">点击</button>
+                <br>
+                ---------------------
+                </div>`
+        }
+        let com2={
+            data(){
+                return{
+                     num:200
+                }              
+            },
+            methods:{
+                fn(value){
+                    this.num=value;
+                }
+            },
+            created(){
+                // obj.changeCom2=this.fn;
+                eventBus.$on('changeCom2',this.fn);
+                // 给eventBus里的changeCom2事件类型订阅方法fn
+            },
+            template:`<div>我是com2组件{{num}}</div>`
+        }
+        let vm = new Vue({
+            el: '#app',
+            created() {},
+            data: {},
+            methods: {},
+            components:{
+                com1,
+                com2
+            }
+        });
+    </script>
+</body>
+
+</html>

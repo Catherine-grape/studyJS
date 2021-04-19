@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div @click="fn">我是根实例</div>
+        <div>
+<com1 v-for="item in [1,2,3,4]" :ss='item'></com1>
+        </div>
+
+        <!-- <com1></com1>
+        <com1></com1> -->
+    </div>
+
+    <script>
+        // 以后的项目完全就是由组件化开发，就是把每一个功能都抽离成一个完成组件（每一个组件都会拥有自己的样式、结构、逻辑、还会有自己的data、methods、生命周期...)
+// 只要是组件都必须在有根实例的基础上使用
+        Vue.component('sun', {
+                template: `<div> 我是孙组件</div>`
+            });
+        // 全局组件  局部组件
+        // 组件的名字不要和原生的标签名重名会报错的
+        Vue.component('com1', {
+            data() {
+                return {
+                    num: 100,
+                    msg: '我是com1组件'
+                }
+            },
+            props: ["ss"],//从外界或者从父亲身上接收的
+            methods: {
+                fn() {
+                    this.num++
+                    console.log(this);
+                }
+            },
+            template: `<div>
+                <p>{{num}},{{ss}} <sun> </sun> </p>
+                <div @click="fn">点击 </div>
+                -----------------
+                </div>`
+        });
+        
+
+        let vm = new Vue({
+            el: '#app',
+            created() {},
+            data: {
+                num: 1,
+                masg: 2
+            },
+            methods: {
+                fn() {
+                    console.log(this);
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

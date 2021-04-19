@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <com2></com2>
+        <com1 :num="num"></com1>
+
+    </div>
+
+    <script>
+        let com2 = {
+            template: '<div>22222</div>'
+        }
+        let com1 = {
+            data() {
+                return {
+                    ss: 100
+                }
+            },
+            methods: {
+                fn() {
+                    this.$parent.num = 800;
+                    console.log(this);
+                }
+            },
+            props: ['num'],
+            template: `<div>
+                      <div>{{ss}}我是com1组件{{num}}</div>
+                      <button @click="fn">点击</button>
+                </div>`
+        }
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                num: 100
+            },
+            methods: {},
+            components: {
+                com1,
+                com2
+            }
+        });
+
+    // 每一个实例身上都有$parent和$children属性，代表当前组件的父亲实例和所有的儿子实例，可以通过他俩快速获取到父亲和儿子，从而去改变他们身上的数据
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 相当于给当前标签绑定了一个自定义事件，事件类型是sss -->
+        <!-- 给当前sss事件类型对应的池子里增加事件方法fn -->
+        <son :num='num1' @sss='fn'></son>
+    </div>
+
+    <script>
+        // 利用发布订阅
+        let son = {
+            data() {
+                return {
+                    msg: '我是son组件'
+                }
+            },
+            methods: {
+                ss(){
+                    console.log(1);
+                    // 去发布sss事件类型对应的池子里面的方法
+                    this.$emit('sss',900);//this.$emit(事件类型，实参) 发布池子里的方法
+                    // 想实现子传父，不管使用什么方式，原理都是一样的，都是在儿子里面去通知父亲身上的方法执行，让父亲自己去改自己的数据，数据会重新再流向儿子组件里面
+                }
+            },
+            props: ['num'],
+            template: `<div>{{msg}} {{num}}
+                <button @click="ss">点击</button>
+                </div>`
+        }
+        let vm = new Vue({
+            el: '#app',
+            created() { },
+            data: {
+                num1: 1,
+                num2: 2
+            },
+            methods: {
+                fn(value) {
+                    this.num1 = value
+                }
+            },
+            components: {
+                son
+            }
+        });
+    </script>
+</body>
+
+</html>

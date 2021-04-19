@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <son :num='num1'></son>
+        <son :num='num2'></son>
+    </div>
+
+    <script>
+        // 组件之间的参数传递
+        // 父传子、子传父、兄弟组件之间传参
+        let son={
+            data(){
+                return{
+                    msg:'我是son组件'
+                }
+            },
+            methods:{
+                fn(){
+                    this.msg="我是sonnnnn组件"
+                }
+            },
+            props:['num'],//只有组件会有 是用来接收从父组件传递过来的属性，它会把当前接收的属性，挂载到当前组件的实例上
+            template:`<div>{{msg}} {{num}}
+                <button @click="fn">点击</button>
+                </div>`
+        }
+        let vm = new Vue({
+            el: '#app',
+            created() {},
+            data: {
+                num1:1,
+                num2:2
+            },
+            methods: {},
+            components:{
+                son
+            }
+        });
+        // 想让组件更新，有两种方法：1. 把从父亲身上传递进来的属性更新，组件就会自动更新
+        // 2. 更改自己组件身上的响应式数据
+        // vue的数据流是单向
+    </script>
+</body>
+
+</html>

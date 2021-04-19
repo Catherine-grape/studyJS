@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <com> </com>
+    </div>
+
+    <script>
+        let com2 = {
+                template: `<div> 我是com2组件</div>`
+            }
+        // 局部组件
+        let com1 = {
+            data(){
+                return{
+                    msg:'com'
+                }
+            },
+            methods:{
+                fn(){
+                    console.log('com组件',this);
+                }
+            },
+            components: {
+                com2: com2
+            },
+            template:`<div> 我是com组件 <com2></com2></div>`
+        }
+        
+        
+        // 局部组件的使用方式
+        // 1. 创建组件
+        // 2. 注册组件
+        // 3. 使用组件
+        let vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {},
+            components:{
+                com:com1
+            }
+        });
+    </script>
+</body>
+
+</html>

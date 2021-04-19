@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        1000 {{a}}
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+
+        let vm = new Vue({
+            el: "#app",
+            //  template:`<div v-if="">{{a}}</div>`, //有template就用自己的模板没有就用el
+            data: {
+                a: 1,
+                b: 2,
+                c: 3
+            },
+            methods: {
+                fn() {
+                    this.a = 100;
+                    this.b = 200;
+                    this.c = 300;
+                }
+            },
+            beforeCreate() {
+                // 当前函数执行的时候，vue实例还没有初始化完成（data中的属性没有响应式也没有挂载到实例上，methods中的方法也没有挂载到实例上。。。）
+                // 空间地址 直接log this 生命周期全部都已经执行完毕了,所以可以看见vue的实例
+                // 在此函数里面你几乎什么都做不了
+                console.log(this);
+                console.log(this.a);//un
+                // 理论上来说 虽然ajax是异步 但是你更改他的数据时，还没有挂载到实例上 
+                /* ajax(xxx)
+                this.products=xxx;//这里面的products是un
+                console.log('beforeCreate'); */
+            },
+            created() {
+                // 生命周期函数是同步的
+                // console.log(1);
+                console.log(this.a);
+                // 当此函数执行的时候，说明vue的实例已经初始化完成了，你可以在当前函数里，通过this获取到挂载到vue实例上的所有属性和方法
+                // this.a=100;//在这里更改数据比较合适，你现在虚拟dom还没有挂载到视图上，不会引起视图的二次更新
+                // this.c=200;//这里增加的时候没有响应式
+                // 在这里可以对data中的数据进行二次更改，不会引起视图的更新
+                // 请求一般都在这里发送
+                console.log('created');
+            },
+            beforeMount() {
+                console.log('beforeMount');
+                console.log(document.getElementById('app'));// <div id="app"> 1000 {{ a }} </div>
+                // 在这里虚拟dom元素生成的真实的dom还没有挂载到页面
+                // 视图还没有更新，如果在这时候去更改实例上的属性，不会引起视图的二次更新，这里不能操作dom
+            },
+            mounted() {
+                // 当此函数执行的时候，说明dom已经替换完成，在页面已经可以看见渲染完成之后的dom结构了，这时候可以操作任意dom，但是如果在此时，二次更改实例上的属性的，会引起视图的二次更新
+                console.log('mounted');
+            },
+            // 以上四个函数，初始化的时候自动执行一次，以后就不再执行了
+            beforeUpdate() {
+                // 数据更新之前
+                console.log('beforeUpdate');
+                // this.a=110;
+            },
+            updated() {
+                // 数据更新之后
+                console.log('updated');
+            },
+            // 以上两个函数，会在vue初始化完成之后数据更新的时候执行。
+            beforeDestroy() {
+                console.log('销毁之前');
+            },
+            destroyed() {
+                console.log('销毁之后');
+            }
+            // 以上两个函数 会在手动调用vm.$destroy()「销毁vue」的时候触发两个对应的函数
+        });
+        console.log(2);
+       // vm.$mount('#app');//与el:"#app"是一样的
+       //vm.$destroy();  销毁vue
+    </script>
+</body>
+
+</html>
