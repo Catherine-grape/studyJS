@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+	<title>珠峰培训 - 微信：18310612838</title>
+	<!-- IMPORT CSS -->
+	<link rel="stylesheet" href="css/reset.min.css">
+	<link rel="stylesheet" href="css/banner.css">
+</head>
+
+<body>
+	<div id="app">
+					<!-- 加上冒号就变成动态取值为数字类型     1秒切换完-->
+					<!-- banner组件，理论上是要渲染两次的，初始化渲染一次，数据请求成功再渲染一次，但是第一次渲染的时候，是没有意义，我们就可以以bannerData的length作为判断渲不渲染的依据，如果bannerData的length是0，说明没有数据，不需要渲染。相反再进行渲染 -->
+		<banner v-if="bannerData.length" :data="bannerData" :interval="2000" :duration="1000" :button="true" :focus="true"  :index="0"> </banner>
+
+
+		<banner v-if="bannerData.length" :data="bannerData" :interval="2000" :duration="1000" :button="false" :focus="false"  :index="0"> </banner>
+	</div>
+	<!-- <section class="container">
+		<div class="wrapper">
+			<div class="slide">
+				<img src="./images/banner01.jpg" alt="">
+			</div>
+			<div class="slide">
+				<img src="./images/banner01.jpg" alt="">
+			</div>
+			<div class="slide">
+				<img src="./images/banner01.jpg" alt="">
+			</div>
+		</div>
+		 焦点
+		<div class="pagination">
+			<span class="active"></span>
+			<span></span>
+			<span></span>
+		</div>
+		 小耳朵 
+		 <div>
+		<a href="#" class="button-prev"></a>
+		<a href="javascript:;" class="button-next"></a>
+		 </div>
+	</section> -->
+
+	<script src="js/vue.js"></script>
+	<script src="js/axios.min.js"></script>
+	<script src="js/axios.defaults.js"></script>
+	<script src="./js/1._banner.js"></script>
+	<script>
+			/* let bannerFocus = {}
+			let bannerButton = {}
+			let banner = {} */
+			// 当banner组件使用的时候，定义几个给他传递数据的属性名 
+			// data==>当前轮播图片的数据 「必传项」
+			// interval===>图片轮播间隔的时间
+			// duration===>图片切换一张所需的时间
+			// button===>是否需要左右button
+			// focus==>是否需要focus
+			// index==>轮播图初始化的时候，图片默认展示第几张「可以不用但是这个功能必须要有」
+		let vm = new Vue({
+			el:"#app",
+			data:{
+				bannerData:[]
+			},
+			created() {
+				this.getData('xxx');
+			},
+			methods: {
+				getData() {
+					axios.get('/banner').then((res) => {
+						console.log(res);
+						let { code, data } = res;
+						if (code == 0) {
+							console.log(11);
+							this.bannerData = data;
+						}
+					}).catch(() => {
+
+					})
+				}
+			},
+			components:{
+				banner,
+			}
+		})
+	</script>
+</body>
+
+</html>

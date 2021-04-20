@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"name": "client",
+			"path": "."
+		},
+		{
+			"name": "v",
+			"path": "../../v"
+		},
+		{
+			"name": "admin",
+			"path": "../admin"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "client"
+	}
+}
