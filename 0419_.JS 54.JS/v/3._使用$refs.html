@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div ref='a'>100</div>
+        <com ref='b'></com>
+        <com1 ref='c'></com1>
+    </div>
+
+    <script>
+        // 在组件行间或者dom元素行间写上ref="xxx"，那么在他们共同的父亲实例身上的$refs的属性里就可以快速获取到当前有ref的组件或者dom元素
+        // 在vue利用ref和$refs可以快速获取到原生的dom元素
+        const com={
+            data(){
+                return{
+                    num:100
+                }
+            },
+            methods:{
+                fn(){
+                    console.log('改com1的东西');
+                    // this.$parent.$refs.c.num=800
+                }
+            },
+            template:`<div>com{{num}}  <button @click="fn"> 点击</button> --------</div>`
+        }
+        const com1={
+            data() {
+                return {
+                    num: 200
+                }
+            },
+            template:`<div>com1{{num}} </div>`
+        }
+        const vm = new Vue({
+            el: '#app',
+            created() {},
+            data: {},
+            methods: {},
+            components:{
+                com,
+                com1
+            }
+        });
+    </script>
+</body>
+
+</html>

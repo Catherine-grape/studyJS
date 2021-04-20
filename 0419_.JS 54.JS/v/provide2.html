@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <son></son>
+    </div>
+
+    <script>
+        let sun = {
+            props: {
+                'z': {
+                    // default:'haha'
+                    // default(){
+                    //   // this指向当前的实例
+                    //   return this.obj.num
+                    // }
+                }
+            },
+            // inject:['obj'],
+            inject: {
+                sss: {
+                    from: 'aa' // 如果接收的时候想换个名字接收，可以使用from指定一下当前新名字对应的值的来源
+                    // 「aa是provide里的值，sss就是给aa起的别名」
+                },
+                ww:{
+                    from:'obj'
+                },
+                obj: {
+                    default: {}
+                }
+            },
+            // inject:['obj','fn','msg'], // 获取从祖先组件传递过来的数据
+            // template:`<div>我是sun组件{{obj.num}},{{msg}}<button @click="fn(567)">改爷爷</button></div>`
+            template: `<div>我是sun组件,{{ww.num}}{{sss}}{{z}}</div>`
+        }
+        let son = {
+            provide() {
+                return {
+                    msg: 'son'
+                }
+            },
+            components: { sun },
+            template: `<div>
+                    我是son组件
+                    <sun ></sun>
+                    -------------------------------
+                </div>`
+        }
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                obj: {
+                    num: 0
+                },
+                aa: 100
+            },
+            provide() {
+                // this是当前实例
+                return {
+                    obj: this.obj, // 是吧obj的空间地址拿过来了
+                    fn: this.fn,
+                    aa: this.aa // 直接在data中拿基本值是没有响应式的
+                }
+            },
+            methods: {
+                fn(value) {
+                    this.obj.num = value
+                }
+            },
+            components: {
+                son
+            }
+        });
+    // provide存储的值本身是没有响应式的，这是vue可以而为之的，
+    // 想让provide中的值加上响应式，那就把data中的某一个响应式的对象放到provide中
+    </script>
+</body>
+
+</html>

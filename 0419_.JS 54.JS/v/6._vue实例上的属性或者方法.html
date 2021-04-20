@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <com title=100>
+            <template slot="a">
+                <span>2345</span>
+
+            </template>
+            <template v-slot:b>
+
+                <span>500</span>
+            </template>
+
+        </com>
+        <com title=100>
+            <p>1234897</p>
+        </com>
+        <!-- 插槽也可以让咱们使用组件的时候在组件标签内去传递一些不同的内容，如果传递多个不同的内容，就可以使用具名插槽，「具体的使用方法就是在slot组件的行间写一个name属性，属性值随意，这样就可以在组件标签内利用template去写多个不同的内容 -->
+    </div>
+
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        let com = {
+            props: ['title'],
+            // template:`<div id="com"><slot></slot> com </div>`,
+            template: `<div id="com"><slot name="a"></slot> com <slot name="b"> </slot> </div>`,//<slot></slot>是vue的内置组件
+            created() {
+                console.log(this, 22);
+            }
+        }
+        let vm = new Vue({
+            el: '#app',
+            created() {
+                console.log(this, 28);
+            },
+            data: {
+                num: 100,
+                type: 1
+            },
+            methods: {
+                fn() {
+                    console.log(this.num);
+                }
+            },
+            filters: {
+                toFixed() {
+                    return 200
+                }
+            },
+            computed: {
+                sex() {
+                    return this.type == 1 ? '男' : '女'
+                }
+            },
+            watch: {
+                num() {
+                    console.log(300);
+                }
+            },
+            components: {
+                com
+            }
+        });
+    </script>
+</body>
+
+</html>

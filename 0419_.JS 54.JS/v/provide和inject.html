@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <son></son>
+    </div>
+
+    <script>
+    const s = Symbol()
+
+    const Provider = {
+        provide() {
+            return {
+                [s]: 'foo'
+            }
+        }
+    }
+
+    const Child = {
+        inject: { s },
+        // ...
+    }
+
+
+
+    // 使用一个注入的值作为一个 property 的默认值：
+    const Child = {
+            inject: ['foo'],
+            props: {
+                bar: {
+                    default() {
+                        // this指向当前实例
+                        return this.foo
+                    }
+                }
+            }
+        }
+    /* const Child = {
+        inject: {
+            foo: {
+                from: 'bar',//如果想换个名字接收，可以指定from指定一下当前新名字对应的值的来源
+                default: 'foo'
+            }
+        }
+    } */
+        let sun={
+
+            inject:['obj','fn','msg'],//获取从祖先「祖父、父亲」组件传递过来的数据
+            /* template: `<div>我是sun组件 {{obj.num}}  {{msg}}
+                <button @click="fn(567)">爷爷</button>
+                </div>` */
+            template: `<div>我是sun组件 {{obj.num}}  {{msg}}
+                <button @click="fn(567)">爷爷</button>
+                </div>`
+        }
+        let son={
+            provide() {
+                return {
+                    msg:'sonnnn'
+                }
+            },
+            components: { sun },
+            template:`<div>我是son组件
+                
+                <sun> </sun>
+                ------------
+                </div>`
+        }
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                // num:100
+                obj:{
+                    num:0
+                },
+                aa:200
+            },
+            provide(){
+                return {
+                    // num:101
+                    // vm._provided.num=800;   视图没有更改
+                    // num:this.num
+                    obj:this.obj,//是把obj的空间地址拿过来了
+                    fn:this.fn, 
+                    aa:this.aa//直接拿是没有响应式的
+                }
+            },
+            methods: {
+                fn(value){
+                    this.obj.num=value;
+                }
+            },
+            components:{son}
+        });
+        // provide 存储的值本身是没有响应式的，这是vue刻意而为之的，想让provide具有响应式，那就把data中的某一个响应式对象放到provide中
+    </script>
+</body>
+
+</html>

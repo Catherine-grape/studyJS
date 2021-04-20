@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .container {
+            width: 350px;
+            margin: 20px auto;
+            border: 1px solid lightcoral;
+            text-align: center;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: lightsalmon;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <vote title="竞选校长"></vote>
+        <vote title="竞选市长"></vote>
+
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        // let eventBus = new Vue();
+        const footer = {
+            props:['bus'],
+                
+           
+            template: `
+            <div class="footer">
+                   <button @click='fn("zhi")' > 支持</button>
+        <button @click='fn("fan")' style="marginLeft:10px" >反对</button>
+                </div>
+        `,
+            methods: {
+                fn(type) {
+                    this.bus.$emit('change', type)
+                }
+            }
+        }
+        const content = {
+            // 对象的话 可以写多种校验格式写数据类型，或者是个对象
+            // props:{bus:'bus'},  vue.js:1748 Uncaught TypeError: Right-hand side of 'instanceof' is not an object    instanceof 右侧不是对象
+            props:['bus','change'],
+            template: `
+            <div class="content">
+                <p>支持人数:{{zhi}}</p>
+                <p>反对人数:{{fan}}</p>
+                <p>支持率:{{lv | toFixed(2)}}</p>
+            </div>
+                `,
+            data() {
+                return {
+                    zhi: 0,
+                    fan: 0
+                }
+            },
+            methods: {
+                // 要实现对支持人数和反对人数的++
+                add(type = "zhi") {
+                    this[type]++;
+                    this.change(this.zhi+this.fan);
+                }
+            },
+            created() {
+                this.bus.$on('change', this.add);
+            },
+            computed: {
+                lv() {
+                    if (this.zhi + this.fan == 0) {
+                        return '0%'
+                    }
+                    return this.zhi / (this.zhi + this.fan) * 100
+                }
+            },
+            filters: {
+                toFixed(value, n) {
+                    console.log(value);
+                    return value !== '0%' ? value.toFixed(n) + "%" : '0%'
+                }
+            }
+        }
+
+
+        const vote = {
+            props: {
+                title: {
+                    default: '车轮滚滚'
+                }
+            },
+            data() {
+                return {
+                    sum: 0,
+                    'bus' : new Vue()
+                }
+            },
+            methods:{
+                change(value){
+                    this.sum=value;
+                }
+            },
+            template: `
+            <div class="container">
+                <h2>{{title}} ({{sum}})</h2>
+                <vote-content :bus='bus' :change="change"></vote-content>
+                <vote-footer :bus='bus'></vote-footer>
+            </div>
+        `,
+            components: {
+                'vote-content': content,
+                "vote-footer": footer
+            }
+        }
+
+
+        const vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {},
+            components: {
+                vote,
+            }
+        });
+    </script>
+</body>
+
+</html>

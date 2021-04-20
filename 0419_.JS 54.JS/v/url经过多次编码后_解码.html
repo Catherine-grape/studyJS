@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function fn(url) {
+            url = decodeURIComponent(url);
+            if (!/:/.test(url)) {
+                console.log(1);
+                url = fn(url)
+            }
+            else {
+                console.log(url, 777);
+            }
+        }
+        fn("https%2525253A%2525252F%2525252Fwww.baidu.com%2525253A8080%2525252Findex%2525253Fname%2525253D1%25252526age%2525253D2")
+    </script>
+</body>
+
+</html>

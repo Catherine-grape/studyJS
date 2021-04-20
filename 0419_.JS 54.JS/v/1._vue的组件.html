@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        
+        <com></com>
+    </div>
+
+    <script>
+        // 全局组件  局部组件
+
+    // 1.创建组件
+    // 2.注册组件
+    // 3.使用组件(组件的名字)
+      // 1。组件的名字不能和原生的标签重名
+      // 2.由于视图渲染的标签的时候，把大写字母会按照小写字母识别，所以js中的组件名不要大写
+      // 3.如果名字有多个单词，就是用-隔开就好
+
+
+
+    //  组件的传参：
+        // 1.数据流是单向的，只能从外面传递到里面，不能倒着传
+        // 视图的更新：更新自己身上的数据，视图就会更新：从外面把传递进来的属性更新了，当前组件也会更新
+        let com={
+            data(){
+                return {
+                    num:1
+                }
+            },
+            methods:{
+                fn(){
+                    num++
+                }
+            },
+            template:"<div>1111</div>"
+        }
+        let vm = new Vue({
+            el: '#app',
+            created() {},
+            data: {},
+            methods: {},
+            components:{
+                com:com
+            }
+        });
+    </script>
+</body>
+
+</html>

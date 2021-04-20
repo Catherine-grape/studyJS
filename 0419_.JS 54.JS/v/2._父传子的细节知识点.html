@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <com :num='ss'> </com>
+    </div>
+    
+    <script>
+        // 父传子 「类似国家公用房，只有使用权没有买卖权」
+        let com={
+            template:'<div>我是子组件{{num}}</div>',
+            // props:['num'] //不想做校验的话用这种
+            props:{
+                num:String,//可以对接收的数据类型做出一个校验，如果校验失败，只会在控制台抛出红色警告，但是不会影响代码执行
+                num:Number,
+                num:[String,Number],//规定当前接收的数据类型可以是多种类型
+                num:{
+                    default:100,//如果没有传参那么可以赋默认值，并且检测类型
+                    type:Number,
+                    required:true ,//当前的属性是必传的，必须传参
+                    validator:function(value){
+                        // 自定义校验，如当前函数执行返回的结果是true，那就是自定义校验通过，否则就是不通过。
+                        // value就是当前数据num对应的值，当前的值必须大于100并且小于300，才会校验通过
+                        if(value>100&&value<300){
+                            return true
+                        }
+                        return false
+                    }
+                }
+            }
+        }
+        // 不管是那种格式的校验，只会在控制台输出红色警告，不会阻止代码运行
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                // ss:100,
+                ss:true
+            },
+            methods: {},
+            components:{
+                com
+            }
+        });
+
+
+        // 子传父的方式
+        // 由于数据流是单向的，所以在儿子里面不能直接该父亲的数据，但是可以通知父亲，让父亲自己去改
+        // 一般请款下都是在父亲身上定义一个方法（这个方法就是改自己的数据），想办法把这个方法传递给儿子，在儿子内部去执行
+        // 自定义事件：在子组件行间定义一个自定义事件，事件绑定的方法是父亲身上的，「订阅」，在子组件就可以发布当前自定义事件对应的池子里的方法了，this.$emit('事件类型',实参)
+        // 2. 通过父传子，把父亲的房发传递给儿子，让儿子直接执行。
+
+
+
+
+        // 兄弟之间的传参：
+            // 利用事件总线「事件车」，来创建一个第三方的事件池，可以把改变组件的方法订阅到事件池子里面「在created里面去订阅方法」
+
+        // $parent    $children是数组
+        // $refs 当前实例上的一个属性
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+       <!-- 组件外面 app下 -->
+        
+        <com >
+            <template v-slot="scope"> 
+                <!-- scope是接收的slot组件行间的所有属性，并且是对象类型 -->
+                <!-- scope的值为{info:{xing:'董',ming:'浩'},a:'100'} -->
+                <!-- 作用域插槽显示的数据都是从组件内部传上来的，到底使用那个数据，用户说了算 -->
+            <div>
+                {{scope.info.xing}}
+                {{scope.a}}
+                <!-- 想在当前组件里展示什么，你就可以在scope里找到对应的值，写到小胡子里面即可 -->
+            </div>
+        </template>
+        </com>
+        
+    </div>
+
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        let com = {//这里面才是组件里面
+            template: `
+                <div>
+                我是com组件
+                    <slot v-bind:info="info" a=100> </slot>
+                </div>`,
+                data(){
+                    return{
+                        info:{
+                            xing:'董',
+                            ming:'浩'
+                        }
+                    }
+                }
+        }
+        let vm = new Vue({
+            el: '#app',
+            created() { },
+            data: {},
+            methods: {},
+            components: {
+                com
+            }
+        });
+    </script>
+</body>
+
+</html>
