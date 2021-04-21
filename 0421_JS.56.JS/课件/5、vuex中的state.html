@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <first></first>
+    <second></second>
+  </div>
+  <script src="./node_modules/vue/dist/vue.js"></script>
+  <script src="./node_modules/vuex/dist/vuex.js"></script>
+  <script>
+    // 当前count数据是好几个组件共享的，可以把这个数据放到vuex的store里
+
+    // 在vuex中如果想要改变某一个公共的数据，必须commit一个mutation里的函数
+    // 当公共的数据发生变化以后，那么依赖这个数据的组件都会发生响应的更新
+    let store = new Vuex.Store({
+      state: {
+        count: 0, // count就是一个公共的数据,
+        shop: [{ name: '摩托车' }, { name: '自行车' }]
+      },
+      mutations: {
+        // mutations里的方法死一个形参全部是当前仓库的state
+        increment(state, val) { // 形参state就是当前仓库的state  val就是commit时传递过来的值
+
+          state.count += val
+        },
+        min(state) {
+          state.count--
+        },
+        add(state) {
+          state.shop.push({ name: '66666' })
+        }
+      }
+    })
+    let first = {
+      data() {
+        return {
+          // count:0
+        }
+      },
+      methods: {
+        fn() {
+          this.$store.commit('increment', 10) // 这个方法就是修改仓库中的公共的状态的
+             this.$store.commit('add') 
+        }
+
+      },
+      // computed:{ // 计算属性
+      //     shop(){  // get函数
+      //         // 当shop所依赖的值发生变化的时候回执行
+      //         // return的值就是shop的值
+      //         return this.$store.state.shop
+      //     }
+      // },
+      // Vuex.mapState(['shop','count']) 将vuex中的state中的数据映射到当前实例的计算属性上(上边的简易写法)
+      computed: {
+        ss() { },
+        ...Vuex.mapState(['shop', 'count'])
+      },
+      // computed:Vuex.mapState(['shop']),
+      template: '<div>{{count}}<button @click="fn">++</button><ul><li v-for="a in shop">{{a.name}}</li></ul></div>'
+    };
+    let second = {
+      data() {
+        return {
+
+        }
+      },
+      template: '<div>{{this.$store.state.count}}</div>'
+    }
+    let vm = new Vue({
+      el: '#app',
+      data: {
+
+      },
+      methods: {
+
+      },
+      components: {
+        first,
+        second
+      },
+      store: store // 这句话写上代表当前的vue实例身上会新增一个$store的属性。属性值是一个对象,同事也会给当前子组件新增一个$store的属性
+    })
+    console.log(vm)
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .container {
+            box-sizing: border-box;
+            margin: 20px auto;
+            width: 400px;
+            padding: 10px;
+            border: 1px solid red;
+        }
+        
+        .container h2 {
+            font-size: 20px;
+            text-align: center;
+            border-bottom: 1px dashed gainsboro;
+            padding-bottom: 10px;
+            color: orangered;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+        <vote title="车轮滚滚1"></vote>
+    </div>
+
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script src="./node_modules/vuex/dist/vuex.js"></script>
+    <script>
+        // mapState和mapGetters遍历的属性是存放到组件的computed中
+        // mapActions和mapMutations遍历的方法是存放到组件的methods中
+        const store = new Vuex.Store({
+            state: {
+                supportNum: 0,
+                opposeNum: 0
+            },
+            getters: {
+                yes(state) {
+                    if (state.supportNum == 0) {
+                        return 0
+                    } else {
+                        return state.supportNum / (state.supportNum + state.opposeNum) * 100
+                    }
+
+                },
+                sum(state) {
+                    return state.supportNum + state.opposeNum
+                }
+            },
+            mutations: {
+                changeSupport(state, payload) {
+                    state.supportNum++
+                },
+                changeOppose(state, payload) {
+                    state.opposeNum++
+                }
+            },
+            actions: {
+                changeSupport(context) {
+                    let {
+                        commit
+                    } = context;
+                    commit('changeSupport')
+                },
+                changeOppose(context) {
+                    let {
+                        commit
+                    } = context;
+                    commit('changeOppose')
+                }
+            }
+        });
+
+        let voteContent = {
+            template: `<div class="content">
+                    <p>支持人数：<span>{{supportNum}}</span></p>
+                    <p>反对人数：<span>{{opposeNum}}</span></p>
+                    <p>支持率：<span>{{yes}}%</span></p>
+                </div>`,
+            data() {
+                return {}
+            },
+            computed: {
+                opposeNum() {
+                    return this.$store.state.opposeNum
+                },
+                ...Vuex.mapState(['supportNum']),
+                yes() {
+                    return this.$store.getters.yes;
+                }
+            }
+        }
+
+        let voteFooter = {
+            template: `<div class="footer">
+                    <button type="button" style="margin-right: 30px;" @click="changeSupport">支持</button>
+                    <button type="button" @click="changeOppose">反对</button>
+                </div>`,
+            data() {
+                return {
+
+                }
+            },
+            methods: {
+                ...Vuex.mapActions(['changeSupport']),
+                changeOppose(payload) {
+                    this.$store.dispatch('changeOppose', payload);
+                },
+
+            }
+        }
+        let vote = {
+            template: `<div class="container">
+                    <h2>{{title}} (<span>{{sum}}</span>)</h2>
+                    <vote-content></vote-content>
+                    <vote-footer></vote-footer>
+                  </div>`,
+            props: ['title'],
+            data() {
+                return {
+                    // sum:0
+                }
+            },
+            computed: {
+                sum() {
+                    return this.$store.state.supportNum + this.$store.state.opposeNum
+                }
+            },
+            components: {
+                voteContent,
+                voteFooter
+            }
+        };
+
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                msg: '车轮滚滚'
+            },
+            store,
+            components: {
+                vote
+            }
+        });
+    </script>
+</body>
+
+</html>

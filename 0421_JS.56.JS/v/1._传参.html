@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <com></com>
+    </div>
+
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        let com = {
+            // props: ['a']
+            props: {
+                a: {
+                    default: '100'
+                }
+            },
+            template: ``,
+        }
+        let vm = new Vue({
+            el: '#app',
+
+            created() {},
+            data: {},
+            methods: {},
+            components: {
+                com
+            }
+        });
+        /* 
+        父传子 利用组件的行间属性进行传参，在组件内部使用props进行接收
+        子传父  1. 实例上没有真正的子传父「需要在父亲身上定义好一个方法，然后想办法让这个方法在儿子里去执行」
+            2. 自定义事件 <com @ss="fn"></com> .在组件内部使用this.$emit（‘事件名’，实参）去发布对应的事件
+        兄弟之间    事件总线「利用发布订阅实现的 $on $emit」 A组件  B组件
+        隔辈之间传参   provide「类似公交，每次都新增加」   inject  「向下过程可以拿」没有响应式「一般逻辑不用，都封装组件用的」把一个响应式的对象放到provide里面
+        */
+        // $parent $children 两个组件挨得比较近 $set $nextTick $on $emit被vuex取代 $refs快速获取dom元素
+        // 组件中的this是实例 data如果不写成函数会报错，并且组件复用会混
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    {{msg}}
+    <br>
+    {{age}}
+    <br>
+    {{obj.name}}
+  </div>
+  <script src="./node_modules/vue/dist/vue.js"></script>
+  <script>
+    // Object.defineProperty:对一个对象中的某个属性进行处理
+    // let obj = {age:99};
+    // Object.defineProperty(obj,'name',{
+    //   value:'11',
+    //   // 是否允许当前的属性被删除
+    //   configurable:true,
+    //   // 是否为可枚举的属性
+    //   enumerable:true,
+    //   // 当前属性是否可以被修改
+    //   writable:false
+    // });
+    // // delete obj.name
+    // // obj.name = '666'
+    // console.log(obj);
+    // for(let key in obj){
+    //   console.log(key);
+    // }
+
+    // 设置属性的getter和setter，我们可以在get和set函数中监听当前属性和获取的时候干什么 ==> 这是vue2.0响应式数据(双向数据绑定)的实现原理，vue 3.0采用的是proxy
+
+    // let obj = {
+    //   name:'11',
+    //   age:18
+    // };
+    // Object.defineProperty(obj,'name',{
+    //   get(){
+    //     // 获取的时候就会执行
+    //     console.log('hha');
+    //     return 2345
+    //   },
+    //   set(value){
+    //     // 设置的时候就会执行
+    //     console.log('setter',value);
+    //   }
+    // })
+  </script>
+  <script>
+    let vm = new Vue({
+      el: '#app',
+      data: {
+        msg: '你好',
+        obj: {
+          // vue内置的observer/defineRective函数，会利用Object.defineProperty()帮我们把所有的data中初始化的属性都设置getter和setter
+          name: ''
+        },
+        // arr本身是有getter和setter的，但是里边的每一项值都没有被处理，所以基于arr[index]=xxx修改值不能通知视图重新渲染，那vue是将数组的方法进行重写push、pop、unshift、shift、splice、reverse、sort当我们调取这些方法的时候，vue会帮我们刷新视图
+        arr: []
+      },
+      created() {
+        this.age = 18
+      },
+      mounted() {
+        // this.msg = '世界'
+        this.age = 20;
+        // this.obj.name = '666'
+        // this.obj = {name:'777'} // 修改obj的值触发，触发obj的setter函数
+        this.$set(this.obj, 'name', 3333)
+      },
+    });
+
+        // 当执行 new Vue() 时，Vue 就进入了初始化阶段，一方面Vue 会遍历 data 选项中的属性，并用 Object.defineProperty 将它们转为 getter/setter，实现数据变化监听功能；另一方面，Vue 的指令编译器Compile 对元素节点的指令进行解析，初始化视图，并订阅Watcher 来更新视图， 此时Wather 会将自己添加到消息订阅器中(Dep),初始化完毕。当数据发生变化时，Observer 中的 setter 方法被触发，setter 会立即调用Dep.notify()，Dep 开始遍历所有的订阅者，并调用订阅者的 update 方法，订阅者收到通知后对视图进行相应的更新
+  </script>
+</body>
+
+</html>

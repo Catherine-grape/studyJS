@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <first></first>
+    <second></second>
+  </div>
+  <script src="./node_modules/vue/dist/vue.js"></script>
+  <script src="./node_modules/vuex/dist/vuex.js"></script>
+  <script>
+    // 工作需求中，发送的请求都是异步的，请求来的数据会赋值给store中的state
+    // .then((data)=>{
+
+    // })
+    let state = {
+      count: 0,
+      num: 1,
+      ss: 6
+    };
+    let getters = {
+      sex(state) {
+        return state.count % 2 === 0 ? '男' : '女'
+      }
+    }
+    let store = new Vuex.Store({ // 建立一个存储公共状态的仓库
+      state: state,
+      getters,
+      mutations: {
+        add(state, payload) {
+          console.log(payload)
+          // setTimeout(()=>{
+          state.count += payload
+          // },2000)
+        },
+        min() {
+
+        }
+      },
+      actions: {
+        addNum({ commit }, a) {
+          setTimeout(() => {
+            commit('add', a)
+          }, 2000)
+
+          // this.$store.commit('add',1)
+        }
+      }
+    });
+    let first = {
+      data() {
+        return {
+
+        }
+      },
+
+      computed: {
+        rr() {
+          return 3
+        },
+        ...Vuex.mapState(['count', 'num']),
+        ...Vuex.mapGetters(['sex'])
+      },
+      methods: {
+
+        // ...Vuex.mapMutations(['add', 'min'])
+        ...Vuex.mapActions({
+          ww: 'addNum'
+        }),
+        ss(){
+          this.$store.commit('add',1)
+        }
+
+      },
+
+      template: '<div>一组件{{count}}{{num}}<button @click="ww(1)">点击</button>{{sex}}</div>'
+    }
+
+    let second = {
+      data() {
+        return {
+
+        }
+      },
+      template: '<div>二组件{{$store.state.count}}</div>'
+    }
+    let vm = new Vue({
+      el: '#app',
+      data: {
+        // msg:'hha'
+      },
+      components: {
+        first,
+        second
+      },
+      store: store
+    })
+    console.log(vm)
+
+
+  </script>
+</body>
+
+</html>

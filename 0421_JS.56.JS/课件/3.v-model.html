@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+	<title></title>
+	<!-- IMPORT CSS -->
+</head>
+
+<body>
+	<div id="app">
+		<input type="text" id="inpBox">
+		<span id='spanText'></span>
+	</div>
+	<!-- IMPORT JS -->
+	<script src="./node_modules/vue/dist/vue.js"></script>
+	<script>
+		//=>响应式数据
+		let data = {
+			msg: '珠峰培训'
+		};
+		let tempData = {
+			msg: data.msg
+		};
+		Object.defineProperty(data, 'msg', {
+			set(value) {
+				tempData.msg = value;
+				render();
+			}
+		});
+
+		//=>渲染视图
+		function render() {
+			inpBox.value = tempData.msg;
+			spanText.innerHTML = tempData.msg;
+		}
+		render();
+
+		//=>视图数据更改的监听
+		inpBox.addEventListener('input', function () {
+			data.msg = this.value;
+		});
+
+
+
+		/* let vm = new Vue({
+			el: '#app',
+			data: {
+				msg: '珠峰培训'
+			}
+		}); */
+	</script>
+</body>
+
+</html>

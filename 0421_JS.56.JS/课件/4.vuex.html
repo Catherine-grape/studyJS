@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+
+  </div>
+  <script src="./node_modules/vue/dist/vue.js"></script>
+  <script>
+    // VUEX
+    // state: 数据(状态)
+    // view：视图，将state数据展示到页面
+    // actions：动态更改，后者触发视图的动作
+
+    // 数据传递：把各个组件共享的状态抽离出来，并且每一个组件都可以使用它，而且还可以更改它，既然是公共的状态，当其中任意一个组件把这个公共的状态修改了之后，凡是依赖这个公共状态的组件都得更新
+
+
+    // 什么时候使用vuex：
+    // 如果你的项目是小型的，比较简单的，就没有必要使用vuex
+    // 如果你的项目是中大型的项目，这时候管理组件之间的公共的状态就会变得尤为复杂，那这个时候你就可以考虑使用vuex
+
+
+    // 1、vueX存储的数据是响应式的，vue组件中如果使用了vuex中的数据，那当vuex中的数据发生改变时，那么使用这个数据的组件也会响应的更新
+
+    // 2、不能直接修改store中的状态，必须commit一个mutation，这样方便我们追踪每一个数据的变化
+    let num = 1;
+    let son = {
+
+    };
+    let pro = {
+
+    }
+    let vm = new Vue({
+      el: '#app',
+      data: {
+
+      },
+    })
+  </script>
+</body>
+
+</html>

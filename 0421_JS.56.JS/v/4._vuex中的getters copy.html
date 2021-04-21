@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script src="./node_modules/vuex/dist/vuex.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <com></com>
+    </div>
+
+    <script>
+        // store仓库中的计算属性
+        // Vuex 允许我们在 store 中定义“getter”（可以认为是 store 的计算属性）。就像计算属性一样，getter 的返回值会根据它的依赖被缓存起来，且只有当它的依赖值发生了改变才会被重新计算。
+        let store = new Vuex.Store({
+            state: {
+                num: 1,
+                ss: 100,
+                obj: {
+                    a: 1
+                }
+            },
+            mutations: {
+                // mutations中的方法中不要写异步的代码，但是调试工具中的状态就不准确了
+                changeNum(state, payload) {
+                    console.log(payload);
+                    // state.num=1;
+                    // state.obj = {...state.obj,b:1}
+                    // setTimeout(()=>{
+                    state.num++
+
+                        // },2000)
+
+                }
+            },
+            getters: {
+                // 当前sex的值依赖state中的num的变化而变化，那他就是vuex中的一个计算属性
+                sex(state) {
+                    return state.num % 2 == 0 ? '女' : '男'
+                }
+            }
+        });
+
+        let com = {
+            template: `<div>
+                  我是com组件{{num}},{{sex}}
+                  <button @click="changeNum({num1:100,num2:200})">改变num</button>
+                  ----------------------------------
+                </div>`,
+            computed: {
+                num() {
+                    return this.$store.state.num
+                },
+                // sex(){
+                //   return this.$store.getters.sex
+                // }
+                // 在vuex中也有和mapState类似的mapGetters功能，将 store 中的 getter 映射到局部计算属性上
+                ...Vuex.mapGetters(['sex'])
+            },
+            methods: {
+                // changeNum(payload) {
+                //   this.$store.commit('changeNum',payload)
+                //   // 对象风格的提交方法
+                //   // this.$store.commit({
+                //   //   type: 'changeNum',
+                //   //   amount: 10
+                //   // })
+                // },
+                ...Vuex.mapMutations(['changeNum'])
+            }
+        }
+        var vm = new Vue({
+            el: '#app',
+            data: {},
+            components: {
+                com
+            },
+            store
+        });
+    </script>
+</body>
+
+</html>

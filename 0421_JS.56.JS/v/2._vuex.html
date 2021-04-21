@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        /* 
+         *   状态就是 data里面的数据
+         *   state，驱动应用的数据源；「状态」
+         *   view，以声明方式将 state 映射到视图；
+         *   actions，响应在 view 上的用户输入导致的状态变化。
+         *   Vuex 的状态存储是响应式的/你不能直接改变 store 中的状态
+         * 
+         * 
+         *      vuex是一个管理公共状态的一个工具
+         *  数据传递：把各个组件共享的状态抽离出来，并且每一个组件都可以使用它，而且还可以更改它，既然是公共的状态，当其中任意一个组件把这个公共的状态修改了之后，凡是依赖这个公共状态的组件都得更新
+         */
+        let vm = new Vue({
+            el: '#app',
+            created() {},
+            data: {},
+            methods: {},
+        });
+    </script>
+</body>
+
+</html>
+
+</html>

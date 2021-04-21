@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script src="./node_modules/vuex/dist/vuex.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <com></com>
+    </div>
+
+    <script>
+        let store = new Vuex.Store({
+            state: {
+                num: 1,
+                ss: 100,
+            },
+            mutations: {
+                // mutations中的方法中不要写异步的代码，但是调试工具中的状态就不准确了
+                changeNum(state, payload) {
+                    state.num++
+                        console.log(payload);
+                }
+            },
+            actions: {
+                // 或者直接在 changeNum({commit}) 这里解构了实参
+                changeNum(context, payload) { //当前形参代表的是store对象 {state,commit,getters...}   context对象不是 store 实例本身     context 对象有 store 实例的相同方法和属性
+                    let {
+                        commit,
+                        state,
+                        dispatch,
+                        getters
+                    } = context;
+                    commit('changeNum');
+                    setTimeout(() => {
+                        commit('changeNum', payload)
+                    }, 2000)
+                }
+            },
+            getters: {
+                // 当前sex的值依赖state中的num的变化而变化，那他就是vuex中的一个计算属性
+                sex(state) {
+                    return state.num % 2 == 0 ? '女' : '男'
+                }
+            }
+        });
+
+        let com = {
+                template: `<div>
+                  我是com组件
+                  {{num}}
+                  <button @click="changeNum({num:100})" @change="ss({num1:200})">改变</button>
+                </div>`,
+                computed: {
+                    ...Vuex.mapState(['num'])
+                },
+                methods: {
+                    changeNum(payload) {
+                        this.$store.dispatch('changeNum', payload); // 当前dispatch派发的是actions中的方法
+                        // commit提交的是mutations里的方法
+                    },
+                    // ...Vuex.mapActions(['changeNum','ss']) // 上面方法的简写(辅助函数)
+
+                }
+            }
+            /* 
+             * commit 是提交mutations中的方法
+             * dispatch是派发「分发」actions中的方法
+             */
+        var vm = new Vue({
+            el: '#app',
+            data: {},
+            store,
+            components: {
+                com
+            }
+        });
+
+
+
+        // -----------
+        function mapActions(arr) {
+            let obj = {}
+            for (let i = 0; i < arr.length; i++) {
+                let item = arr[i];
+                obj[item] = function(payload) {
+                    this.$store.dispatch(item, payload)
+                }
+                return obj
+            }
+        }
+        let res = mapActions(['changeNum']);
+    </script>
+</body>
+
+</html>

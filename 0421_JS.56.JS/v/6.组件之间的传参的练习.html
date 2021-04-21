@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .container {
+            box-sizing: border-box;
+            margin: 20px auto;
+            width: 400px;
+            padding: 10px;
+            border: 1px solid red;
+        }
+        
+        .container h2 {
+            font-size: 20px;
+            text-align: center;
+            border-bottom: 1px dashed gainsboro;
+            padding-bottom: 10px;
+            color: orangered;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+        <vote title="车轮滚滚1"></vote>
+    </div>
+
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script src="./node_modules/vuex/dist/vuex.js"></script>
+    <script>
+        let store = new Vuex.Store({
+            state: {
+                sum: 0,
+                'bus': new Vue(),
+                zhi: 0,
+                fan: 0
+            },
+            mutations: {
+                change(state, value) {
+                    state.sum = state.zhi + state.fan;
+                }
+            },
+            actions: {
+                chang(context, value) {
+                    let {
+                        commit,
+                        state
+                    } = context;
+                    commit('change', value)
+                }
+            },
+            getters: {
+                lv(state) {
+                    if (state.zhi + state.fan == 0) {
+                        return '0%'
+                    }
+                    return state.zhi / (state.zhi + state.fan) * 100
+                }
+            }
+        })
+        let voteContent = {
+            template: `<div class="content">
+                    <p>支持人数：<span>{{supportNum}}</span></p>
+                    <p>反对人数：<span>{{opposeNum}}</span></p>
+                    <p>支持率：<span>{{lv}}%</span></p>
+                </div>`,
+            data() {
+                return {
+                    supportNum: 0,
+                    opposeNum: 0
+                }
+            },
+            computed: {
+                /* yes() {
+                    if (this.supportNum == 0) {
+                        return 0
+                    } else {
+                        return this.supportNum / (this.supportNum + this.opposeNum) * 100
+                    }
+
+                } */
+                ...Vuex.mapGetters(['lv'])
+            }
+        }
+
+        let voteFooter = {
+            template: `<div class="footer">
+                    <button type="button" style="margin-right: 30px;">支持</button>
+                    <button type="button">反对</button>
+                </div>`,
+            data() {
+                return {
+
+                }
+            }
+        }
+        let vote = {
+            template: `<div class="container">
+                    <h2>{{title}} (<span>{{sum}}</span>)</h2>
+                    <vote-content></vote-content>
+                    <vote-footer></vote-footer>
+                  </div>`,
+            props: ['title'],
+            data() {
+                return {
+                    sum: 0
+                }
+            },
+            methods: {
+                change(value) {
+                    this.$store.dispatch('chang', value)
+                }
+            },
+            components: {
+                voteContent,
+                voteFooter
+            }
+        };
+
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                msg: '车轮滚滚'
+            },
+            store,
+            components: {
+                vote
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <first></first>
+    <second></second>
+  </div>
+  <script src="./node_modules/vue/dist/vue.js"></script>
+  <script src="./node_modules/vuex/dist/vuex.js"></script>
+  <script>
+
+    // 现在有一个公共的数据(状态)，这个数据是依赖count的变化而变化
+    // 如果count是偶数，那sex的值就是男孩，如果count是奇数，那sex的值就是女孩
+
+    // getters:vuex中允许定义getters，里面存储的是store的计算属性，也会有缓存，当前依赖的值发生变化，才会改变
+    let state = {
+      count: 0,
+      shop: [{ name: '摩托车' }, { name: '自行车' }],
+
+    };
+    let getters = {
+      sex(state) { // 相当于get函数  形参state就是当前store中的state
+        return state.count % 2 === 0 ? '男' : '女'
+      }
+    }
+    let store = new Vuex.Store({
+      state: state,
+      getters: getters,
+      mutations: {
+        increment(state, val) {
+          state.count += val
+        },
+        min(state) {
+          state.count--
+        },
+        add(state) {
+          state.shop.push({ name: '66666' })
+        }
+      }
+    })
+    let first = {
+      data() {
+        return {
+
+        }
+      },
+      methods: {
+        fn() {
+          this.$store.commit('increment', 1)
+        }
+      },
+
+      // Vuex身上提供了 mapState  mapGetters  mapMutations，他可以将store中的state gettres mutations都映射到当前实例的computed或methods中
+
+      // 这些函数都会return一个包装后的对象 {shop:xxx,count:xxxx}
+      // ...展开运算符，将当前生成的对象展开放到computed中
+      computed: {
+        ss() { },
+        ...Vuex.mapState(['shop', 'count']),
+        ...Vuex.mapGetters(['sex'])
+      },
+
+      template: '<div>{{count}}<button @click="fn">++</button><ul><li v-for="a in shop">{{a.name}}</li></ul><span>{{sex}}</span></div>'
+    }
+    let second = {
+      data() {
+        return {
+
+        }
+      },
+      template: '<div>{{this.$store.state.count}}</div>'
+    }
+    let vm = new Vue({
+      el: '#app',
+      data: {
+
+      },
+      methods: {
+
+      },
+      components: {
+        first,
+        second
+      },
+      store: store
+    })
+    console.log(vm)
+  </script>
+</body>
+
+</html>

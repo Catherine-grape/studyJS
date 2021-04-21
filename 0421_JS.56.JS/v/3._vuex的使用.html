@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script src="./node_modules/vuex/dist/vuex.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <com1></com1>
+        <com2></com2>
+    </div>
+
+    <script>
+        /* 
+         *    Vuex 的状态存储是响应式的。当 Vue 组件从 store 中读取状态的时候，若    store 中的状态发生变化，那么相应的组件也会相应地得到高效更新。
+         *  你不能直接改变 store 中的状态。改变 store 中的状态的唯一途径就是显式地提交 (commit) mutation。这样使得我们可以方便地跟踪每一个状态的变化，从而让我们能够实现一些工具帮助我们更好地了解我们的应用
+         */
+
+        //let store = {
+        //   state:{num:100}
+        // }
+        const store = new Vuex.Store({
+            state: {
+                num: 100
+            },
+            mutations: {
+                add(state, value) {
+                    state.num = value
+                }
+
+            }
+        })
+        let com1 = {
+            data() {
+                return {
+                    msg: '你好'
+                }
+            },
+            template: `<div>
+                  我是com1组件{{num}},{{ss}},{{msg}}
+                  --------------------------------
+                </div>`,
+            // computed:{
+            //   num(){
+            //     return this.$store.state.num
+            //   },
+            //   ss(){
+            //     return this.$store.state.ss
+            //   }
+            // }
+            // 官方已经提供了一个辅助函数用来快速把state的状态存储到当前组件的计算属性中，他的返回值是一个对象，对象里存储的就是mapState执行时传递的数组中对应的计算状态
+            // computed:Vuex.mapState(['ss','num'])
+            // 如果当前组件中的computed中有一些自己的计算属性，那这时候就得把Vuex.mapState()的结果进行解构
+            computed: {
+                a() {
+                    return xxx
+                },
+                ...Vuex.mapState(['ss', 'num'])
+            }
+        };
+        let com2 = {
+            data() {
+                return {}
+            },
+            template: `<div>
+                  我是com2组件{{$store.state.num}}
+                  <button @click="add">按钮</button>
+                  --------------------------------
+                </div>`,
+            methods: {
+                add() {
+                    this.$store.state.num++;
+                    this.$store.commit('add', 200)
+                }
+            },
+            created() {
+                console.log(this);
+            }
+        };
+        var vm = new Vue({
+            el: '#app',
+            created() {},
+            data: {},
+            components: {
+                com1,
+                com2
+            },
+            store: store // 这句话会在vue的根实例和根实例里的所有的组件实例上增加一个属性，属性名是$store,属性值就是当前的store仓库
+        });
+    </script>
+</body>
+
+</html>
