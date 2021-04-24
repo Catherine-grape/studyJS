@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 100%;
+            height: 600px;
+            border: 1px solid lightpink;
+            margin-top: 20px;
+        }
+        html,body{
+            width: 100%;
+            height: 300%;
+            overflow: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- <button>组织结构</button>
+        <button>客户管理</button> -->
+        <!-- router自带的标签 -->
+        <!-- 声明式导航 -->
+        <router-link to="/a">组织结构</router-link>
+        <router-link to="/b">客户管理</router-link>
+        <!-- <organization></organization> 写死了 -->
+        <!-- 现在是动态的 -->
+        <router-view></router-view>
+        <!-- 当前的router-view同时只能展示一个组件，当从组件a切换到组件b的时候，那a组件就会销毁，b组件加载 -->
+    </div>
+
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script src="./node_modules/vue-router/dist/vue-router.js"></script>
+    <script>
+        /* 
+        vuex-router用于切换组件「分发组件」
+        路由的原理是改变哈希值
+
+        window.onhashchange=function(){ console.log(111) }
+        */
+        const organization = {
+            template: `<div class="box">
+                我是组织结构页面
+                <div @click="jump">跳转到客户管理页面</div>
+                </div>`,
+            methods: {
+                jump() {//编程式导航   push打开一个新的路由
+                    this.$router.push('/b')
+                }
+            },
+            created() {
+                console.log('organization-created');
+                /* 
+                organization-created
+                customer-beforeDestroy
+                */
+                this.timer = setInterval(() => {
+                    console.log(1);
+                }, 1000);
+                document.body.onscroll=function(){
+                    console.log(222);
+                }
+            },
+            beforeDestroy() {
+                // 在组件销毁的时候，可以手动的把在当前组件设置的定时器、或者绑定的事件之类的东西清除。
+                console.log('organization-beforeDestroy');
+                clearInterval(this.timer);
+                this.timer = null;
+                document.body.onscroll=null
+            }
+        }
+        const customer = {
+            template: `<div class="box">我是客户管理页面</div>`,
+            created() {
+                console.log('customer-created');
+                /* 
+                customer-created
+                 organization-beforeDestroy
+                */
+            },
+            beforeDestroy() {
+                console.log('customer-beforeDestroy');
+            }
+        }
+        /* const routes = [
+             { path: '/foo', component: Foo },
+             { path: '/bar', component: Bar }
+         ] */
+        let routes = [
+            { path: '/a', component: organization },
+            { path: '/b', component: customer }
+            // { path: '/b', component:[customer,ss]  } //可以使用多个 一个哈希控制多个页面
+        ]
+        let router = new VueRouter({
+            /* routes:[//路由映射表 把你的哈希和组件关联在一起   路由映射表，把页面url上的hash和对应的组件建立联系   
+
+            ] */
+            routes
+        })
+        let vm = new Vue({
+            el: '#app',
+            created() { },
+            data: {},
+            methods: {},
+            filters: {},
+            computed: {},
+            watch: {},
+            // 想让路由在租价那种正常使用，必须这里vue的根实例中引入一下，这样不仅路由能够正常使用了，还可以给每一个组件的实例增加$router和$route属性  
+            router,
+            components: {
+                organization,
+                customer
+            }
+        });
+    </script>
+</body>
+
+</html>

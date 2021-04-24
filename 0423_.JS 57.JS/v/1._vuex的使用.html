@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script src="./node_modules/vuex/dist/vuex.js"></script>
+    <script>
+        /* 
+        状态管理库
+        */
+        let store= new Vuex.Store({
+            state:{
+                // 响应式的状态
+                num:100
+            },
+            getters: {
+                // 计算状态 依赖state的变化而变化 也有缓存
+            },
+            mutations:{//想改状态必须通过mutations的方法
+                changeNum(state,payload){
+                    state.num++
+                    state.num=payload
+                }
+            },
+            actions:{
+                changeNum(context){
+                    let {commit}=context;
+                    setTimeout(()=>{
+                        commit('changeNum',)
+                    },2000);
+                    axios.get('xxx').then((res)=>{
+                        commit('changeNum',res)
+                    })
+                }
+            }
+            
+        });
+        const com={
+            // 在视图中可以省略this
+            template:`<div>{{$store.state.num}}</div>`,
+            computed:{
+                num(){
+                    return this.$store.state.num;
+                },
+                ...Vuex.mapState(['num','s','c'])
+            },
+            data(){
+                // 给每一个属性加上get和set  监听每一个状态的变化
+                return{
+
+                }
+            },
+            methods:{
+                fn(payload){
+                    this.$store.commit('changeNum',payload)//mutations
+                    this.$store.dispatch('changeNum',payload)//actions
+                }
+                // mapmutions与上面一样
+            }
+
+        }
+        let vm = new Vue({
+            el: '#app',
+            created() {},
+            data: {
+                ss:10,
+                a:1,
+                b:2,
+                c:3
+            },
+            methods: {},
+            store,//把store挂载到每一个实例上 组件上  叫做$store
+            computed:{
+                // computed里的状态一般都是 sum num1 num2 一个属性「sum」依赖多个属性「num1、num2」的变化而变化  多对一
+            },
+            watch:{
+                // watch 监听的是当前vue实例上的属性，当监听的属性发生变化时 一对多   watch不需要return
+                ss(){
+                    // 当ss发生变化，把a,b,c全部变化
+                    this.a=100;
+                    this.b=100;
+                    this.c=100;
+                }              
+            },
+
+        });
+    </script>
+</body>
+
+</html>

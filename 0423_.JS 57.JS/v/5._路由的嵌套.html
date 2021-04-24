@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 100%;
+            height: 600px;
+            border: 1px solid lightpink;
+            margin-top: 20px;
+            display:flex;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 300%;
+            overflow: auto;
+        }
+
+        .router-link-active {
+            color: lightseagreen;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <router-link to="/a" tag="button">组织结构</router-link>
+        <router-link to="/b" tag="button">客户管理</router-link>
+        <router-view></router-view>
+    </div>
+
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script src="./node_modules/vue-router/dist/vue-router.js"></script>
+    <script>
+        const  aa={
+            template: `<div>哈哈哈我是aa</div>`
+        }
+        const userList = {
+            template: `<div>用户列表</div>`
+        }
+        const userAdd = {
+            //a标签的href里面不能省略 一定要写全套
+            template: `<div>新增用户
+                <a href="#/a/add/aa"> 嘻嘻嘻</a>   
+                <router-link to="/a/add/aa">ahahah</router-link>
+                <router-view></router-view>
+                </div>`
+        }
+        // 当前children写在那个组件里面 <router-view></router-view> 就在那个组件里面展示
+        const organization = {
+            template: `<div class="box">
+                我是组织结构页面
+                <ul>
+                    <a href="#/a/list">用户列表</a>
+                    <a href="#/a/add">新增用户</a>
+                </ul>
+                <router-view></router-view>
+                </div>`,
+            methods: {
+            },
+        }
+        const customer = {
+            template: `
+            <div class="box">我是客户管理页面
+                <div> </div>
+                </div>`,
+            methods: {
+            }
+        }
+        let routes = [//routes 固定的 path固定的 children固定的 component固定的
+            { 
+                path: '/a', 
+                component: organization ,
+                children:[//当他有儿子就需要router-view去展示
+                    {
+                        path:'/a/list',
+                        component:userList
+                },
+                {
+                    path:'add',//如果path只写最后一级当匹配的时候，它会自动把父亲的path加上 「官方推荐使用这种写法」,  如果加/就是根
+                    component: userAdd,
+                    children:[
+                        {
+                            path:'aa',
+                            component:aa
+                        }
+                    ]
+                }
+            ]
+            },
+            { 
+                path: '/b', 
+                component: customer
+             }
+        ]
+        let router = new VueRouter({
+            routes
+        })
+        let vm = new Vue({
+            el: '#app',
+            router,
+            components: {
+                organization,
+                customer
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <router-link to="/com1/一">一</router-link>
+        <router-link to="/com1/二">二</router-link>
+        <router-link to="/com1/三">三</router-link>
+        <router-view></router-view>
+    </div>
+
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script src="./node_modules/vue-router/dist/vue-router.js"></script>
+    <script>
+        let com1 = {
+            data(){
+                return{
+                    num:'一'
+                }
+            },
+            template: `<div>我是第{{num}}本书</div>`,
+            //  提醒一下，当使用路由参数时，例如从 /user/foo 导航到 /user/bar，原来的组件实例会被复用。因为两个路由都渲染同个组件，比起销毁再创建，复用则显得更加高效。不过，这也意味着组件的生命周期钩子不会再被调用。
+            // 复用组件时，想对路由参数的变化作出响应的话，你可以简单地 watch (监测变化) $route 对象：
+            watch:{
+                $route(to,from){
+                    // 对路由变化做出响应
+                    console.log(to,from);
+                    this.num=to.params.id
+                }
+            }
+        }
+        /* let com2 = {
+            template: `<div>我是第二本书</div>`
+        }
+        let com3 = {
+            template: `<div>我是第三本书</div>`
+        } */
+        const routes = [
+            {//:id 上面只要写就行，动态匹配
+                path: '/com1/:id',
+                name: 'com1',
+                component: com1
+            }/* ,
+            {
+                path: '/com2',
+                name: 'com2',
+                component: com2
+            },
+            {
+                path: '/com3',
+                name: 'com3',
+                component: com3
+            } */
+        ]
+        const router = new VueRouter({
+            routes
+        });
+        let vm = new Vue({
+            el: '#app',
+            created() { },
+            data: {},
+            methods: {},
+            router
+        });
+    </script>
+</body>
+
+</html>

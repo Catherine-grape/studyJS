@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <com1></com1>
+        <com2></com2>
+    </div>
+
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script src="./node_modules/vuex/dist/vuex.js"></script>
+    <script>
+        /* 
+        使用vuex的modules模块化管理每一个组件的状态的时候，他只会把state包装成一个小命名空间，但是其他（getters/mutations/actions）的属性都是存储到相同的全局命名空间下的
+        如果想把其他的属性（getters/mutations/actions/）也严格区分模块管理，就在当前的模块对象里加上nameSpace：true，这样它会给当前模块的getters/mutations/actions加上当前模块的名字
+        在单个组件里使用状态和改变状态的时候要注意一下，如果当前的模块名是a，那么辅助函数的用法就是...Vuex.mapState('a',['num'])
+        ...Vuex.mapMutations('模块名字',['方法名字'])
+        npm install @vue/cli -g 下载vue脚手架
+        mac需要 sudo npm install @vue/cli -g
+        npm i vue-router 下载路由
+        */
+        let a = {//a/mutations
+            namespaced: true,
+            state:{
+                num:10
+            },
+            getters:{
+                a(state){
+                    return state.num+=1
+                }
+            },
+            mutations:{
+                changeNum1(state){
+                    state.num++
+                }
+            },
+            actions:{
+                changeNum:{
+                    root:true,
+                    handler(){
+
+                    }
+                }
+            }
+        };
+        let b = {
+            namespaced:true,
+            state:{
+                num:20
+            },
+            mutations:{
+                changeNum(state) {
+                state.num++
+            }
+            }            
+        };
+        const store = new Vuex.Store({
+            state: {
+                num: 100,
+                /* num1:10,
+                num2:20 */
+                /* com1:{
+                    num:10
+                },
+                com2:{
+                    num:20
+                } */
+            },
+            getter: {
+                ss(state){
+                    return  1010
+                }
+            },
+            mutations: {
+                ss(state){
+
+                }
+            },
+            actions: {},
+            modules: {
+                a,
+                b
+            }
+        });
+        let com1 = {
+            // template: `<div>我是com1组件{{$store.state.com1.num}}</div>`,
+            template: `<div>我是com1组件{{num1}}<button @click=
+                "changeNum">点击</button></div>`,
+            data() {
+                return { num1: 10 }
+            },
+            computed:{
+                ...Vuex.mapState('a',['num'])
+            },
+            methods:{
+                ...Vuex.mapMutations('a',['changeNum'])
+            },
+            created(){
+                console.log(this,97);
+            }
+        }
+        let com2 = {
+            data() {
+                return {
+                    num2: 20
+                }
+            },
+            template: `<div>我是com2组件</div>`
+        }
+        let vm = new Vue({
+            el: '#app',
+            created() { },
+            data: {},
+            methods: {},
+            filters: {},
+            computed: {},
+            watch: {},
+            components: {
+                com1, com2
+            }, store
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 100%;
+            height: 600px;
+            border: 1px solid lightpink;
+            margin-top: 20px;
+            display: flex;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 300%;
+            overflow: auto;
+        }
+
+        .router-link-active {
+            color: lightseagreen;
+        }
+        /* .organ{
+            color:lightsalmon;
+        } */
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <router-link to="organize" tag="button" class="organ">组织结构</router-link>
+        <router-link to="custom" tag="button">客户管理</router-link>
+        <router-link :to="{ name: 'user', params: { userId: 123 }}">User</router-link>
+        <!-- router-link中的to属性可以有两种类型 
+                1. 字符串类型，写的值是当前的hash值，与path进行匹配
+                2. 对象，对象里可以写name属性，name的值和下面路由映射表里的name进行匹配
+        -->
+        <router-view></router-view>
+    </div>
+
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script src="./node_modules/vue-router/dist/vue-router.js"></script>
+    <script>
+        const notFound={
+            template:`
+            <div>
+               您貌似来到了没有内容的荒野
+               <router-link :to="{name:'organize'}" tag="button">返回首页<router-link>
+            </div>
+                `
+
+        }
+        const aa = {
+            template: `<div>哈哈哈我是aa</div>`
+        }
+        const userList = {
+            template: `<div>用户列表</div>`
+        }
+        const userAdd = {
+            //a标签的href里面不能省略 一定要写全套
+            template: `<div>新增用户
+                <a href="#/a/add/aa"> 嘻嘻嘻</a>   
+                <router-link :to="{name:aa}">ahahah</router-link>
+                <router-view></router-view>
+                </div>`
+        }
+        // 当前children写在那个组件里面 <router-view></router-view> 就在那个组件里面展示
+        const organization = {
+            template: `<div class="box">
+                我是组织结构页面
+                <ul>
+                    <router-link :to="{name:list}">用户列表<router-link>
+                    <router-link :to="{name:list}">新增用户<router-link>
+                    <a href="#/a/list">用户列表</a>
+                    <a href="#/a/add">新增用户</a>
+                </ul>
+                <router-view></router-view>
+                </div>`,
+            methods: {
+            },
+        }
+        const customer = {
+            template: `
+            <div class="box">我是客户管理页面
+                <div> </div>
+                </div>`,
+            methods: {
+            }
+        }
+        let routes = [//routes 固定的 path固定的 children固定的 component固定的
+        // 路由的重定向可以解决页面初始化加载显示默认组件的问题
+        {path:'/',redirect:'/a'},//默认展示的，重定向路由
+            {
+                path: '/a',
+                name:'organize',
+                component: organization,
+                children: [
+                     { path: '/a', redirect: '/a/list' },
+                    {
+                        path: '/a/list',
+                        name:'list',
+                        component: userList
+                    },
+                    {
+                        path: 'add',//如果path只写最后一级当匹配的时候，它会自动把父亲的path加上 「官方推荐使用这种写法」,  如果加/就是根
+                        name:'add',
+                        component: userAdd,
+                        children: [
+                            {
+                                path: 'aa',
+                                name:'aa',
+                                component: aa
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                path: '/b',
+                name:'custom',
+                component: customer
+            },
+            {
+                // 当前的*是通配的意思，就是所有的path他都可以匹配上，可以使用他做找不到页面的错误页。
+                path:'*',
+                component:notFound
+            }
+        ]
+        // this.$router.push('/a/list')
+        // this.$router.push(name{name:'a'})
+        let router = new VueRouter({
+            routes
+        })
+        let vm = new Vue({
+            el: '#app',
+            router,
+            components: {
+                organization,
+                customer
+            }
+        });
+    </script>
+</body>
+
+</html>

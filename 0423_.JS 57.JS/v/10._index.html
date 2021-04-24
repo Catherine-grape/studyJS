@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        /* 
+        两个组件创建了 两个a，b模块 每个组件都有自己独立的管理系统. 只能分state
+        在合并的时候除了state以外所有的对象都会合并到同一个命名空间下「对象、堆内存、同一个空间地址」
+        */
+       let a={
+           state:{
+            num:100,
+            
+           },
+           template:`<div>a</div>`,
+           mutations:{
+               add1(state){//state自己的不是全局的
+                   state.num1++
+               }
+           }
+       }
+     /*   add1:[add1,add1]//重名的话就会变成事件池子在commit的时候会触发两个
+       let b={
+           state: {
+
+           },
+           template:`<div>b</div>`,
+           mutations:{
+               add(){
+
+               }
+           }
+       } */
+       let b={
+           namespaced:true,//这种就是强调命名空间，变成'a/add1':function(){}   'b/add1':function(){}
+           state: {
+
+           },
+           template:`<div>b</div>`,
+           mutations:{
+               add(){
+
+               }
+           }
+       }
+    //    组件使用的时候
+   /*  methods:{
+        ...Vuex.mapMutations('a', ['add']), //私有的
+    },
+    computed:{
+        ...Vuex.mapState(['num1'，'a'])//私有和全局的a模块对象
+    } 
+    */
+        let store = new Vuex.Store({
+            state:{
+                num:100,
+                a:{ num1: 200},
+                b:{}
+            },
+            modules:{
+                a,b
+            }
+        })
+        let vm = new Vue({
+            el: '#app',
+            created() {},
+            data: {},
+
+        });
+    </script>
+</body>
+
+</html>

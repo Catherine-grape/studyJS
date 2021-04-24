@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 100%;
+            height: 600px;
+            border: 1px solid lightpink;
+            margin-top: 20px;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 300%;
+            overflow: auto;
+        }
+
+        .router-link-active {
+            color: lightseagreen;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- router-link 默认是生成a标签  tag可以指定生成任意的标签  -->
+        <!-- router 会给当前选中的button增加router-link-active类名，这样你就可以给当前选中的按钮增加样式了 -->
+        <router-link to="/a" tag="button">组织结构</router-link>
+        <router-link to="/b">客户管理</router-link>
+        <router-view></router-view>
+        <!-- 当前的router-view同时只能展示一个组件，当从组件a切换到组件b的时候，那a组件就会销毁，b组件加载 -->
+    </div>
+
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script src="./node_modules/vue-router/dist/vue-router.js"></script>
+    <script>
+        /* 
+        */
+        const organization = {
+            template: `<div class="box">
+                我是组织结构页面
+                <div @click="jump">跳转到客户管理页面</div>
+                </div>`,
+            methods: {
+                jump() {//向当前的历史记录中新增一个历史记录
+                    // this.$router.push('/b');
+                    // vm.$router.back() //回退上一级路由对应的组件
+                    // vm.$router.forward() //前进下一级路由对应的组件「前提要有下一级的记录」
+                    // vm.$router.go() //执行传递页面number参数，1 -1. 切换到指定层级的路由对应的组件
+                    this.$router.replace('/b');
+                    // 是把当前路由的历史记录给替换，然后显示一个新的组件
+                }
+            },
+        }
+        const customer = {
+            template: `
+            <div class="box">我是客户管理页面
+                <div @click="back"> 返回上一页</div>
+                </div>`,
+            methods: {
+                back() {
+                    this.$router.back();
+                }
+            }
+        }
+        let routes = [
+            { path: '/a', component: organization },
+            { path: '/b', component: customer }
+            // { path: '/b', component:[customer,ss]  } //可以使用多个 一个哈希控制多个页面
+        ]
+        let router = new VueRouter({
+            routes
+        })
+        let vm = new Vue({
+            el: '#app',
+            router,
+            components: {
+                organization,
+                customer
+            }
+        });
+    </script>
+</body>
+
+</html>

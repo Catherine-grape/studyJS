@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <router-link to="/com1">按钮1</router-link>
+        <!-- <router-link :to="{path:'/com2',query:{a:100,b:true,obj:{ss:100}}}">按钮2</router-link> -->
+        
+        <router-link :to="{path:'/com2'}">按钮2</router-link>
+        <router-view></router-view>
+    </div>
+
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script src="./node_modules/vue-router/dist/vue-router.js"></script>
+    <script>
+        let com1={
+            data(){
+                return {
+                    num:100,
+                    msg:'haha'
+                }
+            },
+            template:`
+            <div>
+                我是组件一
+                <button @click="jump">跳转组件二</button>
+                </div>
+            `,
+            methods:{
+                jump(){//放在哈希的后面了 编程式
+                    /* this.$router.push({
+                        path:'/com2',
+                        query:{
+                            num:this.num,
+                            msg:this.msg
+                        }
+                    }) */
+                    this.$router.push({
+                        name:'com2',
+                        params: {
+                            num: this.num,
+                            msg: this.msg
+                        } 
+                    })
+                   
+                }
+            }
+        }
+        let com2={
+            data(){
+                return{
+                    num:0
+                }
+            },
+            created(){
+                console.log(this,30);
+                // this.num=this.$route.params.num
+            },
+            template:`
+            <div>
+                我是组件二
+                </div>
+            `
+        }
+        const routes=[
+            {
+                path:'/com1',
+                name:'com1',
+                component:com1
+            },
+            {
+                path: '/com2',
+                name:'com2',
+                component: com2
+            }
+        ];
+        const router = new VueRouter({routes});
+        let vm = new Vue({
+            el: '#app',
+            created() {},
+            data: {},
+            router
+        });
+        /* 
+        query传参：
+        这种传参的特点是
+        1. 通过hash值来传参，参数暴露在url上，不美观，不安全
+        2. 刷新页面参数不会丢失「因为参数在url的hash上传递的」
+        3. 配合path跳转来使用
+        4. 参数接收的时候是字符串类型的
+        */
+       /* 
+       params传参
+       1. 参数不会暴露在url上，美观、安全
+       2. 刷新页面参数会丢失「因为使用的不是hash类传递参数」
+       3. 配合name来跳转的
+       4. 参数接收的时候是原来的类型
+       */
+// $router用来跳转
+// $route是用来接收路由跳转的信息的
+
+
+/* 
+3. 动态路由传参 
+在内部使用params进行接收，动态路由的参数
+这里要注意的是，使用动态路由，切换页面的hash，组件将不在再次渲染，也就是说组件的生命周期函数钩子不再执行，但是可以使用watch去监听$route的变化，从而做出动态的响应
+*/
+    </script>
+</body>
+
+</html>
