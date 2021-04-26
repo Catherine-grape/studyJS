@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 不一定非是router link -->
+    <div id="app">
+        <!-- 路由跳转可以用这种声明式导航 去到path为/a-->
+        <router-link to="/a">111</router-link>
+        <router-link to="/b">222</router-link>
+
+
+        <router-link to="/c/1">3</router-link>
+        <router-link to="/c/2">4</router-link>
+        <router-link to="/c/3">5</router-link>
+        <router-view></router-view>
+    </div>
+
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script src="./node_modules/vue-router/dist/vue-router.js"></script>
+    <script>
+        let c={//动态路由传参 不太使用
+            template: '<div>c</div>',
+            watch:{
+                $route( to,from){//to： 要去哪里的信息  from：从哪里来的
+                    to.params.id
+                }
+            }
+        }
+        let child={
+            template: `<div>
+                我是son</div>`,
+        }
+        // 监听哈希值的变化
+        // name的时候 to一定要加上: 
+        let a={
+            template: `<div>我是a组件
+                <router-link to='/a/child'>点击展示child组件</router-link>
+                //:to={path:'/a/child',query{}}是上面的简写 可以在行间这么写，但是太多了，所以在下面使用编程式传参
+                <router-link :to='{name:"child",params:{}}'>点击展示child组件</router-link>
+                <router-view></router-view>
+                </div>`,
+            methods: {
+                fn() {//通过编程式导航跳转路由  这个功能强大一些
+                    this.$router.push('/b');
+                    // replace forward go back
+
+
+                    // 传参
+                    this.$router.push({
+                        name:'child',
+                        params:{
+                            a:100,b:200
+                        }
+                        /* 
+                        params 
+                        1. 传递的参数不会显示在hash上，美观、安全 2. 刷新页面参数丢失 
+                        3.传递的参数是什么类型，接收的时候还是什么类型
+                        4. 在命名路由「配合name」跳转的时候去使用params传参
+                        query
+                        1. 传递的参数显示在hash上，不美观、不安全 2. 刷新页面参数不会丢失
+                        3.传递的参数是什么类型，接收的时候是字符串类型
+                        4. 配合path跳转的时候去使用query传参
+                        */
+                    })
+                },
+            },
+        }
+        let b={
+            template: '<div>b</div>',
+        }
+        let routes = [
+            {//动态路由传参一定要写「:随意名字」
+                path:'/c/:id',
+                components:c
+            },
+            { 
+                path: '/a', 
+                component: a,
+                 children: [
+                    {
+                        path: '/a/child',
+                        component: child,
+                        name:'child'
+                    },
+            {
+                path: '/b',
+                component: b
+                },
+                ],
+            },
+        ];
+         const router = new VueRouter({
+            routes
+        });
+        let vm = new Vue({
+            el: '#app',
+            created() {},
+            data: {},
+            components:{a,b}
+        });
+    </script>
+</body>
+
+</html>

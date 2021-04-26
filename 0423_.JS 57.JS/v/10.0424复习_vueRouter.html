@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 不一定非是router link -->
+    <div id="app">
+        <!-- 路由跳转可以用这种声明式导航 去到path为/a-->
+        <router-link to="/a">111</router-link>
+        <router-link to="/b">222</router-link>
+        <router-view></router-view>
+    </div>
+
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script src="./node_modules/vue-router/dist/vue-router.js"></script>
+    <script>
+        let child={
+            template: `<div>
+                我是son</div>`,
+        }
+        // 监听哈希值的变化
+        // name的时候 to一定要加上: 
+        let a={
+            template: `<div>我是a组件
+                <router-link to='/a/child'>点击展示child组件</router-link>
+                <router-link :to='{name:"child"}'>点击展示child组件</router-link>
+                <router-view></router-view>
+                </div>`,
+            methods: {
+                fn() {//通过编程式导航跳转路由  这个功能强大一些
+                    this.$router.push('/b');
+                    // replace forward go back
+                },
+            },
+        }
+        let b={
+            template: '<div>b</div>',
+        }
+        let routes = [
+            { 
+                path: '/a', 
+                component: a,
+                 children: [
+                    {
+                        path: '/a/child',
+                        component: child,
+                        name:'child'
+                    },
+            {
+                path: '/b',
+                component: b
+                },
+                ],
+            },
+        ];
+         const router = new VueRouter({
+            routes
+        });
+        let vm = new Vue({
+            el: '#app',
+            created() {},
+            data: {},
+            components:{a,b}
+        });
+    </script>
+</body>
+
+</html>

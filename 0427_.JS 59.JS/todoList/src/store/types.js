@@ -1,0 +1,1 @@
+export const CHANGE_LIST = 'change_list';//改变list  把actions和mutations里面的字符串的抽离出来
