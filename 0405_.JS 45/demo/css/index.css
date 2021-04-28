@@ -1,0 +1,267 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  position: relative;
+}
+.yellow {
+  height: 1.8rem;
+  background: #ffee00;
+}
+#title {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 0.15rem;
+}
+#title .classiFication {
+  background: url("../img/title_Signin.png");
+}
+#title .advertising {
+  width: 1.95rem;
+  height: 0.38rem;
+  background: url("../img/title_Scroll.gif");
+  background-size: cover;
+}
+#title .sign {
+  background: url("../img/title_classification.png") no-repeat;
+}
+#title .classiFication,
+#title .sign {
+  background-size: cover;
+  width: 0.18rem;
+  height: 0.3rem;
+}
+.searchBar {
+  width: 3.51rem;
+  height: 0.44rem;
+  border-radius: 0.3rem 0.3rem 0.3rem 0.3rem;
+  background: whitesmoke;
+  display: block;
+  position: absolute;
+  left: 0.15rem;
+  z-index: 10;
+}
+.searchBar .i_icon {
+  width: 0.18rem;
+  height: 0.18rem;
+  background: url("../img/search.png");
+  background-size: cover;
+  display: block;
+  position: absolute;
+  left: 0.15rem;
+  top: 0.15rem;
+  z-index: 10;
+}
+.swiper-container {
+  width: 3.51rem;
+  height: 1.145rem;
+  position: relative;
+  top: 0.6rem;
+  border-radius: 0.1rem 0.1rem 0.1rem 0.1rem;
+}
+.swiper-container .swiper-slide img {
+  width: 3.51rem;
+  height: 1.145rem;
+  background: no-repeat;
+  background-size: cover;
+}
+.md {
+  background: #f2f2f2;
+  box-sizing: border-box;
+  padding: 0.1rem;
+  margin-bottom: 0.5rem;
+}
+.md .su_menu {
+  width: 3.75rem;
+  height: 1.54rem;
+  margin-top: 0.8rem;
+}
+.md .su_menu ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding-left: 0.1rem;
+}
+.md .su_menu ul li {
+  margin-top: 0.1rem;
+  align-items: center;
+}
+.md .su_menu ul li img {
+  width: 0.38rem;
+  height: 0.38rem;
+}
+.md .su_menu ul li p {
+  line-height: 0.14rem;
+  width: 0.7rem;
+  height: 0.13rem;
+  overflow: hidden;
+  font-size: 0.12rem;
+  margin-top: 0.05rem;
+  color: #666;
+}
+.md .displayArea {
+  margin: 0.05rem auto;
+  display: flex;
+}
+.md .displayArea img {
+  height: 1.17rem;
+  margin-left: -0.15rem;
+}
+.md .displayArea img:nth-child(2) {
+  margin: 0 0.05rem;
+}
+.md .displayArea img:nth-child(3) {
+  margin-left: 0.01rem;
+}
+.md .limitedAll {
+  background: whitesmoke;
+  display: flex;
+}
+.md .limitedAll .limitedAll_left .Limited {
+  width: 1.75rem;
+  height: 1.29rem;
+  box-sizing: border-box;
+  padding: 0.1rem;
+  border-right: 1px solid #cfcfcf;
+}
+.md .limitedAll .limitedAll_left .Limited h2 {
+  width: 0.56rem;
+  height: 0.2rem;
+  line-height: 0.2rem;
+  font-size: 14px;
+  font-weight: normal;
+}
+.md .limitedAll .limitedAll_left .Limited .spike {
+  display: flex;
+  justify-content: space-between;
+}
+.md .limitedAll .limitedAll_left .Limited .spike img {
+  width: 0.6rem;
+  height: 0.6rem;
+}
+.md .limitedAll .limitedAll_left .Limited .person {
+  display: block;
+  width: 1.5rem;
+  height: 0.15rem;
+  line-height: 0.15rem;
+  margin: 0.01rem 0;
+  color: #999;
+}
+.md .limitedAll .limitedAll_left .Limited .price {
+  color: #F50;
+  margin: 0.5rem 0 0.1rem 0.2rem;
+}
+.md .limitedAll .limitedAll_left .Limited .right {
+  margin-left: 0.6rem;
+}
+.md .limitedAll .limitedAll_right {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.md .limitedAll .limitedAll_right .Limited {
+  width: 1.75rem;
+  height: 1.29rem;
+  box-sizing: border-box;
+  padding: 0.1rem;
+}
+.md .limitedAll .limitedAll_right .Limited h2 {
+  width: 0.56rem;
+  height: 0.2rem;
+  line-height: 0.2rem;
+  font-size: 14px;
+  font-weight: normal;
+}
+.md .limitedAll .limitedAll_right .Limited .spike {
+  display: flex;
+  justify-content: space-between;
+}
+.md .limitedAll .limitedAll_right .Limited .spike img {
+  width: 0.6rem;
+  height: 0.6rem;
+}
+.md .limitedAll .limitedAll_right .Limited .person {
+  display: block;
+  width: 1.5rem;
+  height: 0.15rem;
+  line-height: 0.15rem;
+  margin: 0.01rem 0;
+  color: #999;
+}
+.md .limitedAll .limitedAll_right .Limited .price {
+  color: #333333;
+  font-size: 10px;
+  margin: 0.08rem 0 0.1rem 0.15rem;
+}
+.md .youLike {
+  font-size: 18px;
+  font-weight: 700px;
+  margin: 0.5rem 1.3rem;
+}
+.md .alsoLike {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.md .alsoLike li {
+  width: 1.71rem;
+  height: 2.71rem;
+  background: whitesmoke;
+  margin-top: 0.1rem;
+}
+.md .alsoLike li img {
+  width: 100%;
+  height: 1.71rem;
+}
+.md .alsoLike li p {
+  width: 1.59rem;
+  height: 0.3;
+  margin: 0.1rem auto;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.md .alsoLike li span {
+  color: #ff4422;
+  font-weight: 900px;
+  font-size: 18px;
+  margin-left: 0.1rem;
+}
+.md .alsoLike li span i {
+  font-style: normal;
+  font-size: 12px;
+}
+.tabBar {
+  width: 100%;
+  height: 0.6rem;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f2f2f2;
+  box-sizing: border-box;
+  padding: 0.2rem;
+  vertical-align: middle;
+}
+.tabBar div {
+  margin-top: 0.05rem;
+  margin-bottom: 0.05rem;
+}
+.tabBar div img {
+  width: 0.24rem;
+  height: 0.24rem;
+  line-height: 0.24rem;
+}
+.tabBar div .lastImg {
+  margin-left: 0.1rem;
+}
+.tabBar div p {
+  margin: 0.03rem auto;
+}

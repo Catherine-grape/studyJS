@@ -1,0 +1,42 @@
+[
+    {
+        "nav_img": "./img/nav_ring.png",
+        "nav_title": "苏宁秒杀"
+    },
+    {
+        "nav_img": "./img/nav_vegetables.png",
+        "nav_title": "苏宁超市"
+    },
+    {
+        "nav_img": "./img/nav_pingou.png",
+        "nav_title": "苏宁拼购"
+    },
+    {
+        "nav_img": "./img/nav_shoujishuma.png",
+        "nav_title": "手机数码"
+    },
+    {
+        "nav_img": "./img/nav_shuningjiadian.png",
+        "nav_title": "苏宁家电"
+    },
+    {
+        "nav_img": "./img/nav_mianfeishuiguo.png",
+        "nav_title": "免费水果"
+    },
+    {
+        "nav_img": "./img/nav_superhuiyuan.png",
+        "nav_title": "super会员"
+    },
+    {
+        "nav_img": "./img/nav_qiandaoyouli.png",
+        "nav_title": "签到有礼"
+    },
+    {
+        "nav_img": "./img/nav_lingquanyouli.png",
+        "nav_title": "领券中心"
+    },
+    {
+        "nav_img": "./img/nav_gengduopindao.png",
+        "nav_title": "更多频道"
+    }
+]

@@ -29,7 +29,7 @@ this.$forceUpdate()
 
 
 npm install babel-plugin-component -D
--D 是--save 和--dev 的缩写
+-D 是--save生产依赖 和--dev 的缩写
 
 如果项目中没有.babelrc 可以新建，如果有babel.config.js粘在其中
 

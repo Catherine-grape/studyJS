@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/reset.min.css">
+    <link rel="stylesheet" href="./node_modules/swiper/css/swiper.min.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_2317084_bfiglmf9jld.css">
+    <link rel="stylesheet" href="./css/index.css">
+
+    <script>
+        // 自适应 fontsize
+        function resize() {
+            let winW = document.documentElement.clientWidth;
+            document.documentElement.style.fontSize = winW * 100 / 375 + "px"
+        }
+        window.onresize = resize;
+        resize();
+    </script>
+</head>
+
+<body>
+    <!-- 标题 -->
+    <div class="yellow">
+        <nav id="title">
+
+            <a href="http://cc.cmbchina.com/" class="classiFication"></a>
+            <a href="https://cuxiao.m.suning.com/scms/kqcdsh.html?adTypeCode=1137&adId=https%3A%2F%2Flib.suning.com%2Fweex%2Fkqcdsh.js%3FpageCode%3Dkqcdsh%26isSCMS%3D1&safp=f73ee1cf.wapindex7.113456429854.2&safpn=10001"
+                class="advertising"></a>
+            <a href="http://cc.cmbchina.com/" class="sign"></a>
+
+        </nav>
+        <!-- 搜索框 -->
+        <div class="searchBar">
+            <a href="https://m.suning.com/search.html?defaultWord=%E5%86%B0%E7%AE%B1%E6%B4%97%E8%A1%A3%E6%9C%BA%20%E7%88%86%E6%AC%BE5%E6%8A%98%E6%8A%A2"
+                class="i_icon"></a>
+        </div>
+        <!-- 轮播图 -->
+        <div class="swiper-container">
+            <ul class="swiper-wrapper" id="wrapper">
+                <!-- <li class="swiper-slide">
+                   <img src="./img/banner1.png" alt="">
+                </li> -->
+                <li class="swiper-slide">2</li>
+            </ul>
+            <div class="swiper-pagination"></div>
+        </div>
+
+    </div>
+    <!-- 菜单 -->
+    <!-- 灰色背景 -->
+    <div class="md">
+        <div class="su_menu">
+            <ul id="su_menu">
+                <!-- <li>
+                <img src="./img/ring.png" alt="">
+                <p>苏宁秒杀</p>
+            </li>
+            <li>
+                <img src="./img/vegetables.png" alt="">
+                <p>苏宁超市</p>
+            </li> -->
+            </ul>
+        </div>
+        <!-- 展示区 -->
+        <div class="displayArea">
+            <img src="./img/xinrendalibao.png" alt="">
+            <img src="./img/1fen.gif" alt="">
+            <img src="./img/1fen2.gif" alt="">
+        </div>
+
+        <div class="limitedAll">
+            <div class="limitedAll_left">
+                <div class="Limited">
+                    <h2>限时秒杀</h2>
+                    <span class="person">人气好货限时抢</span>
+                    <div class="spike">
+                        <img src="./img/tuijian.jpeg" alt="">
+                        <img src="./img/miaosha2.jpeg" alt="">
+                    </div>
+                    <span class="price">¥36.9</span>
+                    <span class="price right">¥6.9</span>
+                </div>
+                <div class="Limited">
+                    <h2>新品首发</h2>
+                    <span class="person">一加9免息抢</span>
+                    <div class="spike">
+                        <img src="./img/xinpinshoufa.webp" alt="">
+                        <img src="./img/xinpinshoufa2.webp" alt="">
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="limitedAll_right">
+                <div class="Limited">
+                    <h2>大聚惠</h2>
+                    <span class="person">聚优品·惠生活</span>
+                    <div class="spike">
+                        <img src="./img/dajuhui.webp" alt="">
+                        <img src="./img/dajuhui2.webp" alt="">
+                    </div>
+                    <span class="price">爱式晨曦</span>
+                    <span class="price right">飞科(FLYCO)</span>
+                </div>
+                <div class="Limited">
+                    <h2>苏宁拼购</h2>
+                    <span class="person">二人拼更实惠 全场包邮</span>
+                    <div class="spike">
+                        <img src="./img/shuihu.webp" alt="">
+                        <img src="./img/shuihu2.webp" alt="">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- 猜你喜欢 -->
+        <p class="youLike">猜你喜欢</p>
+        <ul class="alsoLike" id="alsoLike">
+            <li>
+                <img src="./img/cainixih.webp" alt="">
+                <p>美可卓（Maxigenes）全脂高钙成人奶粉 1kg/罐 进口奶粉 学生奶粉 蓝胖子 澳大利亚进口</p>
+
+                <span class="price">
+                    <i>¥</i>
+                    89</span>
+            </li>
+        </ul>
+        <!-- 眉脚 -->
+        <footer>
+            <div class="tabBar">
+                <div>
+                    <img src="./img/首页.png" alt="">
+                    <p>首页</p>
+                </div>
+                <div>
+                    <img src="./img/search.png" alt="">
+                    <p>分类</p>
+                </div>
+                <div>
+                    <img src="./img/排行.png" alt="">
+                    <p>排行榜</p>
+                </div>
+                <div>
+                    <img src="./img/购物车.png" alt="">
+                    <p>购物车</p>
+                </div>
+                <div>
+                    <img class="lastImg" src="./img/我的.png" alt="">
+                    <p>我的易购</p>
+                </div>
+
+            </div>
+
+
+        </footer>
+
+        <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+        <script src="./node_modules/swiper/js/swiper.js"></script>
+        <script src="./js/utils.js"></script>
+        <script src="./js/index.js"></script>
+</body>
+
+</html>

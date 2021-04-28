@@ -1,0 +1,23 @@
+[
+    {
+        "banner_img": "./img/banner1.png"
+    },
+    {
+        "banner_img": "./img/banner2.png"
+    },
+    {
+        "banner_img": "./img/banner3.jpeg"
+    },
+    {
+        "banner_img": "./img/banner4.jpeg"
+    },
+    {
+        "banner_img": "./img/banner5.png"
+    },
+    {
+        "banner_img": "./img/banner6.png"
+    },
+    {
+        "banner_img": "./img/banner7.png"
+    }
+]

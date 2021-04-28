@@ -37,13 +37,13 @@
       <div class="tagBox">
         <!-- 如果函数里的代码只有一句话，可以把 -->
         <el-tag :type="0 == type ? 'success' : 'info'" @click="changeType(0)">
-          标签三
+          全部
         </el-tag>
         <el-tag :type="1 == type ? 'success' : 'info'" @click="changeType(1)">
-          标签三
+          未完成
         </el-tag>
         <el-tag :type="2 == type ? 'success' : 'info'" @click="changeType(2)">
-          标签三
+          已完成
         </el-tag>
 
         <el-divider content-position="center"
@@ -73,7 +73,12 @@
           >
             <!-- formatter绑定的是一个函数，当前函数return啥，那对应的那一列中就显示什么，而且还会默认给函数的第一个实参传递当前行的所有值 -->
           </el-table-column>
-          <el-table-column prop="time" label="完成时间" width="180">
+          <el-table-column
+            prop="time"
+            label="完成时间"
+            width="180"
+            :formatter="showTime"
+          >
           </el-table-column>
           <el-table-column prop="address" label="操作">
             <template slot-scope="scope">
@@ -81,7 +86,11 @@
               <el-button type="text" size="small" @click="del(scope)"
                 >删除</el-button
               >
-              <el-button type="text" size="small" v-if="scope.row.state == 1"
+              <el-button
+                type="text"
+                size="small"
+                v-if="scope.row.state == 1"
+                @click="update(scope)"
                 >完成</el-button
               >
             </template>
@@ -134,8 +143,10 @@
 </template>
 
 <script>
+import moment from "../node_modules/moment";
 // import{CHANGE_LIST} from './store/types'
-import { removeTask } from "./api/task";
+import { removeTask, updateTask, addTask } from "./api/task";
+
 export default {
   /* created( ){
     this.$message.error('alskdjf');
@@ -181,7 +192,7 @@ export default {
         ],
         time: [{ required: true, message: "请选择时间", trigger: "blur" }],
       },
-      loading:true
+      loading: true,
     };
   },
   methods: {
@@ -200,6 +211,23 @@ export default {
           return;
         }
         console.log("正常提交");
+        console.log(this.form);
+        // moment是处理时间的函数，他可以获取到任何形式的时间，也可以相对于当前的时间获取之前或者之后的时间
+        this.form.time = moment(this.form.time).format("lll");
+        let { time, desc } = this.form;
+        addTask({ time, task: desc }).then((res) => {
+          let { code } = res;
+          if (code == 0) {
+            this.$message.success("新增成功");
+            this.loading = true;
+            this.$store.dispatch("changeList").then(() => {
+              this.loading = false;
+            });
+          } else {
+            this.$message.info("新增失败");
+          }
+          this.dialogVisible = false;
+        });
       });
       //  this.$refs.form.resetFields();//清空表单
     },
@@ -214,7 +242,7 @@ export default {
       // row 代表每一行中的所有数据，有多少行循环多少次
       console.log(row, 191);
       let { state } = row;
-      return state == 1 ? "已完成" : "未完成";
+      return state == 1 ? "未完成" : "已完成";
     },
     del(scope) {
       //看一下scope是什么东西
@@ -234,20 +262,49 @@ export default {
           let { code } = res;
           if (code == 0) {
             this.$message.success("删除成功");
-            this.loading=true;
-            this.$store.dispatch("changeList").then(()=>{
-              this.loading=false
-            })
+            this.loading = true;
+            this.$store.dispatch("changeList").then(() => {
+              this.loading = false;
+            });
           } else {
             this.$message.info("删除失败");
           }
         });
     },
+    showTime(row) {
+      let { state, time, complete } = row;
+      return state == 1 ? time : complete;
+    },
+    update(scope) {
+      let id = scope.row.id;
+      this.$confirm(`您确定要修改ID为${id}的数据吗, 是否继续?`, "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          // 发送更新的接口
+          return updateTask({ id });
+          // removeTask({id}).then(()=>{})
+        })
+        .then((res) => {
+          let { code } = res;
+          if (code == 0) {
+            this.$message.success("修改成功");
+            this.loading = true;
+            this.$store.dispatch("changeList").then(() => {
+              this.loading = false;
+            });
+          } else {
+            this.$message.info("修改失败");
+          }
+        });
+    },
   },
   created() {
-    this.$store.dispatch("changeList").then(()=>{
-      this.loading=false;
-    })
+    this.$store.dispatch("changeList").then(() => {
+      this.loading = false;
+    });
   },
   computed: {
     tableData() {
