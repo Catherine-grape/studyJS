@@ -55,3 +55,41 @@ store直接写在组件上面直接写 this.store使用，如果挂载在vue根�
 工程化路由中的路径有快捷方式
 '../pages/customer/customerAdd.vue'
 '@/pages/customer/customerAdd.vue'   @代表src，使用@没有提示
+
+
+limit分页 page分页 limit=10&page=1 每一页10条第一页   limit=10&page=2 每一页10条第二页   limit一般是固定的 page一般是动态的
+
+## router的导航守卫
+
+ 此函数叫做全局的前置导航守卫
+ 它会监听所有的路由，在路由跳转成功之前会执行此函数
+     to是即将到达的路由信息
+    from是你从哪里来的路由信息
+    如果不执行next函数的话，那路由跳转将会被终止
+适宜权限校验，没有next执行都不展示
+ router.beforeEach((to, from, next) => {
+})
+
+路由守卫从外向内执行
+beforeEnter 守卫
+局部导航守卫
+        {
+            path: '/organize',
+            component: organize,
+            children: [],
+            beforeEnter: (to, from, next) => {
+                console.log('即将进入组织解构页面');
+                next();
+            }
+        }
+
+## 自定义指令
+注册一个全局自定义指令 `v-focus` 但是有一个缺陷，如果自己手动更改后面的hash也会跳转，最好是自己写一个自定义指令，并且设置导航守卫，这样比较严谨
+Vue.directive('focus', {
+  // 当被绑定的元素插入到 DOM 中时……
+  inserted: function (el) {
+    // 聚焦元素
+     //el放在谁身上 el就是谁  v-focus=“flag” el就是写了这行的元素
+    el.focus()
+  }
+})

@@ -117,7 +117,7 @@ export default {
         type: "warning",
       })
         .then(() => {
-          console.log("确定");
+          // console.log("确定");
           return signOut();
         })
         .then((result) => {
@@ -133,7 +133,7 @@ export default {
           }
         })
         .catch(() => {
-          console.log("取消");
+          // console.log("取消");
         });
     },
     handleClose() {},

@@ -14,6 +14,22 @@ import "element-ui/lib/theme-chalk/index.css";
 Vue.use(ElementUI);//初始化Element，用use放在来Vue的全局上
 Vue.config.productionTip = false;
 
+// 注册一个全局自定义指令`v-power`
+Vue.directive('power', {
+  // 当被绑定的元素插入到 DOM 中时……
+  inserted: function (el,obj) {
+    // 聚焦元素
+    // el是当前v-power操作的元素，obj是一个对象，里面的value就是给v-power传递的值(value的值就是当前元素对应的权限)。咱们需要判断一下当前的value的值在power里面没有没，如果有的话，人家就是有权限，那就正常显示，如果没有的话，那就是没有权限，就把当前的dom元素删除
+    // console.log(el, power);
+    let power = store.state.power;
+    let flag = obj.value;
+    if (!power.includes(flag)) {
+      el.parentNode.removeChild(el)
+    }
+    
+  }
+})
+
 // 当前的接口的请求是一个串行的过程，等到登录校验成功之后，再去发送请求权限的接口
 checkLogin().then((result) => {
   let { code } = result;

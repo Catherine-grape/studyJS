@@ -3,6 +3,10 @@ import customerAdd from '../pages/customer/customerAdd.vue';
 
 export default [
     {
+        path: '/customer',
+        redirect:'/customer/list'
+    },
+    {
         path: 'list',
         component: customerList
     },
@@ -10,4 +14,5 @@ export default [
         path: 'add',
         component: customerAdd
     }
+
 ]

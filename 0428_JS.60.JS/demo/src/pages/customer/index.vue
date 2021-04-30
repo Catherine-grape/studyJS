@@ -15,6 +15,8 @@
         class="el-menu-vertical-demo"
         active-text-color="#ffd04b"
         @select="select"
+        :default-active="changeActive()"
+        :default-openeds="['1']"
       >
         <el-submenu index="1">
           <template slot="title">
@@ -26,7 +28,7 @@
               我的客户
               <!-- <router-link>我的客户</router-link> -->
             </el-menu-item>
-            <el-menu-item index="1">
+            <el-menu-item index="1" v-power="flag">
               全部客户
               <!-- <router-link>全部客户</router-link> -->
             </el-menu-item>
@@ -41,17 +43,22 @@
     <div class="right">
       <router-view></router-view>
     </div>
-    我是客户管理大组件
+    <!-- 我是客户管理大组件 -->
   </div>
 </template>
 
 <script>
-import Vue from "vue";
+// import Vue from "vue";
 
 export default {
+  data(){
+    return{
+      flag:'allcustomer'
+    }
+  },
   methods: {
     select(index) {
-      console.log(index);
+      // console.log(index);
       let ary = [
         "/customer/list?type=my",
         "/customer/list?type=all",
@@ -63,7 +70,26 @@ export default {
       if(href.includes(path))return
       
       this.$router.push(path); 
+
     },
+    changeActive(){
+      let url=location.href;
+      let [a,b]=url.split('#');
+      let [c,d]=b.split('?')
+      console.log(a,b,c,d);
+      if(b.includes('/customer/list')){
+        if(d==undefined||d=="type=my"){
+        return '0'
+      }else{
+        return '1'
+      }
+      /* if(d=='type=all'){
+        return '1'
+      } */
+      }
+      
+      return '2'
+    }
   },
 };
 </script>
@@ -75,12 +101,14 @@ export default {
   display: flex;
   .left {
     width: 20%;
+    min-width: 200px;
     height: 100%;
     background: #545c64;
   }
   .right {
     width: 80%;
     height: 100%;
+    overflow: auto;
   }
 }
 </style>
