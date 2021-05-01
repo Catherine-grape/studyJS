@@ -36,11 +36,7 @@ checkLogin().then((result) => {
   if (code == 0) {
     // 如果当前的登录校验成功，就再继续请求权限的接口
     // 登录成功之后再渲染页面，因为验证是一个异步的，登录失败也会导致先行渲染，所以在这里面先验证成功再进行渲染页面
-    new Vue({
-      store,
-      router,
-      render: h => h(App)
-    }).$mount('#app');
+    
     return getPower();
   } else {//如果校验失败，就返回一个失败的promise实例，让下面的catch执行
     // Vue.prototype.$alert('当前非法登录，请返回登录页', {
@@ -55,7 +51,12 @@ checkLogin().then((result) => {
   let { code, power } = result;
   if (code == 0) {
     // 应该把power存储到store中
-    store.commit('changePower',power)
+    store.commit('changePower', power)
+    new Vue({
+      store,
+      router,
+      render: h => h(App)
+    }).$mount('#app');
   }
 }).catch(() => {
   Vue.prototype.$alert('当前非法登录，请返回登录页', {

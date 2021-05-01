@@ -8,7 +8,11 @@ import customerModel from './customer'
 // '@/pages/customer/customerAdd.vue'   @代表src，使用@没有提示
 
 import organize from '../pages/organize';
-import noFound from '../pages/notFound';
+// import noFound from '../pages/notFound';
+const noFound = () => {
+    return import('../pages/notFound')
+}
+// 路由懒加载，当路由匹配成功之后，渲染对应的组件的时候，此处的函数执行，才会导入你的组件
 Vue.use(VueRouter);
 
 

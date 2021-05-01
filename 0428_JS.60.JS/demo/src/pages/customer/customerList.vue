@@ -134,6 +134,11 @@ export default {
       total: 0,
     };
   },
+  beforeRouteUpdate(to, from, next) {
+    // 路由给提供的组件内的守卫，它的执行机制和watch中的$route是一样的，切换路由的时候组件没有被切换，但是路由信息发生了变化，这时候此函数就会被执行
+    console.log(123456);
+    next();
+  },
   created() {
     this.queryData();
   },

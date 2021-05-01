@@ -52,6 +52,7 @@ var validatePass2 = (rule, value, callback) => {
   }
 };
 export default {
+  name:'add',
   data() {
     return {
       form: {
@@ -72,7 +73,11 @@ export default {
       },
     };
   },
+  activated(){
+    console.log(123);
+  },
   created(){
+    console.log('我是新增，重新加载');
     //   console.log(this.$route.query);
     let {id}=this.$route.query;
     // 如果当前的id有值，说明是从点击编辑按钮哪里过来的，这时候去请求客户详细信息，并且渲染到页面。如果没有id那说明是点击新增客户按钮进来的，这时候不需要请求客户信息。

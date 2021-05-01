@@ -41,7 +41,11 @@
       </el-menu>
     </div>
     <div class="right">
-      <router-view></router-view>
+      <!-- :include="['add']" include数组里有谁，那谁就会被缓存，可以控制缓存的范围    max是最大缓存数量，如果超过里这个数量，他就会把最久没有访问的组件实例销毁-->
+      <keep-alive :exclude="['add']" :max="10">
+        <router-view></router-view>
+      </keep-alive>
+      
     </div>
     <!-- 我是客户管理大组件 -->
   </div>
@@ -53,6 +57,7 @@
 export default {
   data(){
     return{
+      // arr:['a','b'],
       flag:'allcustomer'
     }
   },
