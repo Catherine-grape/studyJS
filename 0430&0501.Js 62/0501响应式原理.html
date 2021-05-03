@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+/* new Vue({
+    data:{
+
+    }
+}) */
+let data={
+    a:1,
+    b:2,
+    c:{
+        d:4,
+        f:{
+            s:5
+        }
+    }
+}
+
+/* 
+vue2
+//Object.defineProperty(object,key,{对当前属性的修饰}) 当前函数是用来修饰对象里的属性的
+Object.defineProperty(data,'a',{
+   
+    get(){
+        console.log('get');
+        return 100
+         // 以后再获取data.a的时候该函数就会执行，而且当前函数返回什么，a的值就是什么
+    },
+    set(newVal){ //data.a=200   set 200  a: 100
+        console.log('set',newVal);
+        // 以后你设置data.a的值的时候，该函数就会执行，可以传递形参
+
+    }
+}) */
+
+/* vue2 「相当于把每一个get set都放在实例上 每个人都是用自己的」
+// 每一个data属性都加上get set
+function Observer(data){
+    for(let key in data){
+    defineReactive(data,key,data[key]); //data a 1 
+}
+}
+
+
+function defineReactive(data,key,val){
+    if(typeof val ==="object"){
+        Observer(val);
+    }
+    Object.defineProperty(data,key,{
+        get(){
+            return val
+        },
+        set(newVal){
+            val=newVal
+        }
+    });
+}
+Observer(data) */
+
+
+// vue3的数据劫持
+// 利用的是es6新增的Proxy进行数据的劫持「所有的属性都会走共同的get和set函数」。都需要去告诉代理去通知「相当于放在原型上，所有都是用的一个get set」
+let data2=new Proxy(data,{//data2 Proxy {a: 1, b: 2, c: {…}}
+    get(data,key){//data2.a get输出
+        // console.log('get',arguments);
+        console.log(data,key);
+        return data[key]
+    },
+    set(data,key,val){//data2.a=200 set输出 a:1
+        // console.log('set');
+        console.log(data, key,val);
+        data[key]=val
+    }
+})
+    </script>
+</body>
+</html>

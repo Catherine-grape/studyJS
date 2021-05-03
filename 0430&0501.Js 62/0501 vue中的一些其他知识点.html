@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <span v-cloak>{{num}}</span>
+        <div v-pre>100</div>
+        <p v-pre>200</p>
+         <!-- 
+        <input  v-if="flag" type="text">
+        <input  v-else type="text"> 
+    在视图中输入数据后，调用vm.flag=false 其实已经把input删除了，但是看见你的两个元素一样，就直接把input复用了框内的数据还在
+    -->
+
+        <input key='1' v-if="flag" type="text">
+        <input key='2' v-else type="text">
+        <!-- key代表唯一标识，如果有标识，会优先识别标识这时会重新创建一个新的元素 原有元素删除 -->
+
+        <ul>
+            <li v-for="(item,index) in list" :key="index">
+                <input type="checkbox">{{item}}
+                <!-- vm.list.splice(1,1)   删除200  原本√在200上 删除200后 √就落到了300上 所以不建议key是index -->
+            </li>
+            {{obj.flag}}
+        </ul>
+    </div>
+    <script src="./demo2/node_modules/vue/dist/vue.js"></script>
+    <script>
+        // vue中的一些细节知识点
+        // data中的数据尽量扁平化，这样会减少递归的次数
+        // v-pre  如果不是动态的值，写上这个就是跳过编译。如果视图中有一些元素是没有vue的语法的，是不需要进行编译的，这时候我们可以在其行间加一个 v-pre属性，这样就可以让vue跳过对它的编译
+        // v-cloak  「在元素编译之前，让当前元素先隐藏，等到vue编译结束再让其显示」 在元素编译之前，让当前的元素先隐藏，等到需要编译的时候，再让元素显示出来，这样可以避免花胡子闪烁问题。
+        // v-if和v-show的使用场合
+
+        // key在循环的时候尽可能使用key，而且key最好不要使用index
+
+
+
+        // Object.freeze  数据冻结对象  那些纯展示的数据，是不需要增加数据劫持的，可以使用Object.freeze把数据包裹起来，把数据进行冻结
+        // 假设页面有一个轮播图，展示用的 通过后台数据
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                num: 100,
+                obj: Object.freeze({flag:true}),//vm.obj.flag=false 数据是不变的
+                list:[100,200,300,400],
+                swiperData:[]
+            },
+            created(){
+                setTimeout(()=>{
+                    this.swiperData=Object.freeze({ image: 'xxx' }, {})
+                })
+            }
+        })
+    </script>
+</body>
+
+</html>
