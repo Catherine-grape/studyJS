@@ -1,0 +1,11 @@
+<!-- pages/home/home.wxml -->
+<text></text>
+<view class="container">
+    <image class="" src="../../imgs/logo.jpeg"></image>
+    <text class="name">比巴卜</text>
+    <view bind:tap="fn1">
+        1111
+        <text class="title" data-num="100" catch:tap="fn">{{msg}}</text>
+    </view>
+   
+</view>

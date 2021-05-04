@@ -1,0 +1,15 @@
+/* pages/home/home.wxss */
+.container{
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+align-items: center;
+}
+
+image{
+    display:block;
+    width: 480rpx;
+    /* 在ipone6「375」下1rpx等于0.5px */
+    height: 480rpx;
+    border-radius: 50%;
+}

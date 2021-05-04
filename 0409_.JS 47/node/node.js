@@ -1,7 +1,7 @@
 /* 
 ### 
 node 一共有两个作用：
- 1. 当安装node的时候会自动的把npm下载下来（npm可以对当前的项目所以来的模块进行管理）
+ 1. 当安装node的时候会自动的把npm下载下来（npm可以对当前的项目所依赖的模块进行管理）
  在package.json中有一个scripts的属性，它里面可以配置快捷的命令执行方式（你在终端里输入的命令可以在scripts中设置一个快捷方式
 "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,7 +15,7 @@ node 一共有两个作用：
   lessc index.less index css   node权限不够
   "test": "lessc index.less index css"
   npm run text 
-  package.json--> scripts 「test可以算一改变名字，也可以在添加」
+  package.json--> scripts 「test可以算一改变名字，也可以再添加」
 
 ###I/O
 nodeJs 的特点：单线程、无阻塞I/O

@@ -1,0 +1,6 @@
+<!-- components/com.wxml -->
+<view>
+    components/com.wxml
+我是com组件{{msg}}
+    <button bindtap="fn">点击拿到从父组件</button>
+</view>

@@ -1,0 +1,15 @@
+<!-- pages/lang/lang.wxml -->
+<text>相当于span</text>
+<view>相当于div</view>
+<button>相当于button</button>
+<navigator class="" target="" url="" hover-class="navigator-hover" open-type="navigate">
+    相当于vue的router-link
+</navigator>
+<block wx:for="{{arr}}"  wx:for-index="idx">
+    <!-- 它是一个辅助标签 分块，并不想让他显示的时候就可以使用block -->
+    <view >{{item}} {{idx}}</view>
+    <block>
+        <view wx:if="{{true}}">1</view>
+        <view wx:else>2</view>
+    </block>
+</block>

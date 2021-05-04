@@ -1,0 +1,11 @@
+<!--pages/a/a.wxml-->
+<text>pages/a/a.wxml</text>
+<view bind:tap="fn">
+返回到上一页
+</view>
+<view bind:tap="go">
+  前进到我的
+</view>
+<view bindtap="check">
+  查看当前的页面栈
+</view>

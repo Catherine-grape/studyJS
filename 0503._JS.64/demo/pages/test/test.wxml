@@ -1,0 +1,17 @@
+<!-- pages/test/test.wxml -->
+<text></text>
+<com msg="{{msg}}" bind:event="fn"></com>
+<!-- @event="fn"    bind:event="fn" -->
+<button bindtap="fn">点击改变msg</button>
+<swiper class="" autoplay="{{true}}" indicator-dots="{{true}}">
+    <swiper-item class="" item-id="1">1</swiper-item>
+    <swiper-item class="" item-id="2">2</swiper-item>
+    <swiper-item class="" item-id="3">3</swiper-item>
+</swiper>
+<icon class="" type="cancel" size="100" color="red"></icon>
+<picker bindchange="bindPickerChange" range="[{{array}}]" >
+    请选择
+    <view class="picker" hover-class="none" hover-stop-propagation="false"></view>
+</picker>
+<map id="" class="2" longitude="" latitude="" scale="16" markers="" 
+    bindregionchange="" bindtap="" bindupdated="" ></map>
