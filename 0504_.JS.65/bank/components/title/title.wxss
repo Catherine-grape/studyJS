@@ -1,0 +1,17 @@
+/* components/title/title.wxss */
+.container{
+  display: flex;
+  height: 60rpx;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: space-between;
+  padding:0 30rpx;
+}
+.title{
+  font-weight: 700;
+  font-size:32rpx;
+}
+.more{
+  color:#cfcfcfcf;
+  font-size:26rpx;
+}

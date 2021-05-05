@@ -1,0 +1,4 @@
+/* pages/home/home.wxss */
+.hot{
+    margin-top: 20rpx;
+}

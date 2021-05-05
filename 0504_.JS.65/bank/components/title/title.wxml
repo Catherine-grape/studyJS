@@ -1,0 +1,6 @@
+<!--components/title/title.wxml-->
+
+<view class="container">
+<view class="title" >{{title}}</view>
+<view class="more" bindtap="jump">查看更多></view>
+</view>

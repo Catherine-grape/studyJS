@@ -1,0 +1,10 @@
+<!-- components/bank/bank.wxml -->
+<view class="container">
+  <view class="list " style="height:{{isHeight?'auto':'320rpx'}}">
+    <view class="item" wx:for="{{data}}" wx:key="index">
+      <image class="image" src="{{item.bankLogoUrl}}"></image>
+      <view class="name">{{item.bankName}}</view>
+    </view>
+  </view>
+  <button wx:if="{{data.length>8}}" bindtap="fn">{{isHeight?'展开显示':'显示更多'}}</button>
+</view>

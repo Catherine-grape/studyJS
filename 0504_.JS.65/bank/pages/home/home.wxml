@@ -1,0 +1,14 @@
+<!-- pages/home/home.wxml -->
+<view class="container">
+  <!-- 轮播图部分 -->
+  <my-swiper data="{{swiperData}}"></my-swiper>
+  <!-- 标题头部 -->
+  <my-title title="热门银行" url="/pages/my/my"></my-title>
+  <!-- 银行列表 -->
+  <my-bank data="{{bankList}}"></my-bank>
+  <!-- 热门卡片 -->
+  <view class="hot" >
+  <my-title title="热门卡片" url="/pages/my/my"></my-title>  
+  </view>
+  <my-card data="{{cardList}}"></my-card>
+</view>

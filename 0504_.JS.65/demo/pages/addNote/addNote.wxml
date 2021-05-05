@@ -1,0 +1,11 @@
+<view class="container">
+    <view class="title">
+        <label>标题</label>
+        <input placeholder="请输入标题" bindinput="inputValue"></input>
+    </view>
+    <view class="content">
+        <label>内容</label>
+        <textarea placeholder="请输入内容" bindinput="textValue"></textarea>
+    </view>
+    <button class="button" catchtap="add">添加</button>
+</view>

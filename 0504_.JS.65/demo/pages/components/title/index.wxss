@@ -1,0 +1,14 @@
+@import '/common/css.wxss';
+.container {
+    display: flex;
+    justify-content: space-between;
+    margin: 30rpx 20rpx;
+}
+
+.titleName {
+    
+}
+.lookMore {
+    font-size: 28rpx;
+    color: rgb(165, 163, 163);
+}

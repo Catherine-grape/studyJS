@@ -1,0 +1,12 @@
+{
+  "usingComponents": {
+      "swiper-cpn": "../components/swiper/index",
+      "bankList-con": "../components/bankList/index",
+      "title-cpn": "../components/title/index",
+      "cardList-cpn": "/pages/components/cardList/index"
+  },
+    "navigationBarTitleText": "首页",
+    "backgroundColor": "#FF4500",
+    "backgroundTextStyle": "dark",
+    "enablePullDownRefresh": true
+}

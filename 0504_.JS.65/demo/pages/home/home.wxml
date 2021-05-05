@@ -1,0 +1,7 @@
+<swiper-cpn swiperData="{{swiperData}}"></swiper-cpn>
+<title-cpn titleName="热门银行"></title-cpn>
+<bankList-con bankList="{{bankList}}"></bankList-con>
+<view class="hotCard">
+    <title-cpn titleName="热门卡片"></title-cpn>
+</view>
+<cardList-cpn cardList="{{cardList}}"></cardList-cpn>

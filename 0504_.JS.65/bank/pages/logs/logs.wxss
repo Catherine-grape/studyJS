@@ -1,0 +1,21 @@
+/* pages/logs/logs.wxss */
+.container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: lightblue;
+height: 100vh;
+}
+.img{
+  width: 200rpx;
+  height: 200rpx;
+  margin:0 20rpx;
+  border-radius: 50%;
+}
+.title{
+  margin:200rpx auto;
+}
+.name{
+  color:lightcoral;
+}

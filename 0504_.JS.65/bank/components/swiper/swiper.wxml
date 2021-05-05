@@ -1,0 +1,11 @@
+<!-- components/swiper/swiper.wxml -->
+<view>
+    <swiper indicator-dots="{{true}}" autoplay="{{true}}" circular="{{true}}" indicator-color="#FF6699" indicator-active-color="#FF6633">
+    <!--key可以拿到for循环中的属性名直接使用-->
+        <block wx:for="{{data}}" wx:key="id">
+            <swiper-item class="item" item-id="{{item.id}}">
+                <image src="{{item.imgUrl}}" />
+            </swiper-item>
+        </block>
+    </swiper>
+</view>

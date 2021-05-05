@@ -1,0 +1,38 @@
+{
+    "pages": [
+        "pages/log/log",
+        "pages/note/note",
+        "pages/home/home",
+        "pages/moreCard/moreCrad",
+        "pages/detail/detail",
+        "pages/addNote/addNote"
+    ],
+    "window": {
+        "navigationBarBackgroundColor": "#00CCFF",
+        "navigationBarTextStyle": "white",
+        "navigationBarTitleText": "小程序",
+        "backgroundColor": "#eeeeee",
+        "backgroundTextStyle": "light",
+        "enablePullDownRefresh": true
+    },
+    "tabBar": {
+        "list": [
+            {
+                "pagePath": "pages/home/home",
+                "text": "首页",
+                "iconPath": "imgs/home2.png",
+                "selectedIconPath": "imgs/home1.png"
+            },
+            {
+                "pagePath": "pages/note/note",
+                "text": "记事本",
+                "iconPath": "imgs/dingdan2.png",
+                "selectedIconPath": "imgs/dingdan1.png"
+            }
+        ]
+    },
+    "requiredBackgroundModes": [
+        "audio"
+    ],
+    "sitemapLocation": "sitemap1.json"
+}

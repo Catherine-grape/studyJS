@@ -1,0 +1,3 @@
+<scroll-view class="container" scroll-y="{{true}}" bindscrolltolower="downFetch">
+    <card-list-cpn cardList="{{cardList}}"></card-list-cpn>
+</scroll-view>

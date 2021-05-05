@@ -1,0 +1,18 @@
+<view>
+    <block wx:for="{{cardList}}">
+        <view class="container" data-id="{{item.cardCode}}" catchtap="jumpDetail">
+            <view class="container-left">
+                <image src="{{item.logoUrl}}"></image>
+            </view>
+            <view class="container-right">
+                <view class="title">{{item.title}}</view>
+                <view class="content">{{item.content}}</view>
+                <view class="tags">
+                    <block wx:for="{{item.tags}}" wx:for-item="ite">
+                        <text>{{ite}}</text>
+                    </block>
+                </view>
+            </view>
+        </view>
+    </block>
+</view>

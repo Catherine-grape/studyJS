@@ -1,0 +1,6 @@
+<!--pages/logs/logs.wxml-->
+<view class="container">
+  <image class="img" src="/imgs/logo.jpeg" bindtap="jump"></image>
+  <view class="title">Hello Word</view>
+  <view class="name">比巴卜</view>
+</view>

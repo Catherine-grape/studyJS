@@ -1,0 +1,46 @@
+
+.box {
+   height: 950rpx;
+   /* background: rgba(255, 68, 0, 0.082);  */
+}
+.container {
+    border: 1px solid gainsboro;
+    box-sizing: border-box;
+    margin: 10rpx;
+    padding: 10rpx;
+}
+.title {
+    border-bottom: 1px solid rgba(220, 220, 220, 0.788);
+    font-size: 40rpx;
+    line-height: 2;
+    color: rgba(240, 105, 57, 0.836);
+}
+.content {
+    font-size: 32rpx;
+    line-height: 1.5;
+    color: rgb(82, 80, 80);
+}
+
+.time {
+    border-top: 1px solid rgba(220, 220, 220, 0.788);
+    font-size: 32rpx;
+    line-height: 1.5;
+}
+
+.button {
+    position: fixed;
+    width: 100%;
+    bottom: 40rpx;
+    display: flex;
+    justify-content: space-between;
+}
+
+button {
+    font-size: 28rpx;
+    width: 200rpx;
+}
+
+.noData {
+    text-align: center;
+    margin: 400rpx auto;
+}

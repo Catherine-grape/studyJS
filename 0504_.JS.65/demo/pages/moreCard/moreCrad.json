@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+      "card-list-cpn": "/pages/components/cardList/index"
+  },
+  "navigationBarTitleText": "卡列表"
+}

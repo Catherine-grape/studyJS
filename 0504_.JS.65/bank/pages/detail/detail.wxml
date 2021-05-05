@@ -1,0 +1,16 @@
+<!--pages/detail/detail.wxml-->
+<view class="container">
+  <image class="image" src="{{item.logoUrl}}">
+  </image>
+  <view class="titile">{{item.title}}</view>
+  <view class="tags">
+    <block wx:for="{{item.tags}}" wx:for-item="ite">
+      <text>{{ite}}</text>
+    </block>
+    
+  </view>
+  <view class="desc">
+    <view class="c" wx:for="{{item.detail}}" wx:for-item="ite"> {{ite}}</view>    
+  </view>
+  <button type="primary" class="button">点击办卡</button>
+</view>

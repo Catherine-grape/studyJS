@@ -1,0 +1,20 @@
+<!--components/card/card.wxml-->
+<view class="container">
+  <block wx:for="{{data}}"  wx:key="index" >
+   <view class="item" data-code="{{item.cardCode}}" bindtap="jump">
+    <view class="left">
+  <image class="image" src="{{item.logoUrl}}" >  
+  </image>
+    </view>
+    <view class="right">
+      <view class="title">{{item.title}}</view>
+      <view class="content">{{item.content}}</view>
+      <view class="tags">
+        <block wx:for="{{item.tags}}">
+          <text>{{item}}</text> 
+        </block>
+      </view>
+    </view>
+  </view> 
+  </block>
+</view>

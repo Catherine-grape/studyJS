@@ -1,0 +1,26 @@
+/* components/bank/bank.wxss */
+.container{
+  width: 100%;
+  height: auto;
+  box-sizing: border-box;
+  padding: 10rpx 20rpx;
+}
+.list{
+  display:flex;
+  justify-items: center;
+  flex-wrap: wrap;
+  overflow: hidden;
+}
+.item{
+  width: 25%;
+  margin-bottom: 10rpx;
+}
+.image{
+  width: 90rpx;
+  height: 90rpx;
+  display: block;
+  margin:10rpx auto;
+}
+.name{
+  text-align: center;
+}

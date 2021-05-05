@@ -1,0 +1,21 @@
+<scroll-view class="box" scroll-y="{{true}}">
+    <block wx:for="{{notes}}">
+        <view class="container">
+            <view class="title">
+                <text>{{item.title}}</text>
+            </view>
+            <view class="content">
+                <text>{{item.content}}</text>
+            </view>
+            <view class="time">
+                <text>{{item.time}}</text>
+            </view>
+        </view>
+    </block>
+    <view wx:if="{{notes.length<1}}" class="noData">暂无数据~</view>
+</scroll-view>
+
+<view class="button">
+    <button type="warn" catchtap="delete">清除</button>
+    <button type="primary" catchtap="jumpAddNote">添加</button>
+</view>

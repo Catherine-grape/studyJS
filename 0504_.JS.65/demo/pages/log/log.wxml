@@ -1,0 +1,5 @@
+<view class="container">
+    <image src="/imgs/logo.jpeg" class="userImg" bindtap="jumpHome"></image>
+    <text class="userName">骨架终结者</text>
+    <text class="userInfo">hello world</text>
+</view>
