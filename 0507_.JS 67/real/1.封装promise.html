@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    // 重写promise类，这个方法
+    class MyPromise {
+      constructor(executor) { // 当new Promise的时候， constructor就会立即执行，而且还可以接受new Promise传递过来的参数
+        // this-->MyPromise类的实例
+        // promise的实例都有三个状态，分别是pending, fulfilled, rejected
+        // 当new MyPromise的时候是pending等待态
+        // 当你执行resolve时，那实例的状态就会变成fulfilled成功态
+        // 当你执行reject时，那实例的状态就会变成rejected失败态
+        this.state = 'pending';
+        this.fulfilledEvent = []; // 用来存放成功的事件回调
+        this.rejectedEvent = []; // 用来存放失败的事件回调
+        let resolve = (result) => {
+          // 如果当前状态不是pending，那就说明状态已经被更改过，那状态就会发生凝固，下面的代码就不会再执行
+          if (this.state !== 'pending') return;
+
+          this.state = 'fulfilled';
+
+          clearTimeout(this.timer);
+          this.timer = setTimeout(() => {
+            this.fulfilledEvent.forEach(item => {
+              if (typeof item === 'function') {
+                item(result)
+              }
+            })
+          })
+
+
+        }
+        let reject = (result) => {
+          if (this.state !== 'pending') return;
+          this.state = 'rejected';
+
+          clearTimeout(this.timer);
+          this.timer = setTimeout(() => {
+            this.rejectedEvent.forEach(item => {
+              if (typeof item === 'function') {
+                item(result)
+              }
+            })
+          })
+        }
+        try {
+          executor(resolve, reject)
+        } catch (e) {
+          reject(e)
+        }
+
+      }
+
+      // then所做的事就是往事件池子里订阅方法
+      // 当then执行的时候，分别把成功的回调函数订阅到成功的事件池里，把失败的回调函数订阅到失败的事件池里
+      then(resolveFn, rejectFn) {
+        // this-->p1
+        // 订阅方法
+        // 如果then执行的时候形参没有被赋值，那就默认给他赋值一个空函数
+        if (!resolveFn) {
+          resolveFn = () => { }
+        };
+        if (!rejectFn) {
+          rejectFn = () => { }
+        }
+
+        this.fulfilledEvent.push(resolveFn);
+        this.rejectedEvent.push(rejectFn);
+
+        // then函数的返回结果应该是一个promise实例
+
+        return new MyPromise((resolve, reject) => { // 第一个then函数的返回结果就是p2实例
+          // 当前的this是谁 p1
+
+          // 往p1的事件池子里增加方法
+          this.fulfilledEvent[0] = (result) => {
+
+            let x = resolveFn(result); // x就是p3
+            // x:就是第一个then中回调函数执行的返回结果(看看他的返回结果是否是一个promise实例)
+            x instanceof MyPromise ? x.then(resolve, reject) : resolve();
+            // x就是p3实例，把p2的改状态的方法订阅到p3的事件池子里，当p3的状态发生变化的时候，去发布自己池子里的方法，但是p3的池子里的方法是改变p2状态的方法，所以就相当于间接的改变p2的状态
+          };
+
+
+          this.rejectedEvent[0] = (result) => {
+
+            let x = rejectFn(result); // x就是p3
+            // x:就是第一个then中回调函数执行的返回结果
+            x instanceof MyPromise ? x.then(resolve, reject) : resolve();
+            // x就是p3实例，把p2的改状态的方法订阅到p3的事件池子里，当p3的状态发生变化的时候，去发布自己池子里的方法，但是p3的池子里的方法是改变p2状态的方法，所以就相当于间接的改变p2的状态
+          }
+        })
+      }
+
+    }
+
+
+
+    let p1 = new MyPromise((resolve, reject) => {
+      // console.log(resolve)
+      // resolve(100);
+      resolve(100);
+      // console.log(xxxx)
+    })
+    // console.log(p1, 34)
+    // p1.then((res) => {
+    //     console.log(res)
+    // }, (e) => {
+    //     console.log(e)
+    //  })
+    // 这是使用try，catch那块
+    // console.log(300)
+
+
+    //------------------------------
+    p1.then(() => {
+      return new MyPromise((resolve, reject) => { // p3
+        resolve()
+      })
+      console.log(100)
+    }).then(() => {
+      console.log(200)
+    }, () => {
+      console.log(300)
+    })
+// then函数的执行结果是一个promise的实例
+// 往p1的事件池里在订阅一个方法(fn)，这个方法的作用就是发布第二个then中的回调函数
+
+// p1  p2  p3
+// 第一个then：把方法订阅到p1的事件池子里(p1的成功事件池有)
+// 第二个then：把方法订阅到p2的事件池子里
+// p3的then：它把p2的resolve和reject放到p3的事件池子里了
+
+
+// 下面第二个then的回调函数的执行受上一个then中回调函数的返回的promise实例的状态的影响，如果返回的不是promsie的实例，那就会默认返回一个成功状态的promise实例
+
+
+
+// Promise是一个ES6的内置类，当new Promise的时候，会给当前实例增加状态(默认是pending等待态)和两个事件池子(成功和失败的事件池)，还会给peomise的内部传递一个executor函数，此函数会立即执行，而且此函数会传递两个形参函数resolve和reject，形参对应的实参函数在promise内部，当执行任何一个函数的时候(当然这两个函数是用户在外部手动执行的)都会做两件事，第一件事是去改变当前promise实例的状态【pending-->fulfilled或者pending-->rejected】(而且状态一旦改变就会凝固)，第二件事就是去发布对应池子里的事件(利用的发布订阅思想)
+
+// promise的类的原型上还会有一个then方法，用来给当前的promise实例的事件池子订阅方法，而且还会返回一个新的promise实例(这也是为什么可以使用连then的原因)，
+// 当我们连续调用then的时候(then执行返回的是新的promise实例是p1)，如果当前then中的回调函数执行不返回一个promise实例，那当前的then(p1)就会默认是成功态，然而去发布他的成功的事件池子里的方法；如果当前的then中的回调函数执行返回一个promise(p2)实例，那这个promise(p2)实例就会接管p1实例的状态，然后去影响p1的事件池子里的方法的发布，原理就是把p1的resolve和reject放到p2的对应的事件池子里，当p2去发布自己池子里的方法时p1的resolve或者reject就会执行(p1的对应事件池子也就会执行)，从而达到间接的让p2去发布p1的池子里的方法
+
+
+  </script>
+</body>
+
+</html>
