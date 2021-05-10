@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class A {
+            constructor(a, b) {//构造函数
+                // this -->当前正在创建的实例
+                this.a = a;
+                this.b = b;
+            }
+            s = 300;//给实例增加方法与constructor中的this.s=300 是一样的
+            get() {//原型增加方法
+
+            }
+            static cn = 100;
+            static b = function () { }
+        }
+
+        /*  let f1 = new A(1, 2);//{a:1,b:2}
+         console.log(f1); */
+        class B extends A {//「公有」
+            constructor() {
+                super(100, 200);//让类A以普通函数的方式运行，并且把类A中的this指向了当前类B的实例,「私有」
+            }
+
+        }
+        let b = new B
+
+        function C(a, b) {
+            this.a = a, //d.a=100
+            this.b = b//d.b=200
+        }
+        function D() {
+            // this-->类C的实例
+            C.call(this, 100, 200)//让类C以普通函数的方式去运行，并且把类C函数的this指向了当前类D的实例(super(100,200))
+        }
+        let d = new D
+
+        
+    </script>
+</body>
+
+</html>
