@@ -16,8 +16,8 @@ class A extends React.Component {
             sum: a + b
         }) */
         console.log(this);
-        let a = Number(this.refs.a.value),
-            b = Number(this.x.value);
+        let a = this.refs.a.value/1,
+            b = this.x.value/1;
         this.setState({
             sum: a + b
         })
