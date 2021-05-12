@@ -1,4 +1,4 @@
-// useState，让函数拥有
+// useState，让函数拥有响应式的状态
 import React, { useState } from 'react';
 
 function App(props) {

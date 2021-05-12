@@ -36,7 +36,7 @@ class Foo extends React.Component {
                 num: prevState.num + 1
             }
         });
-        // 1. 在react中给元素绑定方法，当方法执行的时候，方法里的setState是异步执行的 「react合成时间中是异步的」*/
+        // 1. 在react中给元素绑定方法，当方法执行的时候，方法里的setState是异步执行的 「react合成事件中是异步的」*/
 
 
         // 2. setState在定时器中是同步执行的「修改num的值 不是渲染页面与视图更新无关，与console有关」

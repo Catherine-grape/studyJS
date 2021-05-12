@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+	<title>珠峰培训 - 微信：18310612838</title>
+	<!-- IMPORT CSS -->
+	<link rel="stylesheet" href="css/reset.min.css">
+	<link rel="stylesheet" href="css/banner.css">
+</head>
+
+<body>
+	<div id="app">
+		<!-- v-if的作用就是当组件的bannerList为空时不渲染，当bannerList的值不为空了，在渲染 -->
+		<banner v-if="bannerList.length" :button="true" :focus="true" :data="bannerList" :speed="1000" :interval="2000" :index="0" :init="init" :transitoned="transitoned"></banner>
+		<!-- 
+			banner组件的个性化配置:
+
+			data:是轮播图片的数据 [{id:1,src:'xxxx'},....]    是毕传的
+			button:控制当前组件中是否显示button组件   true/false
+			focus:控制当前组件是否显示焦点组件    true/false
+			speed:切换图片的速度(图片运行的速度)  默认是1000
+			interval:每隔多长时间切换一张图片    默认是2000
+			index: 轮播图从哪张图片开始轮播  (图片的索引)  默认是0
+			init: 是轮播图组件初始化完成的回调函数   他是一个函数
+			transitoned：图片轮播的时候，每轮播完成一张就会触发的回调函数
+		 -->
+		{{msg}}
+	</div>
+	<!-- <section class="container">
+		<div class="wrapper">
+			<div class="slide">
+				<img src="./images/banner01.jpg" alt="">
+			</div>
+			<div class="slide">
+				<img src="./images/banner02.png" alt="">
+			</div>
+			<div class="slide">
+				<img src="./images/banner03.png" alt="">
+			</div>
+			<div class="slide">
+				<img src="./images/banner01.jpg" alt="">
+			</div>
+		</div>
+		<div class="pagination">
+			<span class="active"></span>
+			<span></span>
+			<span></span>
+		</div>
+		<a href="javascript:;" class="button-prev"></a>
+		<a href="javascript:;" class="button-next"></a>
+	</section> -->
+
+	<!-- <template id="banner">
+		<div class="container">
+			<div class="wrapper">
+				<div class="slide">
+					<img src="./images/banner01.jpg" alt="">
+				</div>
+				<div class="slide">
+					<img src="./images/banner02.png" alt="">
+				</div>
+				<div class="slide">
+					<img src="./images/banner03.png" alt="">
+				</div>
+				<div class="slide">
+					<img src="./images/banner01.jpg" alt="">
+				</div>
+			</div>
+			<banner-focus></banner-focus>
+			<banner-button></banner-button>
+		</div>
+	</template> -->
+
+	<!-- <template id="focus">
+		<div class="pagination">
+			<span class="active"></span>
+			<span></span>
+			<span></span>
+		</div>
+	</template> -->
+
+	<!-- <template id="button">
+		<div>
+			<a href="javascript:;" class="button-prev"></a>
+			<a href="javascript:;" class="button-next"></a>
+		</div>
+	</template> -->
+</body>
+<script src="./js/axios.min.js"></script>
+<script src="./js/axios.defaults.js"></script>
+<script src="./js/vue.js"></script>
+<script src="./js/banner.js"></script>
+
+<script>
+
+
+	let vm = new Vue({
+		el: '#app',
+		data: {
+			bannerList: [],
+			msg: 100,
+			num: 200
+		},
+		created() {
+			// 发送请求轮播图的数据，请求成功以后给bannerList进行赋值
+			axios.get('/banner').then((res) => {
+				console.log(res);
+				let {
+					code,
+					data
+				} = res
+				if (code == 0) {
+					this.bannerList = data;
+				}
+			})
+		},
+		beforeUpdate() {
+			console.log('beforeUpdate');
+		},
+		components: {
+			banner
+		},
+		methods: {
+			init() {
+				console.log('当前轮播图已经初始化完成');
+			},
+			transitoned() {
+				console.log('图片切换了');
+			},
+			changeMsg() {
+				this.msg = 700;
+	
+				// $nextTick里面的回调函数会等到视图刷新完成之后在执行，那这样视图就会刷新两次
+				this.$nextTick(()=>{
+					this.msg = 900;
+				});
+				
+			}
+		}
+
+
+	});
+</script>
+
+</html>
