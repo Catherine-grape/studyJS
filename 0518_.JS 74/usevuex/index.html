@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- <input type="text" ref="a" v-sss="a" :ss="a">
+        <input type="text" ref="a" v-sss="a" :ss="a">
+        <input type="text" ref="a" v-sss="a" :ss="a"> -->
+        <!-- <div v-ss="true">1</div>
+        <div v-ss="true">1</div>
+        <div v-ss="false">1</div> -->
+        <div>{{num}}</div>
+        <button @click="changeNum(3000)"></button>
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script src="./node_modules/vuex/dist/vuex.js"></script>
+    <script>
+        /* Vue.directive('sss', {
+            //  'sss' v-的事件名字
+            inserted:function(ele,b) {
+                // console.log(a,b);
+                ele.focus()
+            },
+           
+        });
+        Vue.directive('ss', {
+            //  'sss' v-if 实现
+            inserted:function(ele,b) {
+                // console.log(a,b);
+                ele.focus()
+                let value=b.value;
+                if(!value){
+                    // ele.parentNode.removeChild(ele);
+                    ele.style.display='none';
+                }
+            },
+           
+        }); */
+        let store = new Vuex.Store({
+            state: {
+                //公共的响应式状态
+                num: 2
+            },
+            getters: {
+                sex(state) {
+                    return state.num % 2 == 0 ? "女" : "男";
+                }
+            },
+            mutations: { //  默认给两个形参 状态 用户执行传递过来的东西
+                changeNum(state, payload) {
+                    state.num = payload;
+                    console.log(this, 58);//store仓库实例
+                }
+                // 在页面使用的时候 this.$store.commit('changeNum',100)
+            },
+            actions: {
+                changeNum(context, payload) {
+                    //  context 你可以把它看作是当前的store实例对象「不是真正的store实例对象 不是同一个空间地址」
+                    // {state,commit,dispatch,getters}   
+                    // payload 用户执行传递过来的参数
+                    let { commit } = context;
+                    commit('changeNum', payload);
+                     console.log(this, 69);//也是当前store仓库实例
+                }
+                // 在页面使用的时候 this.$store.dispatch('changeNum',100)
+            },
+            modules: {}//分模块的
+        })
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                a: 100
+            },
+            b: 200, //$options
+            store: store,//让每一个组件实例上都可以拿到这个store。vue初始化的时候，在$options拿到store然后再挂载到实例上，use的时候。
+            mounted() {
+                console.log(this.$refs.a);
+                // this.$refs.a.focus();
+                // 把公共的逻辑放到全局  封装到指令中 就不需要在
+            },
+            computed: {
+                /* num() {
+                    return this.$store.state.num
+                } */
+                ...Vuex.mapState(['num'])
+            },
+            methods: {
+                /* changeNum(payload) {
+                    this.$store.dispatch('changeNum', payload)
+                } */
+                ...Vuex.mapActions(['changeNum'])
+            },
+        })
+        console.log(vm);
+        // 在vue实例上有一个属性$options，里面存储的是当前new Vue的时候 传入的配置参数
+    </script>
+</body>
+
+</html>

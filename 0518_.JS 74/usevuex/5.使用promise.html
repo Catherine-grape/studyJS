@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>使用promise</div>
+    <script src="./MyPromise.js"></script>
+    <script>
+        // 解决异步地狱回调问题的，可以让异步代码以同步的方式进行执行
+        // 让异步代码以同步化的方式显示出来，而且不使用嵌套
+        let a = 100;
+        let b = 200;
+        /* new Promise((resolve,reject)=>{
+            // 当new promise的时候，返回的Promise的实例会默认有一个状态pending「共有三种状态：fulfilled、rejected、pending」
+            // 后期当前实例的状态可以从等待态改成成功态「执行resolve」
+            // 从等待改为失败态 「执行reject」
+            // 一旦状态发生变化之后，就会凝固，以后就不可能再变了
+        }); */
+        // 在promise类的原型上存在一个then方法，当then执行的时候可以给当前调用它的实例中对应的事件池子增加成功和失败的方法，后期实例的状态更改之后，那对应的事件池子里的方法就会被异步执行
+    </script>
+    <script>
+        let p1 = new MyPromise((resolve, reject) => {
+            setTimeout(() => {
+                resolve(100);
+                // reject(200);
+            }, 3000)
+        })
+        console.log(p1);
+        let p2 = p1.then((res) => {
+            console.log('成功执行', res);
+            return new MyPromise((resolve, reject) => { resolve(199) })//p3
+        }, (res) => {
+            console.log('失败执行', res);
+        })
+        console.log(1);
+
+// p3想执行下面的回调函数，但是下面的回调函数执行，必须由p2的状态变化来执行。然后咱们就得想办法让p3的状态去影响p2的状态
+// 如果p3的状态发生变化，会发布自己事件池子里对应的方法，也就是说如果p3变成成功态了，那p3成功的事件池子里的方法就会发布，「把更改p2的方法订阅到p3的事件池子里面就可以了」
+        p2.then((res) => {//当前的两个回调函数是p2，只有p2的状态才能管控他俩执行
+            console.log('我是p2成功', res);
+        }, (res) => {
+            console.log('我是p2的失败', res);
+        }).then(() => {
+            console.log('我是三');
+        })
+    </script>
+</body>
+
+</html>

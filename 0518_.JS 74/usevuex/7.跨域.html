@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // jsonp
+        function fn(res) {
+            console.log(res);
+        }
+    </script>
+    <script src="xxx/list?cb=fn"></script>
+    <script>
+        app.get('/list', (req, res) => {
+            let { cb } = req.params;//'fn'
+            res.send(`${cd}(12345)`)//'fn(12345'
+        })
+    </script>
+    <script>
+        crox
+        // access - control - allow - origin:  允许xxx向我请求的
+
+        // Proxy   webpack配置    原理：node服务，后台向后台发起请求
+        /* devServer:{
+            proxy:{
+                // 环境
+               // target:'http:127.0.0.1:3000' //本地
+               target:'http:128.356.777:3030'  //后台
+               target:'http://ceshi.com:3000' //测试
+//target:'http://www.baidu.com' //线上的
+            }
+        }
+        npm run start
+        node server--->3000
+
+
+
+        vue config.js中跨域
+        */
+    </script>
+</body>
+
+</html>

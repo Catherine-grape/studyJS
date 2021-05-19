@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        {{w}}
+        <child></child>
+        <button @click="fn">点击</button>
+        <!-- 单闭合标签会阻止下面代码的运行 -->
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+
+        // Vue.mixin( mixin ) 混入    全局注册一个混入，影响注册之后所有创建的每个 Vue 实例。插件作者可以使用混入，向组件注入自定义的行为。不推荐在应用代码中使用。「封装时使用，逻辑代码中不写」
+        let obj = {//把对象中的每一个键值对混入到vue实例上
+            created() {
+                this.a = 100
+                console.log(this);
+
+            }
+        }
+        let onj = {
+            created() {
+                console.log('我是局部混入');
+            }
+        }
+        Vue.mixin({//把对象中的每一个键值对混入到vue实例上 任何都能写
+            // mixin 可以混入任何的东西，他可以把当前的配置属性混入到每一个组件中
+            data() {
+                return {
+                    // 当混入data中的属性的时候，如果组件自己有这个属性名，那就混入不进去了
+                    w: 3000
+                }
+            },
+            created() {
+                // 如果混入的是钩子函数，那函数里的this就是当前被混入的组件实例
+                // 如果某个组件有自己的生命周期函数，先执行混入的，再执行自己的「不会覆盖」
+                console.log('我是混入的');
+                this.a = 100
+                console.log(this);
+                this.$store = 'store';
+            },
+            methods: {
+                // 事件方法混入的时候，如果组件上已经有这个方法了，那就混入不进去了
+                fn() {
+                    console.log(111);
+                    console.log('我是混入的fn');
+                }
+            },
+        });
+        let child = {
+            template: `<div>我是child组件</div>`,
+            mixins: [onj],//局部混入，他只会在你指定的组件生效
+            data() {
+                return {
+                    num: 2
+                }
+            },
+
+        }
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                a: 1,
+                w: 20
+            },
+            /* created() {
+                this.a = 100
+                console.log(this);
+
+            }, */
+            created() {
+                console.log('自己的钩子');
+            },
+            methods: {
+                fn() {
+                    console.log('我是自己的fn');
+                }
+            },
+            mixins: [obj],//局部混入
+            components: {
+                child
+            }
+        })
+    </script>
+</body>
+
+</html>

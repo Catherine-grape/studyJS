@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        {{a}}
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <!-- <script src="./node_modules/vuex/dist/vuex.js"></script> -->
+    <script>
+        /* 
+        安装 Vue.js 插件。如果插件是一个对象，必须提供 install 方法。如果插件是一个函数，它会被作为 install 方法。install 方法调用时，会将 Vue 作为参数传入。
+
+        该方法需要在调用 new Vue() 之前被调用。
+
+        当 install 方法被同一个插件多次调用，插件将只会被安装一次。
+        非工程化项目会自动调用「隐适调用」 install   工程化项目需要手动调用install
+        */
+       let Vuex={
+           install:function(vm){
+            //    安装或者初始化store仓库的，「把store挂载每一个组件实例上」 
+            // 给install传递的实参就是Vue类
+            console.log("我执行了");
+            
+           },
+           Store:function(){
+
+           },
+           mapState:function (){
+
+           }
+       }
+       Vue.use(Vuex);//在use内部会默认执行传递实参对象里的install方法
+    //    Vue.use 就是让插件里的install方法执行，传递实参Vue
+    //    先初始化好再使用
+
+    // Vue.mixin( mixin ) 混入    全局注册一个混入，影响注册之后所有创建的每个 Vue 实例。插件作者可以使用混入，向组件注入自定义的行为。不推荐在应用代码中使用。「封装时使用，逻辑代码中不写」
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                a: 100
+            }
+        })
+    </script>
+</body>
+
+</html>

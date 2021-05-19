@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="App">
+        <child></child>
+        {{num}} {{msg}}
+        <button @click="changeNum">点击改变num</button>
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script src="./Vuex.js"></script>
+    <script>
+        let store = new Vuex.Store({
+            state: {
+                num: 10,
+                arr: [1, 2, 3, 4],
+                msg: 'hello'
+            },
+            mutations: {
+                changeNum(state, payload) {
+                    // state.num = payload.payload;
+                    state.num = payload;
+                    console.log('mutations中的changeNum方法执行了');
+                }
+            },
+            actions: {
+                changeNum({ commit }, payload) {
+                    // console.log(context, payload);
+                    commit('changeNum', 3000);
+                }
+            }
+        });
+        // {commit,dispatch,state,getters }
+        console.log(store);
+        Vue.use(Vuex);//执行install函数，把store挂载到每一个实例上
+        console.log(Vuex);
+
+        let child = {
+            template: `<div>我是child</div>`
+        }
+        let vm = new Vue({
+            el: '#App',
+            data: {},
+            store: store,
+            computed: {
+                /* num() {
+                    return this.$store.state.num
+                     console.log(this);
+                } */
+                ...Vuex.mapState(['num', 'msg'])
+            },
+            methods: {
+                changeNum(payload) {
+                    // this.$store.dispatch('changeNum', payload);
+                    /*  this.$store.dispatch({
+                         type: "changeNum",
+                         payload: payload
+                     }) */
+
+                },
+                ...Vuex.mapActions(['changeNum'])
+            },
+            components: {
+                child
+            }
+        })
+    </script>
+</body>
+
+</html>
