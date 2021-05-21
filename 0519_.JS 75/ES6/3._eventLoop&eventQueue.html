@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        console.log(1);
+        setTimeout(() => {
+            console.log(3);
+        })
+        console.log(2);
+        // eventLoop 「去异步任务队列拿去任务的循环往复」   eventQueue
+        // 微任务 ：  async await promise 「微任务的执行是先放入的谁就先执行谁」
+        // 宏任务 ：  定时器 ajax请求  事件
+        setTimeout(() => {
+            console.log(100);
+        }, 0)
+        let p1 = new Promise((resolve) => {
+            resolve();//发布是异步的微任务
+        });
+
+        p1.then(() => {
+            console.log(200);
+        })
+        console.log(300);
+
+        async function fn() {
+            let res = await 300
+            console.log(100);
+        }
+    </script>
+</body>
+
+</html>

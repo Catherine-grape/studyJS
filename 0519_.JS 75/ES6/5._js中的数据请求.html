@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+          ajax axios $ajax fetch
+          ajax axios $ajax 都是基于XMLHttpRequest去请求的
+            + axios是基于promise封装的ajax库
+            + $.ajax是基于回调函数的方式封装的ajax库
+          fetch是es6新增的api，和XMLHttpRequest没有关系，这是浏览器新提供的一种和服务器通讯的机制。而且默认就是就promise来管理的
+    
+          请求头中的Content-type的类型有application/x-www-form-urlencoded & application/json & form-data(上传文件)
+        */
+
+
+        /* 
+          axios配置：
+            baseUrl
+            transformRequest
+            validateStatus
+            headers
+            timeout
+            withCredentials
+            请求拦截器
+            响应拦截器:在这里把状态码异常的就直接处理了
+        
+        */
+
+        /* 
+          fetch的配置
+    
+        */
+        fetch('xxxxx', {
+            method: 'GET',
+            headers: {
+                // 设置请求头信息
+            },
+            cache: 'no-cache',
+            credentials: 'include' // 是否允许携带资源凭证 same-origin  include  omit
+
+        }).then((response) => {
+            // 不论此次请求的状态码是200还是400还是500，fetch都认为是成功的(返回的promise实例都是成功的)
+            // fetch请求返回的信息里response
+            // status、statusText、headers(响应头信息，他也是可迭代的)、type(请求类型，例如cors跨域请求)、redirected、url、body(这个直接拿是拿不到的，的利用response.json()拿到响应体)
+            return response.json()
+        }).then((res) => {
+            console.log(res); // 这才是真正的响应体
+        }).catch(() => {
+            // 请求错误
+        })
+    </script>
+</body>
+
+</html>

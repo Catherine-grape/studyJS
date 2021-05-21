@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+            function fun1() {
+                    console.log('func1 start');
+                    return new Promise(resolve => { // 
+                        resolve(); // 去发布对应的池子里的事件时异步的
+                    });
+                };
+
+
+                function fun2() {
+                    console.log('func2 start');
+                    return new Promise(resolve => {
+                        setTimeout(() => { //  宏2
+                            resolve(); // 
+                        }, 10);
+                    })
+                };
+
+                console.log(1);
+                setTimeout(async () => { // 宏1
+                    console.log(2);
+                    await fun1();//同步
+                    console.log(3); // 异步 微
+                }, 20);
+                for (let i = 0; i < 100000000; i++) { }; // 肯定大于20ms了
+                console.log(4);
+
+                fun1().then(() => { //微1
+                    console.log(5);
+                });
+
+                fun2().then(() => { // 
+                    console.log(6);
+                });
+
+                setTimeout(() => { // 宏3
+                    console.log(7);
+                }, 0);
+                console.log(8);
+
+                // 1  4   'func1 start'  'func2 start'8  5  2 'func1 start' 3    7   6
+    </script>
+</body>
+</html>
